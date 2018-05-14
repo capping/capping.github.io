@@ -24,9 +24,9 @@ menu:
   weibo:
     url: http://www.weibo.com/3750729151
     target: _blank
-  link:
-    text: 测试
-    url: /custom
+#   link:
+#     text: 测试
+#     url: /custom
 
 # 你的头像url
 avatar: /img/avatar.png
