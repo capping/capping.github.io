@@ -13,6 +13,7 @@ sourceTree是一个工具, 我一直用它做git管理(git的图形化界面GUI)
 安装之后, 转到用户本地文件夹下的 SourceTree 目录, 没有则新建：
 
 > %LocalAppData%\Atlassian\SourceTree\
+
 请把以上路径直接粘贴到我的电脑路径的位置跳转, 才能跳转到正确位置
 
 新建 accounts.json 文件
