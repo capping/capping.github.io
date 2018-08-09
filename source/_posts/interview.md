@@ -31,6 +31,7 @@ function getRedPackageMoney($min = 1)
 
     $safeTotal = ($remainMoney - $remainSize * $min) / $remainSize;
     $money = mt_rand($min, $safeTotal);
+    $money = $money / 100;  // 主要ini配置项serialize_precision
     $remainMoney = $safeTotal - $money;
 
     $redis->decr('remainSize:' . $redPackageId);

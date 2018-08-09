@@ -57,3 +57,40 @@ The API and Java Virtual Machine insulate the program from the underlying hardwa
 
 Lessons describing the essential concepts and features of the Java Programming Language.
 
+This trail provides everything you'll need to know about getting started with the Java programming language.
+
+### Object-Oriented Programming Concepts
+
+teaches you the core concepts behind object-oriented programming: objects, messages, classes and inheritance. The lesson ends by showing you how these concepts translate into code.  
+
+#### What Is an Object?
+
+Software objects are conceptually similar to real-world object: they too consist of state and related behavior. An object stores it state in fields(variables in some 
+programming languages) and exposes its behavior through methods (functions in some programming languages).Methods operate on an object's internal state and serve as 
+the primary mechanism for object-to-object communication. Hiding internal state and requiring all interaction to be performed through an object's methods is know as 
+`data encapsulation`（数据封装） -- a fundamental principel of object-oriented programming.
+
+**Bundling code into individual software objects provides a number of benefit, include:**
+1. Modularity: The source code for an object can be written and maintained independently of the source code for other objects. Once created, an object can be easily passed around inside the system.
+2. Information-hiding: By interacting only with an object's methods, the datails of its internal implementation remain hidden from the outside world.
+3. Code re-use: If an object already exists (perhaps written by another software developer), you can use that object in your program. This allows specialists to implement/test/debug complex, task-specific objects, which you can then trust to run in your own code.
+4. Pluggability and debugging easy: If a particular object turns out to be problematic, you can simple remove it from your application and plug in a different object as its replacement.This is analogous to fixing mechanical problems in ther real world. If a bolt breaks, you replace it, not the entire machine.
+
+#### What Is a Class?
+
+A class is the blueprint from which individual objects are created.
+
+#### What Is Inheritance?
+
+Object-Oriented programming allows classes to inherit commonly used state and behavior from other classes.In the Java programming language, each class is allowed to have one direct superclass, and each superclass has the potential for an unlimited number of subclass.(java 是单继承的)
+
+#### What Is an Interface?
+
+Interface form a contract between the class and the outside world, and this contract is enforced at build time by the compiler. If your class claims to implement an interface， all methods defined by that interface must appear in its source code before the class will successfully compile.
+
+Note: To actually compile the ACMEBicycle class, you'll need to add the `public` keyword to the beginning of the implemented interface methods.
+
+#### What Is a Package?
+
+A package is a namespace that organizes a set of related classes and interface.(因为java开发的软件由成千上万的类文件组成，将关联类和接口放在同一特定意义的包中)
+
