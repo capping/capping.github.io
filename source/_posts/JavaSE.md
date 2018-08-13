@@ -94,3 +94,25 @@ Note: To actually compile the ACMEBicycle class, you'll need to add the `public`
 
 A package is a namespace that organizes a set of related classes and interface.(因为java开发的软件由成千上万的类文件组成，将关联类和接口放在同一特定意义的包中)
 
+### Language Basics 
+
+describes the traditional features of the language. include variables, array, data types, operators and control flow.
+
+1. Variables
+
+You've already learned that objects store their state in fields. However, the Java programming language also uses the term "variales" as well. This section discusses this relationshi, plus variable naming rules and conventions, basic data types (primitive types, character strings, and arrays), default value, and literals(文字).
+```
+Q:
+What are the rules and conventions for naming a field?
+Besides int, what other data types are there?
+Do fields have to be initialized where they are declared?
+Are fields assigned a default value if they are not explicitly initialized? # 如果未明确初始化字段，为字段分配默认值吗?
+```
+We'll explore the answers to such questions in this lesson.
+
+The Java programming language defines the following kinds of variables:
+- Instance Variables (Non-Static Fields): Technically speaking, object store their individual states in 'non-static fields', field declared without the `static` keyword. Non-static fields are also know as *instance variables* because their values are unique to each *instance of* a class (to each object, in other words); the `currentSpeed` of one bicycle is independent from the `currentSpeed` of another.
+
+- Class Variables (Static Field): A *class variable* is any field declared with the `static` modifier, this tells the compiler that there is exactly one copy of the variable in existence, regardless of how many times the class has been instantiated. The code `static int numGears = 6`;would create such a static field. Additionally, the keyword `final` could be added to indicate that the number of gears will never change.
+
+- Local Variables: Similar to how an object stores its state in fields, a method will often store its tempoary state in `local variable`. The syntax for declaring a local variable is similar to declaring a field(for example `int count = 0`)
