@@ -99,7 +99,7 @@ A package is a namespace that organizes a set of related classes and interface.(
 
 describes the traditional features of the language. include variables, array, data types, operators and control flow.
 
-1. Variables
+#### Variables
 
 You've already learned that objects store their state in fields. However, the Java programming language also uses the term "variales" as well. This section discusses this relationshi, plus variable naming rules and conventions, basic data types (primitive types, character strings, and arrays), default value, and literals(文字).
 ```
@@ -116,4 +116,16 @@ The Java programming language defines the following kinds of variables:
 
 - Class Variables (Static Field): A *class variable* is any field declared with the `static` modifier, this tells the compiler that there is exactly one copy of the variable in existence, regardless of how many times the class has been instantiated. The code `static int numGears = 6`;would create such a static field. Additionally, the keyword `final` could be added to indicate that the number of gears will never change.
 
-- Local Variables: Similar to how an object stores its state in fields, a method will often store its tempoary state in `local variable`. The syntax for declaring a local variable is similar to declaring a field(for example `int count = 0`)
+- Local Variables: Similar to how an object stores its state in fields, a method will often store its tempoary state in `local variable`. The syntax for declaring a local variable is similar to declaring a field(for example `int count = 0`). There is no special keyword designating a variable as local. that determination comes entirely from the location in which the variable is declared -- which is between the opening and closing braces of the method. As such, local variables are only visible to the methods in which they are declared; they are not accessiable from the rest of the class.
+
+- Parameters: You've already seen examples of parameters, both in the `Bicycle` class and in the `main` method of the "Hello World!" application.Recall that the signature for the main method is `public static void main(String[] args)`. Here, the args variable is the parameter to this method.This applies to other parameter-accepting constructs as well (such as constructors and exception handlers) that you'll learn about later in the tutorial.
+
+Naming
+- 大小写敏感，以`字母，$, _`开头(通常都是使用字母开头，避免使用`$`和`_`)
+- 后续字符可以是`字母，$，_ 和数字`，不能使用关键字和保留字
+- 小驼峰命名；常量的话，使用大写加下划线的形式命名，例：`final int NUM_GEARS = 6`
+
+##### Primitive Data Types
+
+The Java Programming language is statically-typed, which means that all variables must first declared before they can be used.This involives stating the variable's type and name, as you've already seen:
+
