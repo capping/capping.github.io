@@ -12,7 +12,7 @@ An introduction to Java technology and lessions on installing Java development s
 
 ### The Java Technology Phenomenon
 
-Java technology is both a programming language and a platform. (java即使编程语言也是平台)
+Java technology is both a programming language and a platform. (java即是编程语言也是平台)
 
 #### The java Programming Language
 
