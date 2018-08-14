@@ -3,6 +3,7 @@ title: JavaSE
 date: 2018-08-08 09:57:06
 tags: [java]
 categories: [java]
+toc: true
 ---
 
 ## Getting Started
