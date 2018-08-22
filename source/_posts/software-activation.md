@@ -1,8 +1,8 @@
 ---
 title: 常用软件激活记录
 date: 2018-08-16 09:55:08
-tags: [tool]
-categories: [tool]
+tags: [tools]
+categories: [tools]
 ---
 1. intellij idea 2018 激活注册码
 ```

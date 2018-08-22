@@ -2,7 +2,7 @@
 title: sourceTree安装时免登录
 date: 2018-05-16 17:01:55
 tags: [git]
-categories: [工具]
+categories: [tools]
 ---
 
 sourceTree是一个工具, 我一直用它做git管理(git的图形化界面GUI)
