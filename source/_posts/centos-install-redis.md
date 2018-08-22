@@ -10,6 +10,7 @@ toc: true
 cd /usr/local/src/
 # 下载
 wget http://download.redis.io/releases/redis-4.0.11.tar.gz
+
 # 解压
 tar xzf redis-4.0.11.tar.gz
 mv redis-4.0.11 /usr/local/redis

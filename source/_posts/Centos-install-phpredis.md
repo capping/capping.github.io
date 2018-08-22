@@ -50,6 +50,6 @@ nginx -s reload # 重启nginx
 
 > /usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php-fpm.conf
 
-导致 `phpinfo()` 中参数 `Loaded Configuration File` 是 `/usr/local/php/etc/php-fpm.conf` ,所以打印 `phpinfo` 是一直无法显示`redis`扩展。
+导致 `phpinfo()` 中参数 `Loaded Configuration File` 是 `/usr/local/php/etc/php-fpm.conf` ,所以打印 `phpinfo` 时一直无法显示`redis`扩展。
 
 正确的做法是上面显示的，不指定配置文件 ~~-c /usr/local/php/etc/php-fpm.conf~~ 的做法
