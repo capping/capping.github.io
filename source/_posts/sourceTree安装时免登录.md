@@ -47,6 +47,7 @@ sourceTree是一个工具, 我一直用它做git管理(git的图形化界面GUI)
   }
 ]
 ```
-![](https://github.com/capping/blog/blob/master/source/images/1526462870(1).png?raw=true)
+![](https://github.com/capping/blog/blob/master/source/images/1526462870.png?raw=true)
+
 原博客链接：https://blog.csdn.net/liby_sunny/article/details/78813001  
 若影响到个人利益, 请联系博主删除该文章。
