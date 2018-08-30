@@ -1,7 +1,7 @@
 ---
 title: Centos安装配置redis
 date: 2018-08-20 10:27:14
-tags: [redis, centos]
+tags: [redis, centos, linux]
 categories: [redis]
 toc: true
 ---
