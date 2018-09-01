@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Z-II&#39;s Blog</title>
+  
+  
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://capping.github.io/"/>
+  <updated>2018-09-01T12:57:26.397Z</updated>
+  <id>https://capping.github.io/</id>
+  
+  <author>
+    <name>Xuebin Zhang</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>常用的PHP工具类</title>
+    <link href="https://capping.github.io/2018/08/31/php-common-custome-function/"/>
+    <id>https://capping.github.io/2018/08/31/php-common-custome-function/</id>
+    <published>2018-08-31T08:46:14.000Z</published>
+    <updated>2018-09-01T12:57:26.397Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="StringUtil"><a href="#StringUtil" class="headerlink" title="StringUtil"></a>StringUtil</h1><ol><li>生成随机字符串<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function randomString($length = 6) :string</span><br><span class="line">&#123;</span><br><span class="line">    $pattern = &apos;1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&apos;;</span><br><span class="line">    $str = &apos;&apos;;</span><br><span class="line">    for ($i = 0; $i &lt; $length; $i++) &#123;</span><br><span class="line">        $str .= $pattern&#123;mt_rand(0, 61)&#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return $str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h1 id=&quot;StringUtil&quot;&gt;&lt;a href=&quot;#StringUtil&quot; class=&quot;headerlink&quot; title=&quot;StringUtil&quot;&gt;&lt;/a&gt;StringUtil&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;生成随机字符串&lt;figure class=&quot;highlight 
+      
+    
+    </summary>
+    
+      <category term="php" scheme="https://capping.github.io/categories/php/"/>
+    
+    
+      <category term="php" scheme="https://capping.github.io/tags/php/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>nohup and &amp;</title>
+    <link href="https://capping.github.io/2018/08/30/nohup-and-&amp;/"/>
+    <id>https://capping.github.io/2018/08/30/nohup-and-&amp;/</id>
+    <published>2018-08-30T03:11:08.000Z</published>
+    <updated>2018-09-01T12:57:26.397Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天来解决下一直存在的一个疑问 <code>nohup</code> 和 <code>&amp;</code> 到底是什么？</p><p>在日常中使用往往是这样子的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup php demo.php &amp;</span><br></pre></td></tr></table></figure></p><p>但是为什么要两个一起用呢？ 只用一个行不行？ 只用其中的一个是什么效果呢？</p><p>我们先看最后一个问题</p><ol><li><p>只用 <code>&amp;</code><br>&amp;的意思是在后台运行, 就是当你运行代码 <code>php demo.php &amp;</code> 时, 即使你使用 <code>Ctrl C</code> ,代码照样会运行(因为对SIGINT信号免疫)。但是要注意, 当你关掉shell后, <code>php demo.php</code>进程就消失了。可见 <code>&amp;</code> 的后台并不硬(因为对SIGHUP信号不免疫)</p></li><li><p>只用 <code>nohup</code><br>nohup的意思是忽略SIGHUP信号, 所以当运行 <code>nohup demo.php</code> 的时候, 关闭shell <code>php demo.php</code> 进程还是存在(对SIGHUP信号免疫)。 但是直接在shell中使用 <code>Ctrl C</code>, <code>php demo.php</code>进程就会消失(因为对SIGINT信号不免疫)。</p></li></ol><p>所以, &amp;和nohup没有半毛钱的关系, 要让进程真正不受shell中Ctrl C和shell关闭的影响, 那该怎么办呢？ 那就用 <code>nohup php demo.php &amp;</code> 吧, 两全其美。</p><p>解决了最后一个问题, 其他问题就迎刃而解啦</p><p>如果你懂守护进程, 那么 <code>nohup php demo.php &amp;</code> 颇有点让 <code>php demo.php</code> 成为守护进程的感觉。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;今天来解决下一直存在的一个疑问 &lt;code&gt;nohup&lt;/code&gt; 和 &lt;code&gt;&amp;amp;&lt;/code&gt; 到底是什么？&lt;/p&gt;
+&lt;p&gt;在日常中使用往往是这样子的&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td cla
+      
+    
+    </summary>
+    
+      <category term="Linux" scheme="https://capping.github.io/categories/Linux/"/>
+    
+    
+      <category term="linux" scheme="https://capping.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux服务器磁盘空间不足异常</title>
+    <link href="https://capping.github.io/2018/08/28/Centos-disk-space-abnormal/"/>
+    <id>https://capping.github.io/2018/08/28/Centos-disk-space-abnormal/</id>
+    <published>2018-08-28T02:32:24.000Z</published>
+    <updated>2018-09-01T12:57:26.396Z</updated>
+    
+    <content type="html"><![CDATA[<p>昨天连接数据库的时候出现如下错误:</p><blockquote><p>got error 28 from storage engine</p></blockquote><p>经过搜索引擎了解到原来是磁盘空间不足了。登陆服务器。输入以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure></p><p>果然磁盘占用 100% 了！怎么办？ 删日志吧。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 进入根目录</span><br><span class="line">cd /</span><br><span class="line"></span><br><span class="line"># 查看当前目录下的磁盘占用情况， 然后一步步分析看哪些文件占用较大</span><br><span class="line">du -sh *</span><br><span class="line"></span><br><span class="line"># 在这步发现磁盘占用情况最多 30% 的样子，百思不得解</span><br></pre></td></tr></table></figure></p><p>结果令人失望，删掉日志文件磁盘占用情况依旧 95% 以上。但是就这样吧， 起码数据库能访问了</p><p>今天过来磁盘占用又 100% 了</p><p>于是就想到了 是不是删除了文件 但是对应的进程并没有被杀掉</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof | grep deleted</span><br></pre></td></tr></table></figure><p>果然发现了端倪, 于是kill掉文件对应的进程号 再 df -h 看存储 恢复正常~</p><p>或者下面的命令会一次全删掉</p><blockquote><p>lsof |awk ‘/deleted/{print $2}’|xargs kill -9</p></blockquote><p>然后 <code>df -h</code>, 看到磁盘占用回到了 28%</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;昨天连接数据库的时候出现如下错误:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;got error 28 from storage engine&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;经过搜索引擎了解到原来是磁盘空间不足了。登陆服务器。输入以下命令&lt;br&gt;&lt;figure c
+      
+    
+    </summary>
+    
+      <category term="Linux" scheme="https://capping.github.io/categories/Linux/"/>
+    
+    
+      <category term="centos" scheme="https://capping.github.io/tags/centos/"/>
+    
+      <category term="linux" scheme="https://capping.github.io/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Centos安装 phpredis 扩展</title>
+    <link href="https://capping.github.io/2018/08/20/Centos-install-phpredis/"/>
+    <id>https://capping.github.io/2018/08/20/Centos-install-phpredis/</id>
+    <published>2018-08-20T05:49:14.000Z</published>
+    <updated>2018-09-01T12:57:26.396Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"># 1. 下载phpredis</span><br><span class="line">wget https://github.com/phpredis/phpredis/archive/4.1.1.tar.gz</span><br><span class="line"></span><br><span class="line"># 2. 解压 </span><br><span class="line"># z-tar包被gzip压缩,用gunzip解压 x-从tar包中提取文件 v-显示详细信息 f-指定被处理的文件</span><br><span class="line">tar -zxvf 4.1.1.tar.gz</span><br><span class="line"></span><br><span class="line"># 3. 进入解压后目录</span><br><span class="line">cd phpredis-4.1.1/</span><br><span class="line"></span><br><span class="line"># 4. 生成configure配置文件</span><br><span class="line">/usr/local/php/bin/phpize</span><br><span class="line"></span><br><span class="line"># 5. 配置</span><br><span class="line">./configure --with-php-config=/usr/local/php/bin/php-config</span><br><span class="line"></span><br><span class="line"># 6. 编译</span><br><span class="line">make</span><br><span class="line"></span><br><span class="line"># 7. 运行测试</span><br><span class="line">make test</span><br><span class="line"></span><br><span class="line"># 8. 安装</span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line"># 9. 配置ini文件</span><br><span class="line">vi /usr/local/php/lib/php.ini</span><br><span class="line">&gt; extension=&quot;redis.so&quot;</span><br><span class="line"></span><br><span class="line"># 10. 重启php-fpm</span><br><span class="line">kill PID</span><br><span class="line">/usr/local/php/sbin/php-fpm</span><br><span class="line"></span><br><span class="line"># 11. 重启nginx</span><br><span class="line">nginx -s reload # 重启nginx</span><br></pre></td></tr></table></figure><h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>重启php-fpm时使用</p><blockquote><p>/usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php-fpm.conf</p></blockquote><p>导致 <code>phpinfo()</code> 中参数 <code>Loaded Configuration File</code> 是 <code>/usr/local/php/etc/php-fpm.conf</code> ,所以打印 <code>phpinfo</code> 时一直无法显示<code>redis</code>扩展。</p><p>正确的做法是上面显示的，不指定配置文件 <del>-c /usr/local/php/etc/php-fpm.conf</del> 的做法</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;安装配置&quot;&gt;&lt;a href=&quot;#安装配置&quot; class=&quot;headerlink&quot; title=&quot;安装配置&quot;&gt;&lt;/a&gt;安装配置&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pr
+      
+    
+    </summary>
+    
+      <category term="php" scheme="https://capping.github.io/categories/php/"/>
+    
+    
+      <category term="centos" scheme="https://capping.github.io/tags/centos/"/>
+    
+      <category term="linux" scheme="https://capping.github.io/tags/linux/"/>
+    
+      <category term="php" scheme="https://capping.github.io/tags/php/"/>
+    
+      <category term="redis" scheme="https://capping.github.io/tags/redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Centos安装配置redis</title>
+    <link href="https://capping.github.io/2018/08/20/centos-install-redis/"/>
+    <id>https://capping.github.io/2018/08/20/centos-install-redis/</id>
+    <published>2018-08-20T02:27:14.000Z</published>
+    <updated>2018-09-01T12:57:26.396Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cd /usr/local/src/</span><br><span class="line"># 下载</span><br><span class="line">wget http://download.redis.io/releases/redis-4.0.11.tar.gz</span><br><span class="line"></span><br><span class="line"># 解压</span><br><span class="line">tar xzf redis-4.0.11.tar.gz</span><br><span class="line">mv redis-4.0.11 /usr/local/redis</span><br><span class="line">cd /usr/local/redis</span><br><span class="line">make</span><br><span class="line">make test</span><br></pre></td></tr></table></figure><p>有的机器会出现类似以下错误：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">make[1]: Entering directory `/root/redis/src&apos;</span><br><span class="line">You need tcl 8.5 or newer in order to run the Redis test</span><br><span class="line">……</span><br></pre></td></tr></table></figure></p><p>这是因为没有安装tcl导致，yum安装即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install tcl</span><br><span class="line">make test</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></p><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">bind: 在bind 127.0.0.1前加H#&quot;将其注释掉, 使外网可以连接</span><br><span class="line">默认为保护模式, 把 protected-mode yes 改为 protected-mode no</span><br><span class="line">默认为不守护进程模式, 把daemonize no 改为daemonize yes 使Redis进程在后台运行</span><br><span class="line">将 requirepass foobared前的&quot;#&quot;去掉, 密码改为你想要设置的密码</span><br><span class="line">daemonize : 是否以后台daemon方式运行</span><br><span class="line">pidfile : pid文件位置</span><br><span class="line">port : 监听的端口号</span><br><span class="line">timeout : 请求超时时间</span><br><span class="line">loglevel : log信息级别</span><br><span class="line">logfile : log文件位置</span><br><span class="line">databases : 开启数据库的数量</span><br><span class="line">save * * : 保存快照的频率, 第一个*表示多长时间, 第三个*表示执行多少次写操作。在一定时间内执行一定数量的写操作时, 自动保存快照。可设置多个条件。</span><br><span class="line">rdbcompression : 是否使用压缩</span><br><span class="line">dbfilename : 数据快照文件名（只是文件名）</span><br><span class="line">dir : 数据快照的保存目录（仅目录）</span><br><span class="line">appendonly : 是否开启appendonlylog, 开启的话每次写操作会记一条log, 这会提高数据抗风险能力, 但影响效率。</span><br><span class="line">appendfsync : appendonlylog如何同步到磁盘。三个选项, 分别是每次写都强制调用fsync、每秒启用一次fsync、不调用fsync等待系统自己同步</span><br></pre></td></tr></table></figure><p>redis 配置文件示例</p><blockquote><p><a href="https://github.com/linli8/cnblogs/blob/master/redis%E5%89%AF%E6%9C%AC.conf" target="_blank" rel="noopener">https://github.com/linli8/cnblogs/blob/master/redis%E5%89%AF%E6%9C%AC.conf</a></p></blockquote><p>启动 : redis-server ./redis.conf<br>停止 : redis-cli -h 127.0.0.1 -p 6379 shutdown</p><p>开启自启动: echo “/usr/local/bin/redis-server /usr/local/redis/redis.conf” &gt;&gt;/etc/rc.local</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span 
+      
+    
+    </summary>
+    
+      <category term="redis" scheme="https://capping.github.io/categories/redis/"/>
+    
+    
+      <category term="centos" scheme="https://capping.github.io/tags/centos/"/>
+    
+      <category term="linux" scheme="https://capping.github.io/tags/linux/"/>
+    
+      <category term="redis" scheme="https://capping.github.io/tags/redis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>常用软件激活记录</title>
+    <link href="https://capping.github.io/2018/08/16/software-activation/"/>
+    <id>https://capping.github.io/2018/08/16/software-activation/</id>
+    <published>2018-08-16T01:55:08.000Z</published>
+    <updated>2018-09-01T12:57:26.397Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-intellij-idea-2018-激活注册码-最后更新时间-2018-8-28"><a href="#1-intellij-idea-2018-激活注册码-最后更新时间-2018-8-28" class="headerlink" title="1. intellij idea 2018 激活注册码 (最后更新时间 2018-8-28)"></a>1. intellij idea 2018 激活注册码 (最后更新时间 2018-8-28)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">EB101IWSWD-eyJsaWNlbnNlSWQiOiJFQjEwMUlXU1dEIiwibGljZW5zZWVOYW1lIjoibGFuIHl1IiwiYXNzaWduZWVOYW1lIjoiIiwiYXNzaWduZWVFbWFpbCI6IiIsImxpY2Vuc2VSZXN0cmljdGlvbiI6IkZvciBlZHVjYXRpb25hbCB1c2Ugb25seSIsImNoZWNrQ29uY3VycmVudFVzZSI6ZmFsc2UsInByb2R1Y3RzIjpbeyJjb2RlIjoiSUkiLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJSUzAiLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJXUyIsInBhaWRVcFRvIjoiMjAxOC0xMC0xNCJ9LHsiY29kZSI6IlJEIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiUkMiLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJEQyIsInBhaWRVcFRvIjoiMjAxOC0xMC0xNCJ9LHsiY29kZSI6IkRCIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiUk0iLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJETSIsInBhaWRVcFRvIjoiMjAxOC0xMC0xNCJ9LHsiY29kZSI6IkFDIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiRFBOIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiUFMiLCJwYWlkVXBUbyI6IjIwMTgtMTAtMTQifSx7ImNvZGUiOiJDTCIsInBhaWRVcFRvIjoiMjAxOC0xMC0xNCJ9LHsiY29kZSI6IlBDIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In0seyJjb2RlIjoiUlNVIiwicGFpZFVwVG8iOiIyMDE4LTEwLTE0In1dLCJoYXNoIjoiNjk0NDAzMi8wIiwiZ3JhY2VQZXJpb2REYXlzIjowLCJhdXRvUHJvbG9uZ2F0ZWQiOmZhbHNlLCJpc0F1dG9Qcm9sb25nYXRlZCI6ZmFsc2V9-Gbb7jeR8JWOVxdUFaXfJzVU/O7c7xHQyaidCnhYLp7v32zdeXiHUU7vlrrm5y9ZX0lmQk3plCCsW+phrC9gGAPd6WDKhkal10qVNg0larCR2tQ3u8jfv1t2JAvWrMOJfFG9kKsJuw1P4TozZ/E7Qvj1cupf/rldhoOmaXMyABxNN1af1RV3bVhe4FFZe0p7xlIJF/ctZkFK62HYmh8V3AyhUNTzrvK2k+t/tlDJz2LnW7nYttBLHld8LabPlEEjpTHswhzlthzhVqALIgvF0uNbIJ5Uwpb7NqR4U/2ob0Z+FIcRpFUIAHEAw+RLGwkCge5DyZKfx+RoRJ/In4q/UpA==-MIIEPjCCAiagAwIBAgIBBTANBgkqhkiG9w0BAQsFADAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBMB4XDTE1MTEwMjA4MjE0OFoXDTE4MTEwMTA4MjE0OFowETEPMA0GA1UEAwwGcHJvZDN5MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxcQkq+zdxlR2mmRYBPzGbUNdMN6OaXiXzxIWtMEkrJMO/5oUfQJbLLuMSMK0QHFmaI37WShyxZcfRCidwXjot4zmNBKnlyHodDij/78TmVqFl8nOeD5+07B8VEaIu7c3E1N+e1doC6wht4I4+IEmtsPAdoaj5WCQVQbrI8KeT8M9VcBIWX7fD0fhexfg3ZRt0xqwMcXGNp3DdJHiO0rCdU+Itv7EmtnSVq9jBG1usMSFvMowR25mju2JcPFp1+I4ZI+FqgR8gyG8oiNDyNEoAbsR3lOpI7grUYSvkB/xVy/VoklPCK2h0f0GJxFjnye8NT1PAywoyl7RmiAVRE/EKwIDAQABo4GZMIGWMAkGA1UdEwQCMAAwHQYDVR0OBBYEFGEpG9oZGcfLMGNBkY7SgHiMGgTcMEgGA1UdIwRBMD+AFKOetkhnQhI2Qb1t4Lm0oFKLl/GzoRykGjAYMRYwFAYDVQQDDA1KZXRQcm9maWxlIENBggkA0myxg7KDeeEwEwYDVR0lBAwwCgYIKwYBBQUHAwEwCwYDVR0PBAQDAgWgMA0GCSqGSIb3DQEBCwUAA4ICAQC9WZuYgQedSuOc5TOUSrRigMw4/+wuC5EtZBfvdl4HT/8vzMW/oUlIP4YCvA0XKyBaCJ2iX+ZCDKoPfiYXiaSiH+HxAPV6J79vvouxKrWg2XV6ShFtPLP+0gPdGq3x9R3+kJbmAm8w+FOdlWqAfJrLvpzMGNeDU14YGXiZ9bVzmIQbwrBA+c/F4tlK/DV07dsNExihqFoibnqDiVNTGombaU2dDup2gwKdL81ua8EIcGNExHe82kjF4zwfadHk3bQVvbfdAwxcDy4xBjs3L4raPLU3yenSzr/OEur1+jfOxnQSmEcMXKXgrAQ9U55gwjcOFKrgOxEdek/Sk1VfOjvS+nuM4eyEruFMfaZHzoQiuw4IqgGc45ohFH0UUyjYcuFxxDSU9lMCv8qdHKm+wnPRb0l9l5vXsCBDuhAGYD6ss+Ga+aDY6f/qXZuUCEUOH3QUNbbCUlviSz6+GiRnt1kA9N2Qachl+2yBfaqUqr8h7Z2gsx5LcIf5kYNsqJ0GavXTVyWh7PYiKX4bs354ZQLUwwa/cG++2+wNWP+HtBhVxMRNTdVhSm38AknZlD+PTAsWGu9GyLmhti2EnVwGybSD2Dxmhxk3IPCkhKAK+pl0eWYGZWG3tJ9mZ7SowcXLWDFAk0lRJnKGFMTggrWjV8GYpw5bq23VmIqqDLgkNzuoog==</span><br></pre></td></tr></table></figure><p>host文件添加如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0.0.0.0 account.jetbrains.com</span><br></pre></td></tr></table></figure></p><h1 id="———————————————————–"><a href="#———————————————————–" class="headerlink" title="———————————————————–"></a>———————————————————–</h1><h2 id="2-PHPStome-2018破解-最后更新时间-2018-8-28"><a href="#2-PHPStome-2018破解-最后更新时间-2018-8-28" class="headerlink" title="2. PHPStome 2018破解 (最后更新时间 2018-8-28)"></a>2. PHPStome 2018破解 (最后更新时间 2018-8-28)</h2><p>License server:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.0-php.com:1017</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;1-intellij-idea-2018-激活注册码-最后更新时间-2018-8-28&quot;&gt;&lt;a href=&quot;#1-intellij-idea-2018-激活注册码-最后更新时间-2018-8-28&quot; class=&quot;headerlink&quot; title=&quot;1. int
+      
+    
+    </summary>
+    
+      <category term="tools" scheme="https://capping.github.io/categories/tools/"/>
+    
+    
+      <category term="tools" scheme="https://capping.github.io/tags/tools/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>面试</title>
+    <link href="https://capping.github.io/2018/08/08/interview/"/>
+    <id>https://capping.github.io/2018/08/08/interview/</id>
+    <published>2018-08-08T06:41:00.000Z</published>
+    <updated>2018-09-01T12:57:26.397Z</updated>
+    
+    <content type="html"><![CDATA[<p>这边记录一些php的面试题(不保证正确性，准确性)，会不定期更新，如果有什么错误或者更好的方案，希望得到你的指导</p><ol><li>设计一个发红包，抢红包的系统</li></ol><p>问题一： 金额是预先分配还是实时计算<br>答： 实时计算，预算需要占存储，并且会产生大量的数据库读写操作，实时效率很高，预算效率才低</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">function getRedPackageMoney($min = 1)</span><br><span class="line">&#123;</span><br><span class="line">    $redPackageId = 10; // 红包ID</span><br><span class="line">    $redis = new Redis();</span><br><span class="line">    $redis-&gt;pconnect(&apos;127.0.0.1&apos;, 6379, 1);</span><br><span class="line">    $remainSize = $redis-&gt;get(&apos;remainSize:&apos; . $redPackageId);</span><br><span class="line">    $remainMoney = $redis-&gt;get(&apos;remainMoney:&apos; . $redPackageId);</span><br><span class="line"></span><br><span class="line">    if (!$remainSize) &#123;</span><br><span class="line">        return json_encode([&apos;status&apos; =&gt; &apos;400&apos;, &apos;message&apos; =&gt; &apos;红包已抢完&apos;]);</span><br><span class="line">    &#125;</span><br><span class="line">    if ($remainSize == 1) &#123;</span><br><span class="line">        $redis-&gt;decr(&apos;remainSize:&apos; . $redPackageId);</span><br><span class="line">        $redis-&gt;decrby(&apos;remainMoney:&apos; . $redPackageId, $remainMoney);</span><br><span class="line">        return json_encode([&apos;status&apos; =&gt; 200, &apos;money&apos; =&gt; $remainMoney]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $safeTotal = ($remainMoney - $remainSize * $min) / $remainSize;</span><br><span class="line">    $money = mt_rand($min, $safeTotal);</span><br><span class="line">    $money = $money / 100;  // 主要ini配置项serialize_precision</span><br><span class="line">    $remainMoney = $safeTotal - $money;</span><br><span class="line"></span><br><span class="line">    $redis-&gt;decr(&apos;remainSize:&apos; . $redPackageId);</span><br><span class="line">    $redis-&gt;decrby(&apos;remainMoney:&apos; . $redPackageId, $money);</span><br><span class="line"></span><br><span class="line">    return json_encode([&apos;status&apos; =&gt; 200, &apos;money&apos; =&gt; $money]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$money = getRedPackageMoney();</span><br><span class="line">print_r($money);</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;这边记录一些php的面试题(不保证正确性，准确性)，会不定期更新，如果有什么错误或者更好的方案，希望得到你的指导&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;设计一个发红包，抢红包的系统&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;问题一： 金额是预先分配还是实时计算&lt;br&gt;答： 实时计算，预算需要占存储，
+      
+    
+    </summary>
+    
+      <category term="php" scheme="https://capping.github.io/categories/php/"/>
+    
+    
+      <category term="php" scheme="https://capping.github.io/tags/php/"/>
+    
+      <category term="面试" scheme="https://capping.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaSE</title>
+    <link href="https://capping.github.io/2018/08/08/JavaSE/"/>
+    <id>https://capping.github.io/2018/08/08/JavaSE/</id>
+    <published>2018-08-08T01:57:06.000Z</published>
+    <updated>2018-09-01T12:57:26.396Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><p>An introduction to Java technology and lessions on installing Java development software and using it to create a simple program.</p><h3 id="The-Java-Technology-Phenomenon"><a href="#The-Java-Technology-Phenomenon" class="headerlink" title="The Java Technology Phenomenon"></a>The Java Technology Phenomenon</h3><p>Java technology is both a programming language and a platform. (java即是编程语言也是平台)</p><h4 id="The-java-Programming-Language"><a href="#The-java-Programming-Language" class="headerlink" title="The java Programming Language"></a>The java Programming Language</h4><p>The Java programming language is a high-level language that can be characterized by all of the following buzzword.</p><ul><li>Simple  </li><li>Architecture neutral (平台无关的)</li><li>Object oriented</li><li>Portable (可移植的)</li><li>Distributed (分布式的)</li><li>High performance</li><li>Multithreaded</li><li>Roubust (健壮的)</li><li>Dynamic</li><li>Secure</li></ul><blockquote><p>MyProgram.java – javac –&gt; MyProgram.class – java –&gt; MyProgram</p></blockquote><p>Through the Java VM, the same application is capable of running on multiple platforms.</p><h4 id="The-java-platform"><a href="#The-java-platform" class="headerlink" title="The java platform"></a>The java platform</h4><p>A platform is the hardware or software environment in which a program runs.<br>The Java platform has two components:</p><ul><li>The Java Virtual Machine.</li><li>The Java Application Programming Interface(API).<br>JVM 是java平台的基础，并被移植到各种给予硬件的平台上。<br>The API is a large collection of ready-made(现成) software componment that provide many useful capabilities(功能). It is grouped into libraries of related classes and interfaces; these libraries are known as packages.</li></ul><p><img src="https://github.com/capping/blog/blob/master/source/images/getStarted-jvm.gif?raw=true" alt=""><br>The API and Java Virtual Machine insulate the program from the underlying hardware.</p><h4 id="What-Can-Java-Technology-Do"><a href="#What-Can-Java-Technology-Do" class="headerlink" title="What Can Java Technology Do?"></a>What Can Java Technology Do?</h4><ul><li>Development Tools: The development tools provide everything you’ll need for compiling, running, monitoring, debugging, and documenting your application. As a new developer, the main tools you’ll be using are the javac compiler, the java launcher and the javadoc documentation tool.</li><li>Application Programming Interface(API): The API provides the core functionlity of the java programming language. </li><li>Deployment Technologies</li><li>User Interface Tookit</li><li>Integration Libraries: Integration libraries such as the Java IDL API, JDBC API, Java Naming and Directory Interface(JNDA) API, and Java Remote Method Invocation over Internet Inter-ORB Protocol Technology (Java RMI-IIOP Technology) enable database access and manipulation of remote objects.</li></ul><h4 id="How-Will-Java-Technology-Change-My-Life"><a href="#How-Will-Java-Technology-Change-My-Life" class="headerlink" title="How Will Java Technology Change My Life?"></a>How Will Java Technology Change My Life?</h4><h2 id="Learning-the-Java-language"><a href="#Learning-the-Java-language" class="headerlink" title="Learning the Java language"></a>Learning the Java language</h2><p>Lessons describing the essential concepts and features of the Java Programming Language.</p><p>This trail provides everything you’ll need to know about getting started with the Java programming language.</p><h3 id="Object-Oriented-Programming-Concepts"><a href="#Object-Oriented-Programming-Concepts" class="headerlink" title="Object-Oriented Programming Concepts"></a>Object-Oriented Programming Concepts</h3><p>teaches you the core concepts behind object-oriented programming: objects, messages, classes and inheritance. The lesson ends by showing you how these concepts translate into code.  </p><h4 id="What-Is-an-Object"><a href="#What-Is-an-Object" class="headerlink" title="What Is an Object?"></a>What Is an Object?</h4><p>Software objects are conceptually similar to real-world object: they too consist of state and related behavior. An object stores it state in fields(variables in some<br>programming languages) and exposes its behavior through methods (functions in some programming languages).Methods operate on an object’s internal state and serve as<br>the primary mechanism for object-to-object communication. Hiding internal state and requiring all interaction to be performed through an object’s methods is know as<br><code>data encapsulation</code>（数据封装） – a fundamental principel of object-oriented programming.</p><p><strong>Bundling code into individual software objects provides a number of benefit, include:</strong></p><ol><li>Modularity: The source code for an object can be written and maintained independently of the source code for other objects. Once created, an object can be easily passed around inside the system.</li><li>Information-hiding: By interacting only with an object’s methods, the datails of its internal implementation remain hidden from the outside world.</li><li>Code re-use: If an object already exists (perhaps written by another software developer), you can use that object in your program. This allows specialists to implement/test/debug complex, task-specific objects, which you can then trust to run in your own code.</li><li>Pluggability and debugging easy: If a particular object turns out to be problematic, you can simple remove it from your application and plug in a different object as its replacement.This is analogous to fixing mechanical problems in ther real world. If a bolt breaks, you replace it, not the entire machine.</li></ol><h4 id="What-Is-a-Class"><a href="#What-Is-a-Class" class="headerlink" title="What Is a Class?"></a>What Is a Class?</h4><p>A class is the blueprint from which individual objects are created.</p><h4 id="What-Is-Inheritance"><a href="#What-Is-Inheritance" class="headerlink" title="What Is Inheritance?"></a>What Is Inheritance?</h4><p>Object-Oriented programming allows classes to inherit commonly used state and behavior from other classes.In the Java programming language, each class is allowed to have one direct superclass, and each superclass has the potential for an unlimited number of subclass.(java 是单继承的)</p><h4 id="What-Is-an-Interface"><a href="#What-Is-an-Interface" class="headerlink" title="What Is an Interface?"></a>What Is an Interface?</h4><p>Interface form a contract between the class and the outside world, and this contract is enforced at build time by the compiler. If your class claims to implement an interface， all methods defined by that interface must appear in its source code before the class will successfully compile.</p><p>Note: To actually compile the ACMEBicycle class, you’ll need to add the <code>public</code> keyword to the beginning of the implemented interface methods.</p><h4 id="What-Is-a-Package"><a href="#What-Is-a-Package" class="headerlink" title="What Is a Package?"></a>What Is a Package?</h4><p>A package is a namespace that organizes a set of related classes and interface.(因为java开发的软件由成千上万的类文件组成，将关联类和接口放在同一特定意义的包中)</p><h3 id="Language-Basics"><a href="#Language-Basics" class="headerlink" title="Language Basics"></a>Language Basics</h3><p>describes the traditional features of the language. include variables, array, data types, operators and control flow.</p><h4 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h4><p>You’ve already learned that objects store their state in fields. However, the Java programming language also uses the term “variales” as well. This section discusses this relationshi, plus variable naming rules and conventions, basic data types (primitive types, character strings, and arrays), default value, and literals(文字).<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Q:</span><br><span class="line">What are the rules and conventions for naming a field?</span><br><span class="line">Besides int, what other data types are there?</span><br><span class="line">Do fields have to be initialized where they are declared?</span><br><span class="line">Are fields assigned a default value if they are not explicitly initialized? # 如果未明确初始化字段，为字段分配默认值吗?</span><br></pre></td></tr></table></figure></p><p>We’ll explore the answers to such questions in this lesson.</p><p>The Java programming language defines the following kinds of variables:</p><ul><li><p>Instance Variables (Non-Static Fields): Technically speaking, object store their individual states in ‘non-static fields’, field declared without the <code>static</code> keyword. Non-static fields are also know as <em>instance variables</em> because their values are unique to each <em>instance of</em> a class (to each object, in other words); the <code>currentSpeed</code> of one bicycle is independent from the <code>currentSpeed</code> of another.</p></li><li><p>Class Variables (Static Field): A <em>class variable</em> is any field declared with the <code>static</code> modifier, this tells the compiler that there is exactly one copy of the variable in existence, regardless of how many times the class has been instantiated. The code <code>static int numGears = 6</code>;would create such a static field. Additionally, the keyword <code>final</code> could be added to indicate that the number of gears will never change.</p></li><li><p>Local Variables: Similar to how an object stores its state in fields, a method will often store its tempoary state in <code>local variable</code>. The syntax for declaring a local variable is similar to declaring a field(for example <code>int count = 0</code>). There is no special keyword designating a variable as local. that determination comes entirely from the location in which the variable is declared – which is between the opening and closing braces of the method. As such, local variables are only visible to the methods in which they are declared; they are not accessiable from the rest of the class.</p></li><li><p>Parameters: You’ve already seen examples of parameters, both in the <code>Bicycle</code> class and in the <code>main</code> method of the “Hello World!” application.Recall that the signature for the main method is <code>public static void main(String[] args)</code>. Here, the args variable is the parameter to this method.This applies to other parameter-accepting constructs as well (such as constructors and exception handlers) that you’ll learn about later in the tutorial.</p></li></ul><p>Naming</p><ul><li>大小写敏感，以<code>字母，$, _</code>开头(通常都是使用字母开头，避免使用<code>$</code>和<code>_</code>)</li><li>后续字符可以是<code>字母，$，_ 和数字</code>，不能使用关键字和保留字</li><li>小驼峰命名；常量的话，使用大写加下划线的形式命名，例：<code>final int NUM_GEARS = 6</code></li></ul><h5 id="Primitive-Data-Types"><a href="#Primitive-Data-Types" class="headerlink" title="Primitive Data Types"></a>Primitive Data Types</h5><p>The Java Programming language is statically-typed, which means that all variables must first declared before they can be used.This involives stating the variable’s type and name, as you’ve already seen:</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;Getting-Started&quot;&gt;&lt;a href=&quot;#Getting-Started&quot; class=&quot;headerlink&quot; title=&quot;Getting Started&quot;&gt;&lt;/a&gt;Getting Started&lt;/h2&gt;&lt;p&gt;An introduction to
+      
+    
+    </summary>
+    
+      <category term="java" scheme="https://capping.github.io/categories/java/"/>
+    
+    
+      <category term="java" scheme="https://capping.github.io/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>url中的特殊字符</title>
+    <link href="https://capping.github.io/2018/06/26/special-charcater-in-url/"/>
+    <id>https://capping.github.io/2018/06/26/special-charcater-in-url/</id>
+    <published>2018-06-26T08:05:14.000Z</published>
+    <updated>2018-09-01T12:57:26.398Z</updated>
+    
+    <content type="html"><![CDATA[<p>uri: uniform resource identifier，统一资源标识符。<br>url: uniform resource locator，统一资源定位符。 </p><p>本文中不讨论<code>url</code>和<code>uri</code>的区别, 暂全文使用url.</p><p>最近调用了一个api, 使用<code>get</code>请求资源. 遇到一个问题, 有的数据可以返回正确的结果, but not all!<br>这就让我很疑惑. 解决思路也很简单, 也没有花多少时间, 在此记录下解决思路, 最后做下总结.</p><p>解决思路:<br>拿到错误数据, 拼接好<code>url</code>, 拿到后台接受的数据.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 问题url例子</span><br><span class="line">https:www.example.com?a=123&amp;b=abc#</span><br></pre></td></tr></table></figure></p><p>其实看到这个url, 问题就明了了, 不过我还是输出下后台拿到的数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [a] =&gt; 123</span><br><span class="line">    [b] =&gt; abc</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p><p>问题就出在url中带有特殊字符！</p><p>以下是url中的特殊字符以及对应的编码：</p><table><thead><tr><th>符号</th><th>url中的含义</th><th>编码</th></tr></thead><tbody><tr><td>+</td><td>URL 中+号表示空格</td><td>%2B</td></tr><tr><td>空格</td><td>URL中的空格可以用+号或者编码</td><td>%20</td></tr><tr><td>/</td><td>分隔目录和子目录</td><td>%2F</td></tr><tr><td>?</td><td>分隔实际的URL和参数</td><td>%3F</td></tr><tr><td>%</td><td>指定特殊字符</td><td>%25</td></tr><tr><td>#</td><td>表示书签</td><td>%23</td></tr><tr><td>&amp;</td><td>URL中指定的参数间的分隔符</td><td>%26</td></tr><tr><td>=</td><td>URL中指定参数的值</td><td>%3D</td></tr></tbody></table><p>解决办法:</p><p>替换url中的特殊字符<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class StringUtil</span><br><span class="line">&#123;</span><br><span class="line">    public static function UrlEncode($str)</span><br><span class="line">    &#123;</span><br><span class="line">        $str = str_replace(&apos;%&apos;, &apos;%25&apos;, $str);</span><br><span class="line">        $str = str_replace(&apos;+&apos;, &apos;%2B&apos;, $str);</span><br><span class="line">        $str = str_replace(&apos; &apos;, &apos;%20&apos;, $str);</span><br><span class="line">        $str = str_replace(&apos;/&apos;, &apos;%2F&apos;, $str);</span><br><span class="line">        $str = str_replace(&apos;?&apos;, &apos;%3F&apos;, $str);</span><br><span class="line">        $str = str_replace(&apos;#&apos;, &apos;%23&apos;, $str);</span><br><span class="line">        $str = str_replace(&apos;&amp;&apos;, &apos;%26&apos;, $str);</span><br><span class="line">        $str = str_replace(&apos;=&apos;, &apos;%3D&apos;, $str);</span><br><span class="line">        return $str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>很明显, 需要先替换<code>%</code>, 因为编码中都存在%.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;uri: uniform resource identifier，统一资源标识符。&lt;br&gt;url: uniform resource locator，统一资源定位符。 &lt;/p&gt;
+&lt;p&gt;本文中不讨论&lt;code&gt;url&lt;/code&gt;和&lt;code&gt;uri&lt;/code&gt;的区别, 暂
+      
+    
+    </summary>
+    
+      <category term="Network" scheme="https://capping.github.io/categories/Network/"/>
+    
+    
+      <category term="url" scheme="https://capping.github.io/tags/url/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>前端压缩图片, php实现上传</title>
+    <link href="https://capping.github.io/2018/06/02/html5-canvas-image-compress-upload/"/>
+    <id>https://capping.github.io/2018/06/02/html5-canvas-image-compress-upload/</id>
+    <published>2018-06-02T02:17:24.000Z</published>
+    <updated>2018-09-01T12:57:26.397Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天在做一个图片上传的功能。<br>流程如下: 点击添加图片按钮–&gt;拍照(或者选择相册图片)–&gt;然后会调用php的上传接口实现上传。<br>遇到的问题: 图片的尺寸过大, 上传时间过长。<br>解决思路: 前端压缩图片后上传。</p><p>无奈前端小哥, 工作量过大, 想让后端实现压缩后上传。经过调研, 妈呀！这不科学(后端的压缩都是图片上传成功后做的, 对提高上传速度没有卵用)。</p><p>继续探索, 找前端实现压缩的方法, 大都是使用base64做, 这…</p><p>还好我找到了张鑫旭大神的文章(<a href="http://www.zhangxinxu.com/wordpress/2017/07/html5-canvas-image-compress-upload/" target="_blank" rel="noopener">http://www.zhangxinxu.com/wordpress/2017/07/html5-canvas-image-compress-upload/</a>)</p><p>前端的实现文章里讲的很详细, 此处不再赘述。</p><p>随之而来的问题, 由于此处使用的<code>toBlob</code>方法方法实现的, 那做为一个php后端要怎么接收<code>blob</code>(binary large object)对象呢？</p><p>普通的文件上传php使用<code>$_FILES</code>可以接收, 然而我<code>var_dump()</code>打印出来的却是一个空数组。 那试试<code>$_REQUEST</code>?</p><p>然后我借助搜索引擎搜索<code>前端压缩图片后端php怎么接受?</code>, 只能说, 我很绝望！ 继续啃大神的文章, 如下一句话, 点醒梦中人:<br><code>可以把canvas转换成Blob文件，通常用在文件上传中，因为是二进制的，对后端更加友好</code>。</p><p>然后我就找到了查询的关键字<code>php如何接收二进制流？</code><br>豁然开朗:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 方式一</span><br><span class="line">$content = $GLOBALS[&apos;HTTP_RAW_POST_DATA&apos;];  // 需要php.ini设置</span><br><span class="line"># 方式二</span><br><span class="line">$content = file_get_contents(&apos;php://input&apos;);    // 不需要php.ini设置，内存压力小</span><br></pre></td></tr></table></figure></p><p>作为一个技术不那么严谨的公司(连服务器的mb_string扩展都没有正确开启), 果断使用方法二。</p><p>那拿到前端传过来的blob对象,怎么把blob解析成图片呢？<br>接下里就顺畅多了, 直接搜索<code>php如何接收二进制流转换成图片？</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$file_name = date(&quot;YmdHis&quot;).rand(&quot;1000&quot;,&quot;9999&quot;).&quot;.png&quot;;</span><br><span class="line">//图片路径</span><br><span class="line">$file_dir = UPLOADIMGNEW.$file_name;</span><br><span class="line">$img = file_get_contents(&quot;php://input&quot;);</span><br><span class="line">if (empty($img)) &#123;</span><br><span class="line">    thow new Exception(&apos;二进制流为空&apos;, 400); //二进制流为空</span><br><span class="line">&#125;</span><br><span class="line">if ($fp = fopen($file_dir, &apos;w&apos;)) &#123;</span><br><span class="line">    if (fwrite($fp, $img)) &#123;</span><br><span class="line">        fclose($fp); //成功</span><br><span class="line">        return json_encode[</span><br><span class="line">            &apos;url&apos; =&gt; &quot;http://&quot; . $_SERVER[&quot;SERVER_NAME&quot;] . &quot;:&quot; . $_SERVER[&quot;SERVER_PORT&quot;].dirname($_SERVER[&quot;SCRIPT_NAME&quot;]).&quot;/upload/img/&quot;.$file_name</span><br><span class="line">        ];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        thow new Exception(&apos;写入文件不成功&apos;, 500); //写入文件不成功</span><br><span class="line">    &#125;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    thow new Exception(&apos;不能打开或创建文件&apos;, 500); //不能打开或创建文件</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>ok！ 打完收工…</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;今天在做一个图片上传的功能。&lt;br&gt;流程如下: 点击添加图片按钮–&amp;gt;拍照(或者选择相册图片)–&amp;gt;然后会调用php的上传接口实现上传。&lt;br&gt;遇到的问题: 图片的尺寸过大, 上传时间过长。&lt;br&gt;解决思路: 前端压缩图片后上传。&lt;/p&gt;
+&lt;p&gt;无奈前端小哥, 工作
+      
+    
+    </summary>
+    
+      <category term="php" scheme="https://capping.github.io/categories/php/"/>
+    
+    
+      <category term="php" scheme="https://capping.github.io/tags/php/"/>
+    
+      <category term="canvas" scheme="https://capping.github.io/tags/canvas/"/>
+    
+      <category term="js" scheme="https://capping.github.io/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>sourceTree安装时免登录</title>
+    <link href="https://capping.github.io/2018/05/16/sourceTree%E5%AE%89%E8%A3%85%E6%97%B6%E5%85%8D%E7%99%BB%E5%BD%95/"/>
+    <id>https://capping.github.io/2018/05/16/sourceTree安装时免登录/</id>
+    <published>2018-05-16T09:01:55.000Z</published>
+    <updated>2018-09-01T12:57:26.398Z</updated>
+    
+    <content type="html"><![CDATA[<p>sourceTree是一个工具, 我一直用它做git管理(git的图形化界面GUI)<br>最大的一个问题是 : 安装 SourceTree 时, 需要使用atlassian授权, 即使翻墙这个过程也会出现反应慢, 收不到邮件或短信的问题, 现提供跳过 atlassian账号 授权方法。</p><p><img src="https://github.com/capping/blog/blob/master/source/images/1066204-20171122140702633-1169598542.png?raw=true" alt=""></p><p>安装之后, 转到用户本地文件夹下的 SourceTree 目录, 没有则新建：</p><blockquote><p>%LocalAppData%\Atlassian\SourceTree\</p></blockquote><p>请把以上路径直接粘贴到我的电脑路径的位置跳转, 才能跳转到正确位置</p><p>新建 accounts.json 文件</p><blockquote><p>%LocalAppData%\Atlassian\SourceTree\accounts.json</p></blockquote><p>输入以下内容保存即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;$id&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;$type&quot;: &quot;SourceTree.Api.Host.Identity.Model.IdentityAccount, SourceTree.Api.Host.Identity&quot;,</span><br><span class="line">    &quot;Authenticate&quot;: true,</span><br><span class="line">    &quot;HostInstance&quot;: &#123;</span><br><span class="line">      &quot;$id&quot;: &quot;2&quot;,</span><br><span class="line">      &quot;$type&quot;: &quot;SourceTree.Host.Atlassianaccount.AtlassianAccountInstance, SourceTree.Host.AtlassianAccount&quot;,</span><br><span class="line">      &quot;Host&quot;: &#123;</span><br><span class="line">        &quot;$id&quot;: &quot;3&quot;,</span><br><span class="line">        &quot;$type&quot;: &quot;SourceTree.Host.Atlassianaccount.AtlassianAccountHost, SourceTree.Host.AtlassianAccount&quot;,</span><br><span class="line">        &quot;Id&quot;: &quot;atlassian account&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;BaseUrl&quot;: &quot;https://id.atlassian.com/&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;Credentials&quot;: &#123;</span><br><span class="line">      &quot;$id&quot;: &quot;4&quot;,</span><br><span class="line">      &quot;$type&quot;: &quot;SourceTree.Model.BasicAuthCredentials, SourceTree.Api.Account&quot;,</span><br><span class="line">      &quot;Username&quot;: &quot;&quot;,</span><br><span class="line">      &quot;Email&quot;: null</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;IsDefault&quot;: false</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p><p><img src="https://github.com/capping/blog/blob/master/source/images/1526462870.png?raw=true" alt=""></p><p>原博客链接：<a href="https://blog.csdn.net/liby_sunny/article/details/78813001" target="_blank" rel="noopener">https://blog.csdn.net/liby_sunny/article/details/78813001</a><br>若影响到个人利益, 请联系博主删除该文章。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;sourceTree是一个工具, 我一直用它做git管理(git的图形化界面GUI)&lt;br&gt;最大的一个问题是 : 安装 SourceTree 时, 需要使用atlassian授权, 即使翻墙这个过程也会出现反应慢, 收不到邮件或短信的问题, 现提供跳过 atlassian账
+      
+    
+    </summary>
+    
+      <category term="tools" scheme="https://capping.github.io/categories/tools/"/>
+    
+    
+      <category term="git" scheme="https://capping.github.io/tags/git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>我开始写博客了</title>
+    <link href="https://capping.github.io/2018/05/14/%E6%88%91%E5%BC%80%E5%A7%8B%E5%86%99%E5%8D%9A%E5%AE%A2%E4%BA%86/"/>
+    <id>https://capping.github.io/2018/05/14/我开始写博客了/</id>
+    <published>2018-05-14T05:59:48.000Z</published>
+    <updated>2018-09-01T12:57:26.398Z</updated>
+    
+    <content type="html"><![CDATA[<p>记录一下吧, 今天是2018年5月14日, 我开始写博客了.<br>之前一直想做一个博客, 当时没什么特别的想法, 只是感觉应该有一个. 但是慢慢的(可能是年龄大了), 想找一个平台记录下自己的生活和学习过程.<br>在纠结了一段时间, 调研了几个常用的博客系统, 从wordpress, segmentfault, hexo等中, 最终决定使用hexo, 选择hexo一样没有理由, 就是感觉想<br>用这个了.<br>从此我也是一个有博客的人了…<br>贴几条命令吧！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 在package.json中配置了这个</span><br><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;start&quot;: &quot;hexo clean &amp;&amp; hexo g &amp;&amp; hexo d&quot;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">$ hexo new &quot;My New Post&quot;</span><br><span class="line">$ npm start</span><br></pre></td></tr></table></figure></p><p>启动本地服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;记录一下吧, 今天是2018年5月14日, 我开始写博客了.&lt;br&gt;之前一直想做一个博客, 当时没什么特别的想法, 只是感觉应该有一个. 但是慢慢的(可能是年龄大了), 想找一个平台记录下自己的生活和学习过程.&lt;br&gt;在纠结了一段时间, 调研了几个常用的博客系统, 从wor
+      
+    
+    </summary>
+    
+      <category term="未分类" scheme="https://capping.github.io/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/"/>
+    
+    
+  </entry>
+  
+</feed>
