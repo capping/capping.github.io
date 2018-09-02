@@ -1,7 +1,7 @@
 ---
 title: sourceTree安装时免登录
 date: 2018-05-16 17:01:55
-tags: [git]
+tags: [git, tools]
 categories: [tools]
 ---
 
