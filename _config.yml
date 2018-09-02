@@ -5,7 +5,7 @@
 # Site
 title: Z-II's Blog
 subtitle:
-description:
+description: You are the owner of your career.
 keywords:
 author: Xuebin Zhang
 language: zh-CN
@@ -73,7 +73,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: maupassant
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
