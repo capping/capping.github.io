@@ -79,5 +79,5 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://capping:zhang123456@github.com/capping/capping.github.io.git
+  repo: https://github.com/capping/capping.github.io.git
   branch: master
