@@ -8,7 +8,7 @@ categories: [tools]
 sourceTree是一个工具, 我一直用它做git管理(git的图形化界面GUI)
 最大的一个问题是 : 安装 SourceTree 时, 需要使用atlassian授权, 即使翻墙这个过程也会出现反应慢, 收不到邮件或短信的问题, 现提供跳过 atlassian账号 授权方法。
 
-![](https://github.com/capping/blog/blob/master/source/images/1066204-20171122140702633-1169598542.png?raw=true)
+![](https://capping.github.com/images/SourceTree_login.png?raw=true)
 
 安装之后, 转到用户本地文件夹下的 SourceTree 目录, 没有则新建：
 
@@ -47,7 +47,7 @@ sourceTree是一个工具, 我一直用它做git管理(git的图形化界面GUI)
   }
 ]
 ```
-![](https://github.com/capping/blog/blob/master/source/images/1526462870.png?raw=true)
+![](https://capping.github.com/images/1526462870.png?raw=true)
 
 原博客链接：https://blog.csdn.net/liby_sunny/article/details/78813001  
 若影响到个人利益, 请联系博主删除该文章。
