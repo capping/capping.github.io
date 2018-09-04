@@ -20,3 +20,17 @@ function randomString($length = 6) :string
     return $str;
 }
 ```
+
+2. Get a subset of the items from the given array.
+```
+/**
+ * @param  array $array
+ * @param  array|string $keys
+ * @return array
+ */
+function array_only($array, $keys) 
+{
+    return array_intersect_key($array, array_flip((array) $keys));
+}
+# array_flip： 交换数组中的键和值
+```
