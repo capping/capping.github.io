@@ -3,6 +3,7 @@ title: Linux服务器磁盘空间不足异常
 date: 2018-08-28 10:32:24
 tags: [centos, linux]
 categories: [Linux]
+top: true
 ---
 
 昨天连接数据库的时候出现如下错误:
