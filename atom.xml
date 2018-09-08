@@ -100,7 +100,7 @@
     <link href="https://capping.github.io/2018/08/28/Centos-disk-space-abnormal/"/>
     <id>https://capping.github.io/2018/08/28/Centos-disk-space-abnormal/</id>
     <published>2018-08-28T02:32:24.000Z</published>
-    <updated>2018-09-01T12:57:26.396Z</updated>
+    <updated>2018-09-08T08:14:26.164Z</updated>
     
     <content type="html"><![CDATA[<p>昨天连接数据库的时候出现如下错误:</p><blockquote><p>got error 28 from storage engine</p></blockquote><p>经过搜索引擎了解到原来是磁盘空间不足了。登陆服务器。输入以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure></p><p>果然磁盘占用 100% 了！怎么办？ 删日志吧。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 进入根目录</span><br><span class="line">cd /</span><br><span class="line"></span><br><span class="line"># 查看当前目录下的磁盘占用情况， 然后一步步分析看哪些文件占用较大</span><br><span class="line">du -sh *</span><br><span class="line"></span><br><span class="line"># 在这步发现磁盘占用情况最多 30% 的样子，百思不得解</span><br></pre></td></tr></table></figure></p><p>结果令人失望，删掉日志文件磁盘占用情况依旧 95% 以上。但是就这样吧， 起码数据库能访问了</p><p>今天过来磁盘占用又 100% 了</p><p>于是就想到了 是不是删除了文件 但是对应的进程并没有被杀掉</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof | grep deleted</span><br></pre></td></tr></table></figure><p>果然发现了端倪, 于是kill掉文件对应的进程号 再 df -h 看存储 恢复正常~</p><p>或者下面的命令会一次全删掉</p><blockquote><p>lsof |awk ‘/deleted/{print $2}’|xargs kill -9</p></blockquote><p>然后 <code>df -h</code>, 看到磁盘占用回到了 28%</p>]]></content>
     
@@ -151,9 +151,9 @@
     
       <category term="linux" scheme="https://capping.github.io/tags/linux/"/>
     
-      <category term="php" scheme="https://capping.github.io/tags/php/"/>
-    
       <category term="redis" scheme="https://capping.github.io/tags/redis/"/>
+    
+      <category term="php" scheme="https://capping.github.io/tags/php/"/>
     
   </entry>
   
