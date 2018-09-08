@@ -1,8 +1,8 @@
 ---
 title: JavaSE
 date: 2018-08-08 09:57:06
-tags: [java]
-categories: [java]
+tags: [Java]
+categories: [Java]
 toc: true
 ---
 
@@ -41,7 +41,7 @@ The Java platform has two components:
 JVM 是java平台的基础，并被移植到各种给予硬件的平台上。
 The API is a large collection of ready-made(现成) software componment that provide many useful capabilities(功能). It is grouped into libraries of related classes and interfaces; these libraries are known as packages.
 
-![](https://github.com/capping/blog/blob/master/source/images/getStarted-jvm.gif?raw=true)
+![](https://capping.github.io/images/getStarted-jvm.gif?raw=true)
 The API and Java Virtual Machine insulate the program from the underlying hardware.
 
 #### What Can Java Technology Do?
