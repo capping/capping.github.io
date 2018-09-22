@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://capping.github.io/"/>
-  <updated>2018-09-08T07:05:08.448Z</updated>
+  <updated>2018-09-22T14:43:33.559Z</updated>
   <id>https://capping.github.io/</id>
   
   <author>
@@ -15,6 +15,136 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>CSS 垂直居中</title>
+    <link href="https://capping.github.io/2018/09/20/CSS-Vertical-Center/"/>
+    <id>https://capping.github.io/2018/09/20/CSS-Vertical-Center/</id>
+    <published>2018-09-20T09:20:36.000Z</published>
+    <updated>2018-09-22T14:43:33.559Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>显示方式设置成表格<br>html:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;wrapper&quot;&gt;</span><br><span class="line">    &lt;div id=&quot;cell&quot;&gt;</span><br><span class="line">        &lt;div class=&quot;content&quot;&gt;Content goes here.&lt;/div&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></li></ol><p>css:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#wrapper &#123;</span><br><span class="line">    display: table;</span><br><span class="line">    height: 100px;</span><br><span class="line">    background: pink;</span><br><span class="line">&#125;</span><br><span class="line">#cell &#123;</span><br><span class="line">    display: table-cell;</span><br><span class="line">    vertical-align: middle;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>效果：<br><img src="https://capping.github.io/images/css/css-vertical-center-01.jpg" alt=""></p><ol start="2"><li>父元素相对定位，子元素绝对定位<br>html:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;wrapper&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;content&quot;&gt;Content goes here.&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></li></ol><p>css:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#wrapper &#123;</span><br><span class="line">    border: 1px solid #ccc;</span><br><span class="line">    width: 600px;</span><br><span class="line">    height: 400px;</span><br><span class="line">    position: relative;</span><br><span class="line">&#125;</span><br><span class="line">.content &#123;</span><br><span class="line">    background: pink;</span><br><span class="line">    width: 300px;</span><br><span class="line">    height: 200px;</span><br><span class="line">    positioin: absolute;</span><br><span class="line">    left: 50%;</span><br><span class="line">    top: 50%;</span><br><span class="line">    margin-left: -150px;</span><br><span class="line">    margin-top: -100px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>效果：<br><img src="https://capping.github.io/images/css/css-vertical-center-02.jpg" alt=""></p><ol start="3"><li>CSS3 <code>transform</code> 代替 <code>margin</code><br>html:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;wrapper&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;content&quot;&gt;Content goes here.&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></li></ol><p>css:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#wrapper &#123;</span><br><span class="line">    border: 1px solid #ccc;</span><br><span class="line">    width: 600px;</span><br><span class="line">    height: 400px;</span><br><span class="line">    position: relative;</span><br><span class="line">&#125;</span><br><span class="line">.content &#123;</span><br><span class="line">    background: pink;</span><br><span class="line">    position: absolute;</span><br><span class="line">    left: 50%;</span><br><span class="line">    top: 50%;</span><br><span class="line">    transform: translate(-50%, -50%);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>效果：<br><img src="https://capping.github.io/images/css/css-vertical-center-03.jpg" alt=""></p><ol start="4"><li><code>margin: auto</code> 实现<br>html:<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;wrapper&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;content&quot;&gt;Content goes here.&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></li></ol><p>css:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#wrapper &#123;</span><br><span class="line">    border: 1px solid #ccc;</span><br><span class="line">    width: 600px;</span><br><span class="line">    height: 400px;</span><br><span class="line">    position: relative;</span><br><span class="line">&#125;</span><br><span class="line">.content &#123;</span><br><span class="line">    background: pink;</span><br><span class="line">    width: 200px;</span><br><span class="line">    height: 100px;</span><br><span class="line">    position: absolute;</span><br><span class="line">    left: 0;</span><br><span class="line">    top: 0;</span><br><span class="line">    right: 0;</span><br><span class="line">    bottom: 0;</span><br><span class="line">    margin: auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>效果：<br><img src="https://capping.github.io/images/css/css-vertical-center-04.jpg" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;显示方式设置成表格&lt;br&gt;html:&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;li
+      
+    
+    </summary>
+    
+      <category term="CSS" scheme="https://capping.github.io/categories/CSS/"/>
+    
+    
+      <category term="CSS" scheme="https://capping.github.io/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java 日常总结</title>
+    <link href="https://capping.github.io/2018/09/17/Java-Common/"/>
+    <id>https://capping.github.io/2018/09/17/Java-Common/</id>
+    <published>2018-09-17T06:06:46.000Z</published>
+    <updated>2018-09-22T14:43:33.560Z</updated>
+    
+    <content type="html"><![CDATA[<p>Java 日常总结，方便以后分类</p><ol><li>AtomicLong<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># AtomicLong 继承 Number, 实现 Serializable</span><br><span class="line">public class AtomicLong extends Number implements java.io.Serializable</span><br><span class="line"># 构造函数：</span><br><span class="line">public AtomicLongs</span><br><span class="line">public AtomicLongs(long initialValue)</span><br><span class="line"></span><br><span class="line"># 使用</span><br><span class="line">private final AtomicLong counter = new AtomicLong();</span><br><span class="line">counter.incrementAndGet();  // 原子的将当前值增加1</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Java 日常总结，方便以后分类&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;AtomicLong&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://capping.github.io/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="https://capping.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>7. Java String类型</title>
+    <link href="https://capping.github.io/2018/09/17/Java-String/"/>
+    <id>https://capping.github.io/2018/09/17/Java-String/</id>
+    <published>2018-09-17T06:04:28.000Z</published>
+    <updated>2018-09-22T14:43:33.560Z</updated>
+    
+    <content type="html"><![CDATA[<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public final class String implement java.io.Serializable, Comparable&lt;String&gt;, CharSequence</span><br></pre></td></tr></table></figure><p>使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String.format(String format, Object... args);  // 使用指定的格式字符串和参数返回格式化字符串</span><br></pre></td></tr></table></figure></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span cla
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://capping.github.io/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="https://capping.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java 数据类型</title>
+    <link href="https://capping.github.io/2018/09/11/Java-Data-Type/"/>
+    <id>https://capping.github.io/2018/09/11/Java-Data-Type/</id>
+    <published>2018-09-11T09:44:23.000Z</published>
+    <updated>2018-09-22T14:43:33.560Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-基本数据类型"><a href="#1-基本数据类型" class="headerlink" title="1. 基本数据类型"></a>1. 基本数据类型</h2><ul><li>数值型<ul><li>整数类型(byte, short, int, long)</li><li>浮点类型(float, double)</li></ul></li><li>字符型(char)</li><li>布尔型(boolean)</li></ul><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">byte b = 2;</span><br><span class="line">short s = 30000;</span><br><span class="line">int i = 10;</span><br><span class="line">long l = 4l;</span><br><span class="line"></span><br><span class="line">char ch = &apos;4&apos;;</span><br><span class="line"></span><br><span class="line">boolean bool = true;</span><br></pre></td></tr></table></figure><h2 id="2-引用数据类型"><a href="#2-引用数据类型" class="headerlink" title="2. 引用数据类型"></a>2. 引用数据类型</h2>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;1-基本数据类型&quot;&gt;&lt;a href=&quot;#1-基本数据类型&quot; class=&quot;headerlink&quot; title=&quot;1. 基本数据类型&quot;&gt;&lt;/a&gt;1. 基本数据类型&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;数值型&lt;ul&gt;
+&lt;li&gt;整数类型(byte, short, int, lon
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://capping.github.io/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="https://capping.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>4. Java 变量</title>
+    <link href="https://capping.github.io/2018/09/11/Java-Variable/"/>
+    <id>https://capping.github.io/2018/09/11/Java-Variable/</id>
+    <published>2018-09-11T08:47:47.000Z</published>
+    <updated>2018-09-22T14:43:33.560Z</updated>
+    
+    <content type="html"><![CDATA[<p>声明变量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[数据类型] [变量名] = [初始化值]</span><br></pre></td></tr></table></figure></p><h2 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h2><ul><li>由26个英文字母大小写，数字：0 ~ 9 符号：<code>_$</code> 组成</li><li>合法标识符的规则<ol><li>数字不可以开头</li><li>不可以使用关键字</li></ol></li><li>Java严格区分大小写</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;声明变量：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;p
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://capping.github.io/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="https://capping.github.io/tags/Java/"/>
+    
+  </entry>
   
   <entry>
     <title>Java学习路径</title>
@@ -100,7 +230,7 @@
     <link href="https://capping.github.io/2018/08/28/Centos-disk-space-abnormal/"/>
     <id>https://capping.github.io/2018/08/28/Centos-disk-space-abnormal/</id>
     <published>2018-08-28T02:32:24.000Z</published>
-    <updated>2018-09-08T08:14:26.164Z</updated>
+    <updated>2018-09-08T10:14:10.994Z</updated>
     
     <content type="html"><![CDATA[<p>昨天连接数据库的时候出现如下错误:</p><blockquote><p>got error 28 from storage engine</p></blockquote><p>经过搜索引擎了解到原来是磁盘空间不足了。登陆服务器。输入以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure></p><p>果然磁盘占用 100% 了！怎么办？ 删日志吧。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 进入根目录</span><br><span class="line">cd /</span><br><span class="line"></span><br><span class="line"># 查看当前目录下的磁盘占用情况， 然后一步步分析看哪些文件占用较大</span><br><span class="line">du -sh *</span><br><span class="line"></span><br><span class="line"># 在这步发现磁盘占用情况最多 30% 的样子，百思不得解</span><br></pre></td></tr></table></figure></p><p>结果令人失望，删掉日志文件磁盘占用情况依旧 95% 以上。但是就这样吧， 起码数据库能访问了</p><p>今天过来磁盘占用又 100% 了</p><p>于是就想到了 是不是删除了文件 但是对应的进程并没有被杀掉</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof | grep deleted</span><br></pre></td></tr></table></figure><p>果然发现了端倪, 于是kill掉文件对应的进程号 再 df -h 看存储 恢复正常~</p><p>或者下面的命令会一次全删掉</p><blockquote><p>lsof |awk ‘/deleted/{print $2}’|xargs kill -9</p></blockquote><p>然后 <code>df -h</code>, 看到磁盘占用回到了 28%</p>]]></content>
     
@@ -151,9 +281,9 @@
     
       <category term="linux" scheme="https://capping.github.io/tags/linux/"/>
     
-      <category term="redis" scheme="https://capping.github.io/tags/redis/"/>
-    
       <category term="php" scheme="https://capping.github.io/tags/php/"/>
+    
+      <category term="redis" scheme="https://capping.github.io/tags/redis/"/>
     
   </entry>
   
