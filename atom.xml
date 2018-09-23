@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://capping.github.io/"/>
-  <updated>2018-09-22T14:43:33.559Z</updated>
+  <updated>2018-09-23T02:26:08.381Z</updated>
   <id>https://capping.github.io/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>PHP基础语法</title>
+    <link href="https://capping.github.io/2018/09/23/php-basic-syntax/"/>
+    <id>https://capping.github.io/2018/09/23/php-basic-syntax/</id>
+    <published>2018-09-23T02:20:49.000Z</published>
+    <updated>2018-09-23T02:26:08.381Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+      <category term="PHP" scheme="https://capping.github.io/categories/PHP/"/>
+    
+    
+      <category term="PHP" scheme="https://capping.github.io/tags/PHP/"/>
+    
+  </entry>
   
   <entry>
     <title>CSS 垂直居中</title>
@@ -177,7 +195,7 @@
     <link href="https://capping.github.io/2018/08/31/php-common-custome-function/"/>
     <id>https://capping.github.io/2018/08/31/php-common-custome-function/</id>
     <published>2018-08-31T08:46:14.000Z</published>
-    <updated>2018-09-08T07:05:08.449Z</updated>
+    <updated>2018-09-23T02:22:51.823Z</updated>
     
     <content type="html"><![CDATA[<h1 id="StringUtil"><a href="#StringUtil" class="headerlink" title="StringUtil"></a>StringUtil</h1><ol><li><p>生成随机字符串</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function randomString($length = 6) :string</span><br><span class="line">&#123;</span><br><span class="line">    $pattern = &apos;1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ&apos;;</span><br><span class="line">    $str = &apos;&apos;;</span><br><span class="line">    for ($i = 0; $i &lt; $length; $i++) &#123;</span><br><span class="line">        $str .= $pattern&#123;mt_rand(0, 61)&#125;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    return $str;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li><li><p>Get a subset of the items from the given array.</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * @param  array $array</span><br><span class="line"> * @param  array|string $keys</span><br><span class="line"> * @return array</span><br><span class="line"> */</span><br><span class="line">function array_only($array, $keys) </span><br><span class="line">&#123;</span><br><span class="line">    return array_intersect_key($array, array_flip((array) $keys));</span><br><span class="line">&#125;</span><br><span class="line"># array_flip： 交换数组中的键和值</span><br></pre></td></tr></table></figure></li></ol>]]></content>
     
@@ -192,10 +210,10 @@
     
     </summary>
     
-      <category term="php" scheme="https://capping.github.io/categories/php/"/>
+      <category term="PHP" scheme="https://capping.github.io/categories/PHP/"/>
     
     
-      <category term="php" scheme="https://capping.github.io/tags/php/"/>
+      <category term="PHP" scheme="https://capping.github.io/tags/PHP/"/>
     
   </entry>
   
@@ -204,7 +222,7 @@
     <link href="https://capping.github.io/2018/08/30/nohup-and-&amp;/"/>
     <id>https://capping.github.io/2018/08/30/nohup-and-&amp;/</id>
     <published>2018-08-30T03:11:08.000Z</published>
-    <updated>2018-09-01T12:57:26.397Z</updated>
+    <updated>2018-09-23T02:25:03.059Z</updated>
     
     <content type="html"><![CDATA[<p>今天来解决下一直存在的一个疑问 <code>nohup</code> 和 <code>&amp;</code> 到底是什么？</p><p>在日常中使用往往是这样子的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup php demo.php &amp;</span><br></pre></td></tr></table></figure></p><p>但是为什么要两个一起用呢？ 只用一个行不行？ 只用其中的一个是什么效果呢？</p><p>我们先看最后一个问题</p><ol><li><p>只用 <code>&amp;</code><br>&amp;的意思是在后台运行, 就是当你运行代码 <code>php demo.php &amp;</code> 时, 即使你使用 <code>Ctrl C</code> ,代码照样会运行(因为对SIGINT信号免疫)。但是要注意, 当你关掉shell后, <code>php demo.php</code>进程就消失了。可见 <code>&amp;</code> 的后台并不硬(因为对SIGHUP信号不免疫)</p></li><li><p>只用 <code>nohup</code><br>nohup的意思是忽略SIGHUP信号, 所以当运行 <code>nohup demo.php</code> 的时候, 关闭shell <code>php demo.php</code> 进程还是存在(对SIGHUP信号免疫)。 但是直接在shell中使用 <code>Ctrl C</code>, <code>php demo.php</code>进程就会消失(因为对SIGINT信号不免疫)。</p></li></ol><p>所以, &amp;和nohup没有半毛钱的关系, 要让进程真正不受shell中Ctrl C和shell关闭的影响, 那该怎么办呢？ 那就用 <code>nohup php demo.php &amp;</code> 吧, 两全其美。</p><p>解决了最后一个问题, 其他问题就迎刃而解啦</p><p>如果你懂守护进程, 那么 <code>nohup php demo.php &amp;</code> 颇有点让 <code>php demo.php</code> 成为守护进程的感觉。</p>]]></content>
     
@@ -221,7 +239,7 @@
       <category term="Linux" scheme="https://capping.github.io/categories/Linux/"/>
     
     
-      <category term="linux" scheme="https://capping.github.io/tags/linux/"/>
+      <category term="Linux" scheme="https://capping.github.io/tags/Linux/"/>
     
   </entry>
   
@@ -230,7 +248,7 @@
     <link href="https://capping.github.io/2018/08/28/Centos-disk-space-abnormal/"/>
     <id>https://capping.github.io/2018/08/28/Centos-disk-space-abnormal/</id>
     <published>2018-08-28T02:32:24.000Z</published>
-    <updated>2018-09-08T10:14:10.994Z</updated>
+    <updated>2018-09-23T02:25:19.338Z</updated>
     
     <content type="html"><![CDATA[<p>昨天连接数据库的时候出现如下错误:</p><blockquote><p>got error 28 from storage engine</p></blockquote><p>经过搜索引擎了解到原来是磁盘空间不足了。登陆服务器。输入以下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">df -h</span><br></pre></td></tr></table></figure></p><p>果然磁盘占用 100% 了！怎么办？ 删日志吧。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 进入根目录</span><br><span class="line">cd /</span><br><span class="line"></span><br><span class="line"># 查看当前目录下的磁盘占用情况， 然后一步步分析看哪些文件占用较大</span><br><span class="line">du -sh *</span><br><span class="line"></span><br><span class="line"># 在这步发现磁盘占用情况最多 30% 的样子，百思不得解</span><br></pre></td></tr></table></figure></p><p>结果令人失望，删掉日志文件磁盘占用情况依旧 95% 以上。但是就这样吧， 起码数据库能访问了</p><p>今天过来磁盘占用又 100% 了</p><p>于是就想到了 是不是删除了文件 但是对应的进程并没有被杀掉</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsof | grep deleted</span><br></pre></td></tr></table></figure><p>果然发现了端倪, 于是kill掉文件对应的进程号 再 df -h 看存储 恢复正常~</p><p>或者下面的命令会一次全删掉</p><blockquote><p>lsof |awk ‘/deleted/{print $2}’|xargs kill -9</p></blockquote><p>然后 <code>df -h</code>, 看到磁盘占用回到了 28%</p>]]></content>
     
@@ -252,7 +270,7 @@
     
       <category term="centos" scheme="https://capping.github.io/tags/centos/"/>
     
-      <category term="linux" scheme="https://capping.github.io/tags/linux/"/>
+      <category term="Linux" scheme="https://capping.github.io/tags/Linux/"/>
     
   </entry>
   
@@ -261,7 +279,7 @@
     <link href="https://capping.github.io/2018/08/20/Centos-install-phpredis/"/>
     <id>https://capping.github.io/2018/08/20/Centos-install-phpredis/</id>
     <published>2018-08-20T05:49:14.000Z</published>
-    <updated>2018-09-01T12:57:26.396Z</updated>
+    <updated>2018-09-23T02:23:49.118Z</updated>
     
     <content type="html"><![CDATA[<h2 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"># 1. 下载phpredis</span><br><span class="line">wget https://github.com/phpredis/phpredis/archive/4.1.1.tar.gz</span><br><span class="line"></span><br><span class="line"># 2. 解压 </span><br><span class="line"># z-tar包被gzip压缩,用gunzip解压 x-从tar包中提取文件 v-显示详细信息 f-指定被处理的文件</span><br><span class="line">tar -zxvf 4.1.1.tar.gz</span><br><span class="line"></span><br><span class="line"># 3. 进入解压后目录</span><br><span class="line">cd phpredis-4.1.1/</span><br><span class="line"></span><br><span class="line"># 4. 生成configure配置文件</span><br><span class="line">/usr/local/php/bin/phpize</span><br><span class="line"></span><br><span class="line"># 5. 配置</span><br><span class="line">./configure --with-php-config=/usr/local/php/bin/php-config</span><br><span class="line"></span><br><span class="line"># 6. 编译</span><br><span class="line">make</span><br><span class="line"></span><br><span class="line"># 7. 运行测试</span><br><span class="line">make test</span><br><span class="line"></span><br><span class="line"># 8. 安装</span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line"># 9. 配置ini文件</span><br><span class="line">vi /usr/local/php/lib/php.ini</span><br><span class="line">&gt; extension=&quot;redis.so&quot;</span><br><span class="line"></span><br><span class="line"># 10. 重启php-fpm</span><br><span class="line">kill PID</span><br><span class="line">/usr/local/php/sbin/php-fpm</span><br><span class="line"></span><br><span class="line"># 11. 重启nginx</span><br><span class="line">nginx -s reload # 重启nginx</span><br></pre></td></tr></table></figure><h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>重启php-fpm时使用</p><blockquote><p>/usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php-fpm.conf</p></blockquote><p>导致 <code>phpinfo()</code> 中参数 <code>Loaded Configuration File</code> 是 <code>/usr/local/php/etc/php-fpm.conf</code> ,所以打印 <code>phpinfo</code> 时一直无法显示<code>redis</code>扩展。</p><p>正确的做法是上面显示的，不指定配置文件 <del>-c /usr/local/php/etc/php-fpm.conf</del> 的做法</p>]]></content>
     
@@ -274,14 +292,14 @@
     
     </summary>
     
-      <category term="php" scheme="https://capping.github.io/categories/php/"/>
+      <category term="PHP" scheme="https://capping.github.io/categories/PHP/"/>
     
     
       <category term="centos" scheme="https://capping.github.io/tags/centos/"/>
     
-      <category term="linux" scheme="https://capping.github.io/tags/linux/"/>
+      <category term="Linux" scheme="https://capping.github.io/tags/Linux/"/>
     
-      <category term="php" scheme="https://capping.github.io/tags/php/"/>
+      <category term="PHP" scheme="https://capping.github.io/tags/PHP/"/>
     
       <category term="redis" scheme="https://capping.github.io/tags/redis/"/>
     
@@ -310,9 +328,9 @@
     
       <category term="centos" scheme="https://capping.github.io/tags/centos/"/>
     
-      <category term="linux" scheme="https://capping.github.io/tags/linux/"/>
-    
       <category term="redis" scheme="https://capping.github.io/tags/redis/"/>
+    
+      <category term="linux" scheme="https://capping.github.io/tags/linux/"/>
     
   </entry>
   
@@ -346,7 +364,7 @@
     <link href="https://capping.github.io/2018/08/08/interview/"/>
     <id>https://capping.github.io/2018/08/08/interview/</id>
     <published>2018-08-08T06:41:00.000Z</published>
-    <updated>2018-09-01T12:57:26.397Z</updated>
+    <updated>2018-09-23T02:24:07.364Z</updated>
     
     <content type="html"><![CDATA[<p>这边记录一些php的面试题(不保证正确性，准确性)，会不定期更新，如果有什么错误或者更好的方案，希望得到你的指导</p><ol><li>设计一个发红包，抢红包的系统</li></ol><p>问题一： 金额是预先分配还是实时计算<br>答： 实时计算，预算需要占存储，并且会产生大量的数据库读写操作，实时效率很高，预算效率才低</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">function getRedPackageMoney($min = 1)</span><br><span class="line">&#123;</span><br><span class="line">    $redPackageId = 10; // 红包ID</span><br><span class="line">    $redis = new Redis();</span><br><span class="line">    $redis-&gt;pconnect(&apos;127.0.0.1&apos;, 6379, 1);</span><br><span class="line">    $remainSize = $redis-&gt;get(&apos;remainSize:&apos; . $redPackageId);</span><br><span class="line">    $remainMoney = $redis-&gt;get(&apos;remainMoney:&apos; . $redPackageId);</span><br><span class="line"></span><br><span class="line">    if (!$remainSize) &#123;</span><br><span class="line">        return json_encode([&apos;status&apos; =&gt; &apos;400&apos;, &apos;message&apos; =&gt; &apos;红包已抢完&apos;]);</span><br><span class="line">    &#125;</span><br><span class="line">    if ($remainSize == 1) &#123;</span><br><span class="line">        $redis-&gt;decr(&apos;remainSize:&apos; . $redPackageId);</span><br><span class="line">        $redis-&gt;decrby(&apos;remainMoney:&apos; . $redPackageId, $remainMoney);</span><br><span class="line">        return json_encode([&apos;status&apos; =&gt; 200, &apos;money&apos; =&gt; $remainMoney]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $safeTotal = ($remainMoney - $remainSize * $min) / $remainSize;</span><br><span class="line">    $money = mt_rand($min, $safeTotal);</span><br><span class="line">    $money = $money / 100;  // 主要ini配置项serialize_precision</span><br><span class="line">    $remainMoney = $safeTotal - $money;</span><br><span class="line"></span><br><span class="line">    $redis-&gt;decr(&apos;remainSize:&apos; . $redPackageId);</span><br><span class="line">    $redis-&gt;decrby(&apos;remainMoney:&apos; . $redPackageId, $money);</span><br><span class="line"></span><br><span class="line">    return json_encode([&apos;status&apos; =&gt; 200, &apos;money&apos; =&gt; $money]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$money = getRedPackageMoney();</span><br><span class="line">print_r($money);</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -363,10 +381,10 @@
     
     </summary>
     
-      <category term="php" scheme="https://capping.github.io/categories/php/"/>
+      <category term="PHP" scheme="https://capping.github.io/categories/PHP/"/>
     
     
-      <category term="php" scheme="https://capping.github.io/tags/php/"/>
+      <category term="PHP" scheme="https://capping.github.io/tags/PHP/"/>
     
       <category term="面试" scheme="https://capping.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
     
@@ -428,7 +446,7 @@
     <link href="https://capping.github.io/2018/06/02/html5-canvas-image-compress-upload/"/>
     <id>https://capping.github.io/2018/06/02/html5-canvas-image-compress-upload/</id>
     <published>2018-06-02T02:17:24.000Z</published>
-    <updated>2018-09-01T12:57:26.397Z</updated>
+    <updated>2018-09-23T02:24:35.561Z</updated>
     
     <content type="html"><![CDATA[<p>今天在做一个图片上传的功能。<br>流程如下: 点击添加图片按钮–&gt;拍照(或者选择相册图片)–&gt;然后会调用php的上传接口实现上传。<br>遇到的问题: 图片的尺寸过大, 上传时间过长。<br>解决思路: 前端压缩图片后上传。</p><p>无奈前端小哥, 工作量过大, 想让后端实现压缩后上传。经过调研, 妈呀！这不科学(后端的压缩都是图片上传成功后做的, 对提高上传速度没有卵用)。</p><p>继续探索, 找前端实现压缩的方法, 大都是使用base64做, 这…</p><p>还好我找到了张鑫旭大神的文章(<a href="http://www.zhangxinxu.com/wordpress/2017/07/html5-canvas-image-compress-upload/" target="_blank" rel="noopener">http://www.zhangxinxu.com/wordpress/2017/07/html5-canvas-image-compress-upload/</a>)</p><p>前端的实现文章里讲的很详细, 此处不再赘述。</p><p>随之而来的问题, 由于此处使用的<code>toBlob</code>方法方法实现的, 那做为一个php后端要怎么接收<code>blob</code>(binary large object)对象呢？</p><p>普通的文件上传php使用<code>$_FILES</code>可以接收, 然而我<code>var_dump()</code>打印出来的却是一个空数组。 那试试<code>$_REQUEST</code>?</p><p>然后我借助搜索引擎搜索<code>前端压缩图片后端php怎么接受?</code>, 只能说, 我很绝望！ 继续啃大神的文章, 如下一句话, 点醒梦中人:<br><code>可以把canvas转换成Blob文件，通常用在文件上传中，因为是二进制的，对后端更加友好</code>。</p><p>然后我就找到了查询的关键字<code>php如何接收二进制流？</code><br>豁然开朗:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 方式一</span><br><span class="line">$content = $GLOBALS[&apos;HTTP_RAW_POST_DATA&apos;];  // 需要php.ini设置</span><br><span class="line"># 方式二</span><br><span class="line">$content = file_get_contents(&apos;php://input&apos;);    // 不需要php.ini设置，内存压力小</span><br></pre></td></tr></table></figure></p><p>作为一个技术不那么严谨的公司(连服务器的mb_string扩展都没有正确开启), 果断使用方法二。</p><p>那拿到前端传过来的blob对象,怎么把blob解析成图片呢？<br>接下里就顺畅多了, 直接搜索<code>php如何接收二进制流转换成图片？</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$file_name = date(&quot;YmdHis&quot;).rand(&quot;1000&quot;,&quot;9999&quot;).&quot;.png&quot;;</span><br><span class="line">//图片路径</span><br><span class="line">$file_dir = UPLOADIMGNEW.$file_name;</span><br><span class="line">$img = file_get_contents(&quot;php://input&quot;);</span><br><span class="line">if (empty($img)) &#123;</span><br><span class="line">    thow new Exception(&apos;二进制流为空&apos;, 400); //二进制流为空</span><br><span class="line">&#125;</span><br><span class="line">if ($fp = fopen($file_dir, &apos;w&apos;)) &#123;</span><br><span class="line">    if (fwrite($fp, $img)) &#123;</span><br><span class="line">        fclose($fp); //成功</span><br><span class="line">        return json_encode[</span><br><span class="line">            &apos;url&apos; =&gt; &quot;http://&quot; . $_SERVER[&quot;SERVER_NAME&quot;] . &quot;:&quot; . $_SERVER[&quot;SERVER_PORT&quot;].dirname($_SERVER[&quot;SCRIPT_NAME&quot;]).&quot;/upload/img/&quot;.$file_name</span><br><span class="line">        ];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        thow new Exception(&apos;写入文件不成功&apos;, 500); //写入文件不成功</span><br><span class="line">    &#125;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    thow new Exception(&apos;不能打开或创建文件&apos;, 500); //不能打开或创建文件</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>ok！ 打完收工…</p>]]></content>
     
@@ -442,10 +460,10 @@
     
     </summary>
     
-      <category term="php" scheme="https://capping.github.io/categories/php/"/>
+      <category term="PHP" scheme="https://capping.github.io/categories/PHP/"/>
     
     
-      <category term="php" scheme="https://capping.github.io/tags/php/"/>
+      <category term="PHP" scheme="https://capping.github.io/tags/PHP/"/>
     
       <category term="canvas" scheme="https://capping.github.io/tags/canvas/"/>
     
@@ -474,9 +492,9 @@
       <category term="tools" scheme="https://capping.github.io/categories/tools/"/>
     
     
-      <category term="tools" scheme="https://capping.github.io/tags/tools/"/>
-    
       <category term="git" scheme="https://capping.github.io/tags/git/"/>
+    
+      <category term="tools" scheme="https://capping.github.io/tags/tools/"/>
     
   </entry>
   
