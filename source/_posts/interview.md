@@ -1,8 +1,8 @@
 ---
 title: 面试
 date: 2018-08-08 14:41:00
-tags: [php, 面试]
-categories: [php]
+tags: [PHP, 面试]
+categories: [PHP]
 ---
 这边记录一些php的面试题(不保证正确性，准确性)，会不定期更新，如果有什么错误或者更好的方案，希望得到你的指导
 

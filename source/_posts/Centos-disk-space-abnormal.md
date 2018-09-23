@@ -1,7 +1,7 @@
 ---
 title: Linux服务器磁盘空间不足异常
 date: 2018-08-28 10:32:24
-tags: [centos, linux]
+tags: [centos, Linux]
 categories: [Linux]
 ---
 

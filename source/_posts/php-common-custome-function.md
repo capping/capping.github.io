@@ -1,8 +1,8 @@
 ---
 title: 常用的PHP工具类
 date: 2018-08-31 16:46:14
-tags: [php]
-categories: [php]
+tags: [PHP]
+categories: [PHP]
 ---
 
 # StringUtil

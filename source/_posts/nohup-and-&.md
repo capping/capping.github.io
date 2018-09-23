@@ -1,7 +1,7 @@
 ---
 title: nohup and &
 date: 2018-08-30 11:11:08
-tags: [linux]
+tags: [Linux]
 categories: [Linux]
 ---
 

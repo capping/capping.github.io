@@ -1,8 +1,8 @@
 ---
 title: 前端压缩图片, php实现上传
 date: 2018-06-02 10:17:24
-tags: [canvas, js, php]
-categories: [php]
+tags: [canvas, js, PHP]
+categories: [PHP]
 ---
 今天在做一个图片上传的功能。
 流程如下: 点击添加图片按钮-->拍照(或者选择相册图片)-->然后会调用php的上传接口实现上传。

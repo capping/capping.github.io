@@ -1,8 +1,8 @@
 ---
 title: Centos安装 phpredis 扩展
 date: 2018-08-20 13:49:14
-tags: [php, redis, centos, linux]
-categories: [php]
+tags: [PHP, redis, centos, Linux]
+categories: [PHP]
 ---
 
 ## 安装配置
