@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Java," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -81,17 +81,16 @@
 
 
 
-<meta name="keywords" content="Java">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Java学习路径">
-<meta property="og:url" content="https://capping.github.io/2018/09/08/java-learnning-path-map/index.html">
+<meta name="description" content="You are the owner of your career.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Z-II&#39;s Blog">
+<meta property="og:url" content="https://capping.github.io/page/3/index.html">
 <meta property="og:site_name" content="Z-II&#39;s Blog">
+<meta property="og:description" content="You are the owner of your career.">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://capping.github.io/images/java-learning-path-map.jpg">
-<meta property="og:updated_time" content="2018-09-08T07:05:08.448Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Java学习路径">
-<meta name="twitter:image" content="https://capping.github.io/images/java-learning-path-map.jpg">
+<meta name="twitter:title" content="Z-II&#39;s Blog">
+<meta name="twitter:description" content="You are the owner of your career.">
 
 
 
@@ -121,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="https://capping.github.io/2018/09/08/java-learnning-path-map/"/>
+  <link rel="canonical" href="https://capping.github.io/page/3/"/>
 
 
 
 
 
-  <title>Java学习路径 | Z-II's Blog</title>
+  <title>Z-II's Blog</title>
   
 
 
@@ -146,7 +145,8 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -249,9 +249,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -264,7 +264,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://capping.github.io/2018/09/08/java-learnning-path-map/">
+    <link itemprop="mainEntityOfPage" href="https://capping.github.io/2018/05/16/sourceTree安装时免登录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Xuebin Zhang">
@@ -281,7 +281,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Java学习路径</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/16/sourceTree安装时免登录/" itemprop="url">sourceTree安装时免登录</a></h1>
         
 
         <div class="post-meta">
@@ -293,8 +295,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-08T14:53:22+08:00">
-                2018-09-08
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-16T17:01:55+08:00">
+                2018-05-16
               </time>
             
 
@@ -316,8 +318,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
+                  <a href="/categories/tools/" itemprop="url" rel="index">
+                    <span itemprop="name">tools</span>
                   </a>
                 </span>
 
@@ -334,8 +336,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/09/08/java-learnning-path-map/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/09/08/java-learnning-path-map/" itemprop="commentCount"></span>
+                <a href="/2018/05/16/sourceTree安装时免登录/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/05/16/sourceTree安装时免登录/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -363,8 +365,25 @@
       
 
       
-        <p><img src="https://capping.github.io/images/java-learning-path-map.jpg" alt=""></p>
+        
+          
+            <p>sourceTree是一个工具, 我一直用它做git管理(git的图形化界面GUI)<br>最大的一个问题是 : 安装 SourceTree 时, 需要使用atlassian授权, 即使翻墙这个过程也会出现反应慢, 收不到邮件或短信的问题, 现提供跳过 atlassian账号 授权方法。</p>
+<p><img src="https://capping.github.com/images/SourceTree_login.png?raw=true" alt=""></p>
+<p>安装之后, 转到用户本地文件夹下的 SourceTree 目录, 没有则新建：</p>
+<blockquote>
+<p>%LocalAppData%\Atlassian\SourceTree\</p>
+</blockquote>
+<p>请把以上路径直接粘贴到我的电脑路径的位置跳转, 才能跳转到正确位置</p>
+<p>新建 accounts.json 文件</p>
+<blockquote>
+<p>%LocalAppData%\Atlassian\SourceTree\accounts.json</p>
+</blockquote>
+<p>输入以下内容保存即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;$id&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;$type&quot;: &quot;SourceTree.Api.Host.Identity.Model.IdentityAccount, SourceTree.Api.Host.Identity&quot;,</span><br><span class="line">    &quot;Authenticate&quot;: true,</span><br><span class="line">    &quot;HostInstance&quot;: &#123;</span><br><span class="line">      &quot;$id&quot;: &quot;2&quot;,</span><br><span class="line">      &quot;$type&quot;: &quot;SourceTree.Host.Atlassianaccount.AtlassianAccountInstance, SourceTree.Host.AtlassianAccount&quot;,</span><br><span class="line">      &quot;Host&quot;: &#123;</span><br><span class="line">        &quot;$id&quot;: &quot;3&quot;,</span><br><span class="line">        &quot;$type&quot;: &quot;SourceTree.Host.Atlassianaccount.AtlassianAccountHost, SourceTree.Host.AtlassianAccount&quot;,</span><br><span class="line">        &quot;Id&quot;: &quot;atlassian account&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;BaseUrl&quot;: &quot;https://id.atlassian.com/&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;Credentials&quot;: &#123;</span><br><span class="line">      &quot;$id&quot;: &quot;4&quot;,</span><br><span class="line">      &quot;$type&quot;: &quot;SourceTree.Model.BasicAuthCredentials, SourceTree.Api.Account&quot;,</span><br><span class="line">      &quot;Username&quot;: &quot;&quot;,</span><br><span class="line">      &quot;Email&quot;: null</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;IsDefault&quot;: false</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://capping.github.com/images/1526462870.png?raw=true" alt=""></p>
+<p>原博客链接：<a href="https://blog.csdn.net/liby_sunny/article/details/78813001" target="_blank" rel="noopener">https://blog.csdn.net/liby_sunny/article/details/78813001</a><br>若影响到个人利益, 请联系博主删除该文章。</p>
 
+          
+        
       
     </div>
     
@@ -379,40 +398,14 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Java/" rel="tag"># Java</a>
-          
-        </div>
+
+      
+
       
 
       
       
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2018/08/31/php-common-custome-function/" rel="next" title="常用的PHP工具类">
-                <i class="fa fa-chevron-left"></i> 常用的PHP工具类
-              </a>
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/11/Java-Variable/" rel="prev" title="4. Java 变量">
-                4. Java 变量 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -422,11 +415,167 @@
   </article>
 
 
+    
+      
 
-    <div class="post-spread">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://capping.github.io/2018/05/14/我开始写博客了/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xuebin Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Z-II's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/14/我开始写博客了/" itemprop="url">我开始写博客了</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-14T13:59:48+08:00">
+                2018-05-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/未分类/" itemprop="url" rel="index">
+                    <span itemprop="name">未分类</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/14/我开始写博客了/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/05/14/我开始写博客了/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>记录一下吧, 今天是2018年5月14日, 我开始写博客了.<br>之前一直想做一个博客, 当时没什么特别的想法, 只是感觉应该有一个. 但是慢慢的(可能是年龄大了), 想找一个平台记录下自己的生活和学习过程.<br>在纠结了一段时间, 调研了几个常用的博客系统, 从wordpress, segmentfault, hexo等中, 最终决定使用hexo, 选择hexo一样没有理由, 就是感觉想<br>用这个了.<br>从此我也是一个有博客的人了…<br>贴几条命令吧！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 在package.json中配置了这个</span><br><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;start&quot;: &quot;hexo clean &amp;&amp; hexo g &amp;&amp; hexo d&quot;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">$ hexo new &quot;My New Post&quot;</span><br><span class="line">$ npm start</span><br></pre></td></tr></table></figure></p>
+<p>启动本地服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></p>
+
+          
+        
       
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
   </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+  </nav>
+
 
 
           </div>
@@ -434,13 +583,6 @@
 
 
           
-
-  
-    <div class="comments" id="comments">
-    </div>
-  
-
-
 
         </div>
         
@@ -481,7 +623,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -492,7 +634,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -503,7 +645,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -683,10 +825,6 @@
 
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
-
-
 
   
 

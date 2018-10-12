@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="PHP,面试," />
+  <meta name="keywords" content="PHP,interview," />
 
 
 
@@ -82,14 +82,14 @@
 
 
 <meta name="description" content="这边记录一些php的面试题(不保证正确性，准确性)，会不定期更新，如果有什么错误或者更好的方案，希望得到你的指导  设计一个发红包，抢红包的系统  问题一： 金额是预先分配还是实时计算答： 实时计算，预算需要占存储，并且会产生大量的数据库读写操作，实时效率很高，预算效率才低 123456789101112131415161718192021222324252627282930function ge">
-<meta name="keywords" content="PHP,面试">
+<meta name="keywords" content="PHP,interview">
 <meta property="og:type" content="article">
 <meta property="og:title" content="面试">
 <meta property="og:url" content="https://capping.github.io/2018/08/08/interview/index.html">
 <meta property="og:site_name" content="Z-II&#39;s Blog">
 <meta property="og:description" content="这边记录一些php的面试题(不保证正确性，准确性)，会不定期更新，如果有什么错误或者更好的方案，希望得到你的指导  设计一个发红包，抢红包的系统  问题一： 金额是预先分配还是实时计算答： 实时计算，预算需要占存储，并且会产生大量的数据库读写操作，实时效率很高，预算效率才低 123456789101112131415161718192021222324252627282930function ge">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-09-23T02:24:07.364Z">
+<meta property="og:updated_time" content="2018-10-12T11:10:41.456Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试">
 <meta name="twitter:description" content="这边记录一些php的面试题(不保证正确性，准确性)，会不定期更新，如果有什么错误或者更好的方案，希望得到你的指导  设计一个发红包，抢红包的系统  问题一： 金额是预先分配还是实时计算答： 实时计算，预算需要占存储，并且会产生大量的数据库读写操作，实时效率很高，预算效率才低 123456789101112131415161718192021222324252627282930function ge">
@@ -317,8 +317,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
+                  <a href="/categories/interview/" itemprop="url" rel="index">
+                    <span itemprop="name">interview</span>
                   </a>
                 </span>
 
@@ -370,6 +370,11 @@
 </ol>
 <p>问题一： 金额是预先分配还是实时计算<br>答： 实时计算，预算需要占存储，并且会产生大量的数据库读写操作，实时效率很高，预算效率才低</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">function getRedPackageMoney($min = 1)</span><br><span class="line">&#123;</span><br><span class="line">    $redPackageId = 10; // 红包ID</span><br><span class="line">    $redis = new Redis();</span><br><span class="line">    $redis-&gt;pconnect(&apos;127.0.0.1&apos;, 6379, 1);</span><br><span class="line">    $remainSize = $redis-&gt;get(&apos;remainSize:&apos; . $redPackageId);</span><br><span class="line">    $remainMoney = $redis-&gt;get(&apos;remainMoney:&apos; . $redPackageId);</span><br><span class="line"></span><br><span class="line">    if (!$remainSize) &#123;</span><br><span class="line">        return json_encode([&apos;status&apos; =&gt; &apos;400&apos;, &apos;message&apos; =&gt; &apos;红包已抢完&apos;]);</span><br><span class="line">    &#125;</span><br><span class="line">    if ($remainSize == 1) &#123;</span><br><span class="line">        $redis-&gt;decr(&apos;remainSize:&apos; . $redPackageId);</span><br><span class="line">        $redis-&gt;decrby(&apos;remainMoney:&apos; . $redPackageId, $remainMoney);</span><br><span class="line">        return json_encode([&apos;status&apos; =&gt; 200, &apos;money&apos; =&gt; $remainMoney]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $safeTotal = ($remainMoney - $remainSize * $min) / $remainSize;</span><br><span class="line">    $money = mt_rand($min, $safeTotal);</span><br><span class="line">    $money = $money / 100;  // 主要ini配置项serialize_precision</span><br><span class="line">    $remainMoney = $safeTotal - $money;</span><br><span class="line"></span><br><span class="line">    $redis-&gt;decr(&apos;remainSize:&apos; . $redPackageId);</span><br><span class="line">    $redis-&gt;decrby(&apos;remainMoney:&apos; . $redPackageId, $money);</span><br><span class="line"></span><br><span class="line">    return json_encode([&apos;status&apos; =&gt; 200, &apos;money&apos; =&gt; $money]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$money = getRedPackageMoney();</span><br><span class="line">print_r($money);</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>有 1000 个一模一样的瓶子，其中有 999 瓶是普通的水，有一瓶是毒药。任何喝下毒药的生物都会在一星期之后死亡。现在，你只有 10 只小白鼠和一星期的时间，如何检验出哪个瓶子里有毒药？</li>
+</ol>
+<p>答: 根据2^10=1024，所以10个老鼠可以确定1000个瓶子具体哪个瓶子有毒。具体实现跟3个老鼠确定8个瓶子原理一样。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">000=0</span><br><span class="line">001=1</span><br><span class="line">010=2</span><br><span class="line">011=3</span><br><span class="line">100=4</span><br><span class="line">101=5</span><br><span class="line">110=6</span><br><span class="line">111=7</span><br></pre></td></tr></table></figure></p>
+<p>一位表示一个老鼠，0-7表示8个瓶子。也就是分别将1、3、5、7号瓶子的药混起来给老鼠1吃，2、3、6、7号瓶子的药混起来给老鼠2吃，4、5、6、7号瓶子的药混起来给老鼠3吃，哪个老鼠死了，相应的位标为1。如老鼠1死了、老鼠2没死、老鼠3死了，那么就是101=5号瓶子有毒。同样道理10个老鼠可以确定1000个瓶子</p>
 
       
     </div>
@@ -389,7 +394,7 @@
           
             <a href="/tags/PHP/" rel="tag"># PHP</a>
           
-            <a href="/tags/面试/" rel="tag"># 面试</a>
+            <a href="/tags/interview/" rel="tag"># interview</a>
           
         </div>
       
@@ -489,7 +494,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -500,7 +505,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -511,7 +516,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

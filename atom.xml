@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://capping.github.io/"/>
-  <updated>2018-09-23T02:26:08.381Z</updated>
+  <updated>2018-10-12T11:10:41.458Z</updated>
   <id>https://capping.github.io/</id>
   
   <author>
@@ -17,13 +17,136 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Java学习路径</title>
+    <link href="https://capping.github.io/2019/09/08/java-learnning-path-map/"/>
+    <id>https://capping.github.io/2019/09/08/java-learnning-path-map/</id>
+    <published>2019-09-08T06:53:22.000Z</published>
+    <updated>2018-10-12T11:10:41.458Z</updated>
+    
+    <content type="html"><![CDATA[<p><img src="https://capping.github.io/images/java-learning-path-map.jpg" alt=""></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;img src=&quot;https://capping.github.io/images/java-learning-path-map.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://capping.github.io/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="https://capping.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JWT</title>
+    <link href="https://capping.github.io/2018/10/11/JWT/"/>
+    <id>https://capping.github.io/2018/10/11/JWT/</id>
+    <published>2018-10-11T06:59:09.000Z</published>
+    <updated>2018-10-12T11:10:41.455Z</updated>
+    
+    <content type="html"><![CDATA[<p>JWT: JSON Web Token 是目前最流行的跨域认证解决方案。</p><h2 id="一、JWT的数据结构"><a href="#一、JWT的数据结构" class="headerlink" title="一、JWT的数据结构"></a>一、JWT的数据结构</h2><p>JWT 的三个部分依次如下。</p><ul><li>Header(头部)</li><li>Payload(负载)</li><li>Signature(签名)</li></ul><p>写成一行，就是下面的样子。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Header.Payload.Signature</span><br></pre></td></tr></table></figure></p><p>下面依次介绍这三个部分。</p><h3 id="1-1-Header"><a href="#1-1-Header" class="headerlink" title="1.1 Header"></a>1.1 Header</h3><p>Header 部分是一个 JSON 对象，描述 JWT 的元数据，通常是下面的样子。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;alg&quot;: &quot;HS256&quot;,</span><br><span class="line">    &quot;typ&quot;: &quot;JWT&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><h3 id="1-2-Payload"><a href="#1-2-Payload" class="headerlink" title="1.2 Payload"></a>1.2 Payload</h3><p>Payload 部分也是一个 JSON 对象，用来存放实际需要传递的数据。</p><ul><li>iss (issuer)：签发人</li><li>exp (expiration time)：过期时间</li><li>sub (subject)：主题</li><li>aud (audience)：受众</li><li>nbf (Not Before)：生效时间</li><li>iat (Issued At)：签发时间</li><li>jti (JWT ID)：编号</li></ul><p>除了官方字段，你还可以在这个部分定义私有字段，下面就是一个例子。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;sub&quot;: &quot;1234567890&quot;,</span><br><span class="line">  &quot;name&quot;: &quot;John Doe&quot;,</span><br><span class="line">  &quot;admin&quot;: true</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>注意，JWT 默认是不加密的，任何人都可以读到，所以不要把秘密信息放在这个部分。</p><h3 id="1-3-Signature"><a href="#1-3-Signature" class="headerlink" title="1.3 Signature"></a>1.3 Signature</h3><p>ignature 部分是对前两部分的签名，防止数据篡改。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">HMACSHA256(</span><br><span class="line">  base64UrlEncode(header) + &quot;.&quot; +</span><br><span class="line">  base64UrlEncode(payload),</span><br><span class="line">  secret)</span><br></pre></td></tr></table></figure></p><p>算出签名以后，把 Header、Payload、Signature 三个部分拼成一个字符串，每个部分之间用”点”（.）分隔，就可以返回给用户。</p><h2 id="二、JWT-的使用方式"><a href="#二、JWT-的使用方式" class="headerlink" title="二、JWT 的使用方式"></a>二、JWT 的使用方式</h2><p>客户端收到服务器返回的 JWT，可以储存在 Cookie 里面，也可以储存在 localStorage。</p><p>此后，客户端每次与服务器通信，都要带上这个 JWT。你可以把它放在 Cookie 里面自动发送，但是这样不能跨域，所以更好的做法是放在 HTTP 请求的头信息Authorization字段里面。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Authorization: Bearer &lt;token&gt;</span><br></pre></td></tr></table></figure></p><p>另一种做法是，跨域的时候，JWT 就放在 POST 请求的数据体里面。</p><p>-—————————————————<br>|  感觉实际使用还是得存库或者redis中呀                  |<br>-—————————————————</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;JWT: JSON Web Token 是目前最流行的跨域认证解决方案。&lt;/p&gt;
+&lt;h2 id=&quot;一、JWT的数据结构&quot;&gt;&lt;a href=&quot;#一、JWT的数据结构&quot; class=&quot;headerlink&quot; title=&quot;一、JWT的数据结构&quot;&gt;&lt;/a&gt;一、JWT的数据结构&lt;/
+      
+    
+    </summary>
+    
+      <category term="General" scheme="https://capping.github.io/categories/General/"/>
+    
+    
+      <category term="JWT" scheme="https://capping.github.io/tags/JWT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PHP 日常总结</title>
+    <link href="https://capping.github.io/2018/10/11/PHP-Common/"/>
+    <id>https://capping.github.io/2018/10/11/PHP-Common/</id>
+    <published>2018-10-11T03:10:46.000Z</published>
+    <updated>2018-10-12T11:10:41.455Z</updated>
+    
+    <content type="html"><![CDATA[<p>PHP 日常总结，方便以后分类</p><ol><li>一个PHP实现的ID生成器</li></ol><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">class Sequence</span><br><span class="line">&#123;</span><br><span class="line">    const EPOCH = 1000000000000;</span><br><span class="line"></span><br><span class="line">    const TIME_BITS  = 41;</span><br><span class="line">    const NODE_BITS  = 10;</span><br><span class="line">    const COUNT_BITS = 10;</span><br><span class="line"></span><br><span class="line">    private $node = 0;</span><br><span class="line"></span><br><span class="line">    private $ttl = 10;</span><br><span class="line"></span><br><span class="line">    public function __construct($node)</span><br><span class="line">    &#123;</span><br><span class="line">        $max = $this-&gt;max(self::NODE_BITS);</span><br><span class="line"></span><br><span class="line">        if (is_int($node) === false || $node &gt; $max || $node &lt; 0) &#123;</span><br><span class="line">            throw new \InvalidArgumentException(&apos;node&apos;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        $this-&gt;node = $node;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function generate($time = null)</span><br><span class="line">    &#123;</span><br><span class="line">        if ($time === null) &#123;</span><br><span class="line">            $time = (int)(microtime(true) * 1000);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return ($this-&gt;time($time) &lt;&lt; (self::NODE_BITS + self::COUNT_BITS)) |</span><br><span class="line">               ($this-&gt;node &lt;&lt; self::COUNT_BITS) |</span><br><span class="line">               ($this-&gt;count($time));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function restore($id)</span><br><span class="line">    &#123;</span><br><span class="line">        $binary = decbin($id);</span><br><span class="line"></span><br><span class="line">        $position = -(self::NODE_BITS + self::COUNT_BITS);</span><br><span class="line"></span><br><span class="line">        return array(</span><br><span class="line">            &apos;time&apos;  =&gt; bindec(substr($binary, 0, $position)) + self::EPOCH,</span><br><span class="line">            &apos;node&apos;  =&gt; bindec(substr($binary, $position, - self::COUNT_BITS)),</span><br><span class="line">            &apos;count&apos; =&gt; bindec(substr($binary, - self::COUNT_BITS)),</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public function setTTL($ttl)</span><br><span class="line">    &#123;</span><br><span class="line">        $this-&gt;ttl = $ttl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private function time($time)</span><br><span class="line">    &#123;</span><br><span class="line">        $time -= self::EPOCH;</span><br><span class="line"></span><br><span class="line">        $max = $this-&gt;max(self::TIME_BITS);</span><br><span class="line"></span><br><span class="line">        if (is_int($time) === false || $time &gt; $max || $time &lt; 0) &#123;</span><br><span class="line">            throw new \InvalidArgumentException(&apos;time&apos;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return $time;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private function count($time)</span><br><span class="line">    &#123;</span><br><span class="line">        $key = &quot;seq:count:&quot; . ($time % ($this-&gt;ttl * 1000));</span><br><span class="line"></span><br><span class="line">        while (!$count = apcu_inc($key)) &#123;</span><br><span class="line">            apcu_add($key, mt_rand(0, 9), $this-&gt;ttl);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        $max = $this-&gt;max(self::COUNT_BITS);</span><br><span class="line"></span><br><span class="line">        if ($count &gt; $max) &#123;</span><br><span class="line">            throw new \UnexpectedValueException(&apos;count&apos;);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        return $count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private function max($bits)</span><br><span class="line">    &#123;</span><br><span class="line">        return -1 ^ (-1 &lt;&lt; $bits);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><ol start="2"><li>PHP实现排列组合<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php </span><br><span class="line">// 阶乘</span><br><span class="line">function factorial($n) &#123;</span><br><span class="line">    return array_product(range(1, $n));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 排列数</span><br><span class="line">function A($n, $m) &#123;</span><br><span class="line">    return factorial($n) / factorial($n-$m);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 组合数</span><br><span class="line">function C($n, $m) &#123;</span><br><span class="line">    return A($n, $m) / factorial($m);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 排列</span><br><span class="line">function arrangement($a, $m) &#123;</span><br><span class="line">    $r = array();</span><br><span class="line">    $n = count($a);</span><br><span class="line">    if ($m &lt;= 0 || $m &gt; $n) &#123;</span><br><span class="line">      return $r;  </span><br><span class="line">    &#125;</span><br><span class="line">    for ($i = 0; $i &lt; $n; $i++) &#123;</span><br><span class="line">        $b = $a;</span><br><span class="line">        $t = array_splice($b, $i, 1);</span><br><span class="line">        if ($m == 1) &#123;</span><br><span class="line">            $r[] = $t;</span><br><span class="line">        &#125; else &#123; </span><br><span class="line">            $c = arrangement($b, $m-1);</span><br><span class="line">            foreach ($c as $v) &#123; </span><br><span class="line">                $r[] = array_merge($t, $v);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return $r;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 组合</span><br><span class="line">function combination($a, $m) &#123;</span><br><span class="line">    $r = array();</span><br><span class="line">    $n = count($a);</span><br><span class="line">    if ($m &lt;= 0 || $m &gt; $n) &#123;</span><br><span class="line">        return $r;</span><br><span class="line">    &#125;</span><br><span class="line">    for ($i = 0; $i &lt; $n; $i++) &#123;</span><br><span class="line">        $t = array($a[$i]);</span><br><span class="line">        if ($m == 1) &#123;</span><br><span class="line">            $r[] = $t;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            $b = array_slice($a, $i+1);</span><br><span class="line">            $c = combination($b, $m-1);</span><br><span class="line">            foreach ($c as $v) &#123;</span><br><span class="line">                $r[] = array_merge($t, $v);</span><br><span class="line">           &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return $r;</span><br><span class="line">&#125;</span><br><span class="line">// ====== 测试 ======</span><br><span class="line">$a = array(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;);</span><br><span class="line">$r = arrangement($a, 2);</span><br><span class="line">print_r($r);</span><br><span class="line">$r = A(4, 2);</span><br><span class="line">echo $r.&quot;\n&quot;;</span><br><span class="line">$r = combination($a, 2);</span><br><span class="line">print_r($r);</span><br><span class="line">echo $r.&quot;\n&quot;;</span><br></pre></td></tr></table></figure></li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;PHP 日常总结，方便以后分类&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;一个PHP实现的ID生成器&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;lin
+      
+    
+    </summary>
+    
+      <category term="PHP" scheme="https://capping.github.io/categories/PHP/"/>
+    
+    
+      <category term="PHP" scheme="https://capping.github.io/tags/PHP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java基础语法</title>
+    <link href="https://capping.github.io/2018/09/23/Java-basic-syntax/"/>
+    <id>https://capping.github.io/2018/09/23/Java-basic-syntax/</id>
+    <published>2018-09-23T02:58:42.000Z</published>
+    <updated>2018-10-12T11:10:09.927Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>final关键字<br>类，方法和成员变量能被定义为<code>final</code>.  </li></ol><ul><li>如果一个类被声明为final, 则不能被继承.  </li><li><p><code>final</code>标记的方法不能被子类复写  </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1. 把方法锁住, 防止任何继承类修改它的意义和实现</span><br><span class="line">2. 高效. 编译器在遇到调用final方法时会转入内嵌机制, 大大提高执行效率.</span><br></pre></td></tr></table></figure></li><li><p><code>final</code>标记的变量即成为常量,只能被赋值一次</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"># 单例模式</span><br><span class="line">// 懒汉式</span><br><span class="line">class Singleton</span><br><span class="line">&#123;</span><br><span class="line">private static Singleton singleton = new Singleton();</span><br><span class="line"></span><br><span class="line">private Singleton() &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static Singleton getInstance() &#123;</span><br><span class="line">return singleton;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line">System.out.println(Singleton.getInstance());</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 饿汉式</span><br><span class="line">class Singleton</span><br><span class="line">&#123;</span><br><span class="line">private static Singleton singleton;</span><br><span class="line"></span><br><span class="line">private Singleton() &#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static Singleton getInstance() &#123;</span><br><span class="line">if (null == singleton) &#123;</span><br><span class="line">synchronized(Object.class) &#123;</span><br><span class="line">if (null == singleton) &#123;</span><br><span class="line">singleton = new Singleton();</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">return singleton;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;final关键字&lt;br&gt;类，方法和成员变量能被定义为&lt;code&gt;final&lt;/code&gt;.  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;如果一个类被声明为final, 则不能被继承.  &lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;final&lt;/code&gt;标记的方法不能
+      
+    
+    </summary>
+    
+      <category term="Java" scheme="https://capping.github.io/categories/Java/"/>
+    
+    
+      <category term="Java" scheme="https://capping.github.io/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
     <title>PHP基础语法</title>
     <link href="https://capping.github.io/2018/09/23/php-basic-syntax/"/>
     <id>https://capping.github.io/2018/09/23/php-basic-syntax/</id>
     <published>2018-09-23T02:20:49.000Z</published>
-    <updated>2018-09-23T02:26:08.381Z</updated>
+    <updated>2018-09-24T04:56:46.944Z</updated>
+    
+    <content type="html"><![CDATA[<ol><li>PHP final关键字<br>类和方法能被定义为<code>final</code>.  </li></ol><ul><li>如果父类中的方法被声明为<code>final</code>, 则子类无法覆盖该方法.   </li><li>如果一个类被声明为final, 则不能被继承.<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"># 单例模式</span><br><span class="line">&lt;?php</span><br><span class="line">final class Singleton</span><br><span class="line">&#123;</span><br><span class="line">private static $instance;</span><br><span class="line"></span><br><span class="line">public static function getInstance(): Singleton</span><br><span class="line">&#123;</span><br><span class="line">if (null === static::$instance) &#123;</span><br><span class="line">static::$instance = new static();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">return static::$instance;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 不允许从外部调用以防止创建多个实例</span><br><span class="line"> * 要使用单例，必须通过 Singleton::getInstance() 方法获取实例</span><br><span class="line"> */</span><br><span class="line">private function __construct() </span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 防止实例被克隆(这会创建实例的副本)</span><br><span class="line"> * @return [type] [description]</span><br><span class="line"> */</span><br><span class="line">private function __clone()</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 防止反序列化(这将创建他的副本)</span><br><span class="line"> */</span><br><span class="line">private function __wakeup()</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul>]]></content>
     
     <summary type="html">
+    
+      
+      
+        &lt;ol&gt;
+&lt;li&gt;PHP final关键字&lt;br&gt;类和方法能被定义为&lt;code&gt;final&lt;/code&gt;.  &lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;如果父类中的方法被声明为&lt;code&gt;final&lt;/code&gt;, 则子类无法覆盖该方法.   &lt;/li&gt;
+&lt;li&gt;如果一个类被声明
+      
     
     </summary>
     
@@ -65,7 +188,7 @@
     <link href="https://capping.github.io/2018/09/17/Java-Common/"/>
     <id>https://capping.github.io/2018/09/17/Java-Common/</id>
     <published>2018-09-17T06:06:46.000Z</published>
-    <updated>2018-09-22T14:43:33.560Z</updated>
+    <updated>2018-09-23T02:59:09.827Z</updated>
     
     <content type="html"><![CDATA[<p>Java 日常总结，方便以后分类</p><ol><li>AtomicLong<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># AtomicLong 继承 Number, 实现 Serializable</span><br><span class="line">public class AtomicLong extends Number implements java.io.Serializable</span><br><span class="line"># 构造函数：</span><br><span class="line">public AtomicLongs</span><br><span class="line">public AtomicLongs(long initialValue)</span><br><span class="line"></span><br><span class="line"># 使用</span><br><span class="line">private final AtomicLong counter = new AtomicLong();</span><br><span class="line">counter.incrementAndGet();  // 原子的将当前值增加1</span><br></pre></td></tr></table></figure></li></ol>]]></content>
     
@@ -153,32 +276,6 @@
       
       
         &lt;p&gt;声明变量：&lt;br&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;p
-      
-    
-    </summary>
-    
-      <category term="Java" scheme="https://capping.github.io/categories/Java/"/>
-    
-    
-      <category term="Java" scheme="https://capping.github.io/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Java学习路径</title>
-    <link href="https://capping.github.io/2018/09/08/java-learnning-path-map/"/>
-    <id>https://capping.github.io/2018/09/08/java-learnning-path-map/</id>
-    <published>2018-09-08T06:53:22.000Z</published>
-    <updated>2018-09-08T07:05:08.448Z</updated>
-    
-    <content type="html"><![CDATA[<p><img src="https://capping.github.io/images/java-learning-path-map.jpg" alt=""></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;&lt;img src=&quot;https://capping.github.io/images/java-learning-path-map.jpg&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
-
       
     
     </summary>
@@ -295,13 +392,13 @@
       <category term="PHP" scheme="https://capping.github.io/categories/PHP/"/>
     
     
-      <category term="centos" scheme="https://capping.github.io/tags/centos/"/>
-    
-      <category term="Linux" scheme="https://capping.github.io/tags/Linux/"/>
-    
       <category term="PHP" scheme="https://capping.github.io/tags/PHP/"/>
     
       <category term="redis" scheme="https://capping.github.io/tags/redis/"/>
+    
+      <category term="centos" scheme="https://capping.github.io/tags/centos/"/>
+    
+      <category term="Linux" scheme="https://capping.github.io/tags/Linux/"/>
     
   </entry>
   
@@ -326,9 +423,9 @@
       <category term="redis" scheme="https://capping.github.io/categories/redis/"/>
     
     
-      <category term="centos" scheme="https://capping.github.io/tags/centos/"/>
-    
       <category term="redis" scheme="https://capping.github.io/tags/redis/"/>
+    
+      <category term="centos" scheme="https://capping.github.io/tags/centos/"/>
     
       <category term="linux" scheme="https://capping.github.io/tags/linux/"/>
     
@@ -364,9 +461,9 @@
     <link href="https://capping.github.io/2018/08/08/interview/"/>
     <id>https://capping.github.io/2018/08/08/interview/</id>
     <published>2018-08-08T06:41:00.000Z</published>
-    <updated>2018-09-23T02:24:07.364Z</updated>
+    <updated>2018-10-12T11:10:41.456Z</updated>
     
-    <content type="html"><![CDATA[<p>这边记录一些php的面试题(不保证正确性，准确性)，会不定期更新，如果有什么错误或者更好的方案，希望得到你的指导</p><ol><li>设计一个发红包，抢红包的系统</li></ol><p>问题一： 金额是预先分配还是实时计算<br>答： 实时计算，预算需要占存储，并且会产生大量的数据库读写操作，实时效率很高，预算效率才低</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">function getRedPackageMoney($min = 1)</span><br><span class="line">&#123;</span><br><span class="line">    $redPackageId = 10; // 红包ID</span><br><span class="line">    $redis = new Redis();</span><br><span class="line">    $redis-&gt;pconnect(&apos;127.0.0.1&apos;, 6379, 1);</span><br><span class="line">    $remainSize = $redis-&gt;get(&apos;remainSize:&apos; . $redPackageId);</span><br><span class="line">    $remainMoney = $redis-&gt;get(&apos;remainMoney:&apos; . $redPackageId);</span><br><span class="line"></span><br><span class="line">    if (!$remainSize) &#123;</span><br><span class="line">        return json_encode([&apos;status&apos; =&gt; &apos;400&apos;, &apos;message&apos; =&gt; &apos;红包已抢完&apos;]);</span><br><span class="line">    &#125;</span><br><span class="line">    if ($remainSize == 1) &#123;</span><br><span class="line">        $redis-&gt;decr(&apos;remainSize:&apos; . $redPackageId);</span><br><span class="line">        $redis-&gt;decrby(&apos;remainMoney:&apos; . $redPackageId, $remainMoney);</span><br><span class="line">        return json_encode([&apos;status&apos; =&gt; 200, &apos;money&apos; =&gt; $remainMoney]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $safeTotal = ($remainMoney - $remainSize * $min) / $remainSize;</span><br><span class="line">    $money = mt_rand($min, $safeTotal);</span><br><span class="line">    $money = $money / 100;  // 主要ini配置项serialize_precision</span><br><span class="line">    $remainMoney = $safeTotal - $money;</span><br><span class="line"></span><br><span class="line">    $redis-&gt;decr(&apos;remainSize:&apos; . $redPackageId);</span><br><span class="line">    $redis-&gt;decrby(&apos;remainMoney:&apos; . $redPackageId, $money);</span><br><span class="line"></span><br><span class="line">    return json_encode([&apos;status&apos; =&gt; 200, &apos;money&apos; =&gt; $money]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$money = getRedPackageMoney();</span><br><span class="line">print_r($money);</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>这边记录一些php的面试题(不保证正确性，准确性)，会不定期更新，如果有什么错误或者更好的方案，希望得到你的指导</p><ol><li>设计一个发红包，抢红包的系统</li></ol><p>问题一： 金额是预先分配还是实时计算<br>答： 实时计算，预算需要占存储，并且会产生大量的数据库读写操作，实时效率很高，预算效率才低</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">function getRedPackageMoney($min = 1)</span><br><span class="line">&#123;</span><br><span class="line">    $redPackageId = 10; // 红包ID</span><br><span class="line">    $redis = new Redis();</span><br><span class="line">    $redis-&gt;pconnect(&apos;127.0.0.1&apos;, 6379, 1);</span><br><span class="line">    $remainSize = $redis-&gt;get(&apos;remainSize:&apos; . $redPackageId);</span><br><span class="line">    $remainMoney = $redis-&gt;get(&apos;remainMoney:&apos; . $redPackageId);</span><br><span class="line"></span><br><span class="line">    if (!$remainSize) &#123;</span><br><span class="line">        return json_encode([&apos;status&apos; =&gt; &apos;400&apos;, &apos;message&apos; =&gt; &apos;红包已抢完&apos;]);</span><br><span class="line">    &#125;</span><br><span class="line">    if ($remainSize == 1) &#123;</span><br><span class="line">        $redis-&gt;decr(&apos;remainSize:&apos; . $redPackageId);</span><br><span class="line">        $redis-&gt;decrby(&apos;remainMoney:&apos; . $redPackageId, $remainMoney);</span><br><span class="line">        return json_encode([&apos;status&apos; =&gt; 200, &apos;money&apos; =&gt; $remainMoney]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    $safeTotal = ($remainMoney - $remainSize * $min) / $remainSize;</span><br><span class="line">    $money = mt_rand($min, $safeTotal);</span><br><span class="line">    $money = $money / 100;  // 主要ini配置项serialize_precision</span><br><span class="line">    $remainMoney = $safeTotal - $money;</span><br><span class="line"></span><br><span class="line">    $redis-&gt;decr(&apos;remainSize:&apos; . $redPackageId);</span><br><span class="line">    $redis-&gt;decrby(&apos;remainMoney:&apos; . $redPackageId, $money);</span><br><span class="line"></span><br><span class="line">    return json_encode([&apos;status&apos; =&gt; 200, &apos;money&apos; =&gt; $money]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$money = getRedPackageMoney();</span><br><span class="line">print_r($money);</span><br></pre></td></tr></table></figure><ol start="2"><li>有 1000 个一模一样的瓶子，其中有 999 瓶是普通的水，有一瓶是毒药。任何喝下毒药的生物都会在一星期之后死亡。现在，你只有 10 只小白鼠和一星期的时间，如何检验出哪个瓶子里有毒药？</li></ol><p>答: 根据2^10=1024，所以10个老鼠可以确定1000个瓶子具体哪个瓶子有毒。具体实现跟3个老鼠确定8个瓶子原理一样。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">000=0</span><br><span class="line">001=1</span><br><span class="line">010=2</span><br><span class="line">011=3</span><br><span class="line">100=4</span><br><span class="line">101=5</span><br><span class="line">110=6</span><br><span class="line">111=7</span><br></pre></td></tr></table></figure></p><p>一位表示一个老鼠，0-7表示8个瓶子。也就是分别将1、3、5、7号瓶子的药混起来给老鼠1吃，2、3、6、7号瓶子的药混起来给老鼠2吃，4、5、6、7号瓶子的药混起来给老鼠3吃，哪个老鼠死了，相应的位标为1。如老鼠1死了、老鼠2没死、老鼠3死了，那么就是101=5号瓶子有毒。同样道理10个老鼠可以确定1000个瓶子</p>]]></content>
     
     <summary type="html">
     
@@ -381,12 +478,12 @@
     
     </summary>
     
-      <category term="PHP" scheme="https://capping.github.io/categories/PHP/"/>
+      <category term="interview" scheme="https://capping.github.io/categories/interview/"/>
     
     
       <category term="PHP" scheme="https://capping.github.io/tags/PHP/"/>
     
-      <category term="面试" scheme="https://capping.github.io/tags/%E9%9D%A2%E8%AF%95/"/>
+      <category term="interview" scheme="https://capping.github.io/tags/interview/"/>
     
   </entry>
   
@@ -468,56 +565,6 @@
       <category term="canvas" scheme="https://capping.github.io/tags/canvas/"/>
     
       <category term="js" scheme="https://capping.github.io/tags/js/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>sourceTree安装时免登录</title>
-    <link href="https://capping.github.io/2018/05/16/sourceTree%E5%AE%89%E8%A3%85%E6%97%B6%E5%85%8D%E7%99%BB%E5%BD%95/"/>
-    <id>https://capping.github.io/2018/05/16/sourceTree安装时免登录/</id>
-    <published>2018-05-16T09:01:55.000Z</published>
-    <updated>2018-09-08T07:05:08.449Z</updated>
-    
-    <content type="html"><![CDATA[<p>sourceTree是一个工具, 我一直用它做git管理(git的图形化界面GUI)<br>最大的一个问题是 : 安装 SourceTree 时, 需要使用atlassian授权, 即使翻墙这个过程也会出现反应慢, 收不到邮件或短信的问题, 现提供跳过 atlassian账号 授权方法。</p><p><img src="https://capping.github.com/images/SourceTree_login.png?raw=true" alt=""></p><p>安装之后, 转到用户本地文件夹下的 SourceTree 目录, 没有则新建：</p><blockquote><p>%LocalAppData%\Atlassian\SourceTree\</p></blockquote><p>请把以上路径直接粘贴到我的电脑路径的位置跳转, 才能跳转到正确位置</p><p>新建 accounts.json 文件</p><blockquote><p>%LocalAppData%\Atlassian\SourceTree\accounts.json</p></blockquote><p>输入以下内容保存即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;$id&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;$type&quot;: &quot;SourceTree.Api.Host.Identity.Model.IdentityAccount, SourceTree.Api.Host.Identity&quot;,</span><br><span class="line">    &quot;Authenticate&quot;: true,</span><br><span class="line">    &quot;HostInstance&quot;: &#123;</span><br><span class="line">      &quot;$id&quot;: &quot;2&quot;,</span><br><span class="line">      &quot;$type&quot;: &quot;SourceTree.Host.Atlassianaccount.AtlassianAccountInstance, SourceTree.Host.AtlassianAccount&quot;,</span><br><span class="line">      &quot;Host&quot;: &#123;</span><br><span class="line">        &quot;$id&quot;: &quot;3&quot;,</span><br><span class="line">        &quot;$type&quot;: &quot;SourceTree.Host.Atlassianaccount.AtlassianAccountHost, SourceTree.Host.AtlassianAccount&quot;,</span><br><span class="line">        &quot;Id&quot;: &quot;atlassian account&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;BaseUrl&quot;: &quot;https://id.atlassian.com/&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;Credentials&quot;: &#123;</span><br><span class="line">      &quot;$id&quot;: &quot;4&quot;,</span><br><span class="line">      &quot;$type&quot;: &quot;SourceTree.Model.BasicAuthCredentials, SourceTree.Api.Account&quot;,</span><br><span class="line">      &quot;Username&quot;: &quot;&quot;,</span><br><span class="line">      &quot;Email&quot;: null</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;IsDefault&quot;: false</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p><p><img src="https://capping.github.com/images/1526462870.png?raw=true" alt=""></p><p>原博客链接：<a href="https://blog.csdn.net/liby_sunny/article/details/78813001" target="_blank" rel="noopener">https://blog.csdn.net/liby_sunny/article/details/78813001</a><br>若影响到个人利益, 请联系博主删除该文章。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;sourceTree是一个工具, 我一直用它做git管理(git的图形化界面GUI)&lt;br&gt;最大的一个问题是 : 安装 SourceTree 时, 需要使用atlassian授权, 即使翻墙这个过程也会出现反应慢, 收不到邮件或短信的问题, 现提供跳过 atlassian账
-      
-    
-    </summary>
-    
-      <category term="tools" scheme="https://capping.github.io/categories/tools/"/>
-    
-    
-      <category term="git" scheme="https://capping.github.io/tags/git/"/>
-    
-      <category term="tools" scheme="https://capping.github.io/tags/tools/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>我开始写博客了</title>
-    <link href="https://capping.github.io/2018/05/14/%E6%88%91%E5%BC%80%E5%A7%8B%E5%86%99%E5%8D%9A%E5%AE%A2%E4%BA%86/"/>
-    <id>https://capping.github.io/2018/05/14/我开始写博客了/</id>
-    <published>2018-05-14T05:59:48.000Z</published>
-    <updated>2018-09-01T12:57:26.398Z</updated>
-    
-    <content type="html"><![CDATA[<p>记录一下吧, 今天是2018年5月14日, 我开始写博客了.<br>之前一直想做一个博客, 当时没什么特别的想法, 只是感觉应该有一个. 但是慢慢的(可能是年龄大了), 想找一个平台记录下自己的生活和学习过程.<br>在纠结了一段时间, 调研了几个常用的博客系统, 从wordpress, segmentfault, hexo等中, 最终决定使用hexo, 选择hexo一样没有理由, 就是感觉想<br>用这个了.<br>从此我也是一个有博客的人了…<br>贴几条命令吧！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 在package.json中配置了这个</span><br><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;start&quot;: &quot;hexo clean &amp;&amp; hexo g &amp;&amp; hexo d&quot;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">$ hexo new &quot;My New Post&quot;</span><br><span class="line">$ npm start</span><br></pre></td></tr></table></figure></p><p>启动本地服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;记录一下吧, 今天是2018年5月14日, 我开始写博客了.&lt;br&gt;之前一直想做一个博客, 当时没什么特别的想法, 只是感觉应该有一个. 但是慢慢的(可能是年龄大了), 想找一个平台记录下自己的生活和学习过程.&lt;br&gt;在纠结了一段时间, 调研了几个常用的博客系统, 从wor
-      
-    
-    </summary>
-    
-      <category term="未分类" scheme="https://capping.github.io/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/"/>
-    
     
   </entry>
   
