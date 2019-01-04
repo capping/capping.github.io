@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="Z-II&#39;s Blog">
 <meta property="og:description" content="这边记录一些php的面试题(不保证正确性，准确性)，会不定期更新，如果有什么错误或者更好的方案，希望得到你的指导  设计一个发红包，抢红包的系统  问题一： 金额是预先分配还是实时计算答： 实时计算，预算需要占存储，并且会产生大量的数据库读写操作，实时效率很高，预算效率才低 123456789101112131415161718192021222324252627282930function ge">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-10-12T11:10:41.456Z">
+<meta property="og:updated_time" content="2018-12-08T11:32:58.674Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面试">
 <meta name="twitter:description" content="这边记录一些php的面试题(不保证正确性，准确性)，会不定期更新，如果有什么错误或者更好的方案，希望得到你的指导  设计一个发红包，抢红包的系统  问题一： 金额是预先分配还是实时计算答： 实时计算，预算需要占存储，并且会产生大量的数据库读写操作，实时效率很高，预算效率才低 123456789101112131415161718192021222324252627282930function ge">
@@ -375,6 +375,9 @@
 </ol>
 <p>答: 根据2^10=1024，所以10个老鼠可以确定1000个瓶子具体哪个瓶子有毒。具体实现跟3个老鼠确定8个瓶子原理一样。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">000=0</span><br><span class="line">001=1</span><br><span class="line">010=2</span><br><span class="line">011=3</span><br><span class="line">100=4</span><br><span class="line">101=5</span><br><span class="line">110=6</span><br><span class="line">111=7</span><br></pre></td></tr></table></figure></p>
 <p>一位表示一个老鼠，0-7表示8个瓶子。也就是分别将1、3、5、7号瓶子的药混起来给老鼠1吃，2、3、6、7号瓶子的药混起来给老鼠2吃，4、5、6、7号瓶子的药混起来给老鼠3吃，哪个老鼠死了，相应的位标为1。如老鼠1死了、老鼠2没死、老鼠3死了，那么就是101=5号瓶子有毒。同样道理10个老鼠可以确定1000个瓶子</p>
+<ol start="3">
+<li>“N叉树”的N值在MySQL中是可以被人工调整的么？</li>
+</ol>
 
       
     </div>
@@ -494,7 +497,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -505,7 +508,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -516,7 +519,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -576,7 +579,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>

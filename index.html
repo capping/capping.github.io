@@ -416,6 +416,530 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://capping.github.io/2019/01/04/Efficient-data-structures-for-php7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xuebin Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Z-II's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/04/Efficient-data-structures-for-php7/" itemprop="url">高效的php7数据结构</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-04T11:42:11+08:00">
+                2019-01-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/01/04/Efficient-data-structures-for-php7/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/01/04/Efficient-data-structures-for-php7/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>原文链接：<a href="https://medium.com/@rtheunissen/efficient-data-structures-for-php-7-9dda7af674cd" target="_blank" rel="noopener">https://medium.com/@rtheunissen/efficient-data-structures-for-php-7-9dda7af674cd</a></p>
+<p>以下为译文：</p>
+<p>PHP有一个数据结构来管理它们。PHP的数组是一个复杂的，灵活的，博而不精(master-of-none)的混合数据结构，结合了<code>list</code>(链表)和<code>linked map</code>的行为。<br>但是我们使用数组做任何事情，因为PHP是务实的：“以一种基于实际而非理论考虑的方式理性和现实地处理事物”。一个数组就能完成工作。不幸的是，灵活性导致了<br>复杂性。</p>
+<p>最近发布的PHP7在PHP社区引起了大的轰动。我们迫不及待的开始使用<a href="http://php.net/manual/en/migration70.new-features.php" target="_blank" rel="noopener">新功能</a>尝试报告中提到<br>的两倍的性能提升。PHP7运行如此快的一个原因是数组被重新设计啦，但是它仍然是相同的结构，“适合一切；没有优化”，仍有改进的余地。</p>
+<blockquote>
+<p>“<a href="http://php.net/manual/en/spl.datastructures.php" target="_blank" rel="noopener">SPL数据结构</a>怎么样？”</p>
+</blockquote>
+<p>不幸的是他们是糟糕的。他们确实在PHP7之前提供了一些好处，但后来被忽略到没有实际价值的程度。</p>
+<blockquote>
+<p>“为什么我们不能修复和改进它们？”</p>
+</blockquote>
+<p>我们可以，但我相信他们的设计和实施非常的糟糕，用更新的东西替代它们会更好。</p>
+<blockquote>
+<p>“SPL data structures are horribly designed.” — Anthony Ferrara</p>
+</blockquote>
+<p>介绍下<code>ds</code>，一个PHP7的扩展，提供了专门的数据结构，可用于替代数组。</p>
+<p>本文简要介绍了每种数据结构的行为和性能优势。最后还有一系列预期问题的答案。</p>
+<p>Github: <a href="https://github.com/php-ds" target="_blank" rel="noopener">https://github.com/php-ds</a></p>
+<p>Namespace: Ds\</p>
+<p>Interfaces: Collection, Sequence, Hashable</p>
+<p>Classes: Vector, Deque, Map, Set, Stack, Queue, PriorityQueue, Pair</p>
+<h2 id="Collection"><a href="#Collection" class="headerlink" title="Collection"></a>Collection</h2><p>Collections 是基础接口，覆盖常见的功能，例如：foreach, echo, count, print_r, var_dump, serialize, json_encode, 和 clone.</p>
+<h2 id="Sequence"><a href="#Sequence" class="headerlink" title="Sequence"></a>Sequence</h2><p>Sequence描述了在单个线性维度中排列的值的行为。有些语言将此称为List。它类似于使用增量整数键的数组，但有一些特性除外：</p>
+<ul>
+<li>值索引始终为[0, 1, 2, …, size - 1]</li>
+<li>删除和插入操作更新所有连续值的位置</li>
+<li>仅允许按[0，size  -  1]范围内的索引访问值</li>
+</ul>
+<h2 id="Vector"><a href="#Vector" class="headerlink" title="Vector"></a>Vector</h2><p>Vector是连续缓冲区中Sequence值，可自动增长和收缩。它是最高效的顺序结构，因为值的索引是到缓冲区中其索引的直接映射，并且增长因子不绑定到特定的倍数或指数。</p>
+<iframe src="https://player.vimeo.com/video/154438958" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+
+<p><strong>优势</strong></p>
+<ul>
+<li>非常低的内存使用</li>
+<li>get, set, push 和 pop 的复杂度是O(1)</li>
+</ul>
+<p><strong>弱点</strong> </p>
+<ul>
+<li>insert, remove, shift, 和 unshift 的复杂度是O(n)</li>
+</ul>
+<blockquote>
+<p>The number one data structure used in Photoshop was Vectors.” — Sean Parent, CppCon 2015</p>
+</blockquote>
+<h2 id="Deque"><a href="#Deque" class="headerlink" title="Deque"></a>Deque</h2><p>Deque（发音为“deck”）是连续缓冲区中的值序列，它自动增长和收缩。该名称是“双端队列”的通用缩写，由Ds\Queue内部使用。</p>
+<p>两个指针用于跟踪头部和尾部。指针可以“环绕”缓冲区的末端，这避免了移动其他值以腾出空间的需要。这使得移位和非移位非常快 - Vector无法与之竞争。</p>
+<p>通过索引访问值需要索引与缓冲区中相应位置之间的转换：（（head + position）％capacity）。</p>
+<iframe src="https://player.vimeo.com/video/154438012" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+
+<p><strong>优势</strong></p>
+<ul>
+<li>低的内存使用</li>
+<li>get, set, push, pop, shift, and unshift 的复杂度都是O(1)</li>
+</ul>
+<p><strong>弱点</strong></p>
+<ul>
+<li>insert, remove 的复杂度是O(n)</li>
+<li>缓冲容量必须是2的幂</li>
+</ul>
+<p>以下基准测试显示了用于推送2ⁿ随机整数所花费的总时间和内存。 PHP数组，Ds\Vector和Ds\Deque都很快，但SplDoublyLinkedList的速度始终慢了2倍。</p>
+<p>SplDoublyLinkedList分别为每个值分配内存，因此预计会出现线性内存增长。数组和Ds \ Deque都有2.0增长因子来维持2ⁿ容量。 Ds\Vector的增长因子为1.5，这导致更多的分配，但整体内存使用率更低。</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*BZVzcscdpcUg8SZmvUEjQQ.gif" alt=""></p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*FHxbwYbZ75l_pSEvWmNCig.gif" alt=""></p>
+<p>以下基准测试显示将单个值取消移动到2ⁿ值序列所需的时间。设置样本所需的时间不包括在基准测试中。</p>
+<p>它表明array_unshift是O（n）。每次样本量增加一倍，卸载所需的时间也会增加一倍。这是有道理的，因为必须更新[1，size  -  1]范围内的每个数字索引</p>
+<p><img src="https://cdn-images-1.medium.com/max/2000/1*7lF6nsm9MlvpHZ-IzFCLdw.gif" alt=""></p>
+<p>但是Ds\Vector::unshift也是O（n），为什么它会这么快？请记住，数组会将每个值与其哈希和键一起存储在存储桶中。因此，如果索引是数字，我们必须检查每个桶并更新其哈希值。在内部，array_unshift实际上分配了一个全新的数组来执行此操作，并在复制了所有值时替换旧的数组。</p>
+<p>Vector中值的索引是缓冲区中其索引的直接映射，因此我们需要做的就是将范围[1，size-1]中的每个值向右移动一个位置。在内部，这是使用单个memmove操作完成的。</p>
+<p>Ds\Deque和SplDoublyLinkedList都非常快，因为取消移动值所花费的时间不受样本大小的影响，即O（1）</p>
+<p>未完，可以提PR</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://capping.github.io/2018/12/08/SQL-Injection-With-MySQL-SLEEP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xuebin Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Z-II's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/12/08/SQL-Injection-With-MySQL-SLEEP/" itemprop="url">SQL Injection With MySQL SLEEP()</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-12-08T20:15:14+08:00">
+                2018-12-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/MySQL/" itemprop="url" rel="index">
+                    <span itemprop="name">MySQL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/12/08/SQL-Injection-With-MySQL-SLEEP/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/12/08/SQL-Injection-With-MySQL-SLEEP/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>最近，我们从一个客户端收到一个警告，说在一台服务器上运行的线程过高。登录之后，我们注意到所有`selects`都在等待表级读锁。我们滚动了进程列表，
+</code></pre><p>找到了导致问题的<code>selects</code>。杀死了它，一切都恢复了正常。<br>    起初我们不明白为什么这个查询要花这么长时间，因为它看起来和其他一样。然后我们注意到其中一个WHERE字句很奇怪。在那里，我们发现查询附带了一个<br>SLEEP(3)。显然，该服务器是SQL注入攻击的受害者。</p>
+<h3 id="What-Is-SQL-Injection"><a href="#What-Is-SQL-Injection" class="headerlink" title="What Is SQL Injection?"></a>What Is SQL Injection?</h3><pre><code>我想我们大多数人都知道SQL注入是什么，但是作为一个复习，SQL注入是当有人向WHERE中提供恶意的输入，以运行自己的语句时。
+通常，当您请求用户输入时就会发生这种情况，例如用户名，但是他们没有给你一个真实的名字，而是给你一个MySQL语句，它会在你不知道的情况由你的服务器
+</code></pre><p>运行<br>让我们看一些例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">mysql&gt; describe post;</span><br><span class="line">+-------+------------------+------+-----+---------+----------------+</span><br><span class="line">| Field | Type             | NULL | Key | Default | Extra          |</span><br><span class="line">+-------+------------------+------+-----+---------+----------------+</span><br><span class="line">| id    | int(10) unsigned | NO   | PRI | NULL    | auto_increment |</span><br><span class="line">| test  | varchar(127)     | YES  |     | NULL    |                |</span><br><span class="line">+-------+------------------+------+-----+---------+----------------+</span><br><span class="line">2 rows in set (0.00 sec)</span><br><span class="line">mysql&gt; select * from post;</span><br><span class="line">+----+--------+</span><br><span class="line">| id | test   |</span><br><span class="line">+----+--------+s</span><br><span class="line">|  1 | text1  |</span><br><span class="line">|  2 | text2  |</span><br><span class="line">|  3 | text3  |</span><br><span class="line">|  4 | text4  |</span><br><span class="line">|  5 | text5  |</span><br><span class="line">|  6 | text6  |</span><br><span class="line">|  7 | text7  |</span><br><span class="line">|  8 | text8  |</span><br><span class="line">|  9 | text9  |</span><br><span class="line">| 10 | text10 |</span><br><span class="line">+----+--------+</span><br><span class="line">10 rows in set (0.00 sec)</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://capping.github.io/2018/10/30/Java-Array/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Xuebin Zhang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Z-II's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/30/Java-Array/" itemprop="url">Java数组操作</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-30T14:04:01+08:00">
+                2018-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/30/Java-Array/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/10/30/Java-Array/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <ol>
+<li><p>声明数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String[] arr1;</span><br><span class="line">String arr2[];</span><br><span class="line">String arr3[] = new String[5];</span><br><span class="line">String[] arr4 = new String[5]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>初始化数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 静态初始化</span><br><span class="line">String[] arr1 = &#123;&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;&#125;;</span><br><span class="line">String[] arr1 = new String[]&#123;&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;&#125;;</span><br><span class="line">String arr2[] = new String[]&#123;&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;&#125;;</span><br><span class="line">String arr2[] = &#123;&quot;1&quot;, &quot;2&quot;, &quot;3&quot;, &quot;4&quot;, &quot;5&quot;&#125;;</span><br><span class="line">// 动态初始化</span><br><span class="line">int score[] = new int[3];</span><br><span class="line">for (int i = 0; i &lt; score.length; i++) &#123;</span><br><span class="line">    score[i] = i + 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>查看数组的长度</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int length = arr.length;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>遍历数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for (int i = 0; i&lt; arr.length; i++) &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>int 数组转成string数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int[] arr = &#123;1, 2, 3, 4, 5&#125;;</span><br><span class="line">String arrStrings = Arrays.toString(arr);</span><br><span class="line">System.out.println(arrStrings);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>从array中创建ArrayList</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://capping.github.io/2018/10/11/JWT/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -870,6 +1394,9 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"># 单例模式</span><br><span class="line">// 懒汉式</span><br><span class="line">class Singleton</span><br><span class="line">&#123;</span><br><span class="line">	private static Singleton singleton = new Singleton();</span><br><span class="line"></span><br><span class="line">	private Singleton() &#123;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public static Singleton getInstance() &#123;</span><br><span class="line">		return singleton;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		System.out.println(Singleton.getInstance());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 饿汉式</span><br><span class="line">class Singleton</span><br><span class="line">&#123;</span><br><span class="line">	private static Singleton singleton;</span><br><span class="line"></span><br><span class="line">	private Singleton() &#123;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public static Singleton getInstance() &#123;</span><br><span class="line">		if (null == singleton) &#123;</span><br><span class="line">			synchronized(Object.class) &#123;</span><br><span class="line">				if (null == singleton) &#123;</span><br><span class="line">					singleton = new Singleton();</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		return singleton;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<ol start="2">
+<li>静态代码块: 用static声明, jvm加载类时执行, 仅执行一次.<br>构造代码块: 类中直接使用{}定义, 每一次构建对象时执行.<br>执行顺序: 静态块, main(), 构造块, 构造方法.</li>
+</ol>
 
           
         
@@ -1394,481 +1921,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://capping.github.io/2018/09/17/Java-String/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Xuebin Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Z-II's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/17/Java-String/" itemprop="url">7. Java String类型</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-17T14:04:28+08:00">
-                2018-09-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/09/17/Java-String/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/09/17/Java-String/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public final class String implement java.io.Serializable, Comparable&lt;String&gt;, CharSequence</span><br></pre></td></tr></table></figure>
-<p>使用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String.format(String format, Object... args);  // 使用指定的格式字符串和参数返回格式化字符串</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://capping.github.io/2018/09/11/Java-Data-Type/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Xuebin Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Z-II's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/11/Java-Data-Type/" itemprop="url">Java 数据类型</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-11T17:44:23+08:00">
-                2018-09-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/09/11/Java-Data-Type/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/09/11/Java-Data-Type/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="1-基本数据类型"><a href="#1-基本数据类型" class="headerlink" title="1. 基本数据类型"></a>1. 基本数据类型</h2><ul>
-<li>数值型<ul>
-<li>整数类型(byte, short, int, long)</li>
-<li>浮点类型(float, double)</li>
-</ul>
-</li>
-<li>字符型(char)</li>
-<li>布尔型(boolean)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">byte b = 2;</span><br><span class="line">short s = 30000;</span><br><span class="line">int i = 10;</span><br><span class="line">long l = 4l;</span><br><span class="line"></span><br><span class="line">char ch = &apos;4&apos;;</span><br><span class="line"></span><br><span class="line">boolean bool = true;</span><br></pre></td></tr></table></figure>
-<h2 id="2-引用数据类型"><a href="#2-引用数据类型" class="headerlink" title="2. 引用数据类型"></a>2. 引用数据类型</h2>
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://capping.github.io/2018/09/11/Java-Variable/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Xuebin Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Z-II's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/11/Java-Variable/" itemprop="url">4. Java 变量</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-11T16:47:47+08:00">
-                2018-09-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/09/11/Java-Variable/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/09/11/Java-Variable/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>声明变量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[数据类型] [变量名] = [初始化值]</span><br></pre></td></tr></table></figure></p>
-<h2 id="标识符"><a href="#标识符" class="headerlink" title="标识符"></a>标识符</h2><ul>
-<li>由26个英文字母大小写，数字：0 ~ 9 符号：<code>_$</code> 组成</li>
-<li>合法标识符的规则<ol>
-<li>数字不可以开头</li>
-<li>不可以使用关键字</li>
-</ol>
-</li>
-<li>Java严格区分大小写</li>
-</ul>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1923,7 +1975,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1934,7 +1986,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
@@ -1945,7 +1997,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">16</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -2005,7 +2057,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
