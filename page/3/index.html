@@ -1,1508 +1,877 @@
 <!DOCTYPE html>
-
-
+<html lang="zh-CN">
 
   
-
-
-<html class="theme-next gemini use-motion" lang="zh-CN">
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-<meta name="theme-color" content="#222">
-
-
-
-
-
-
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta charset="utf-8">
+  <meta name="author" content="董沅鑫, yuanxin.me@gmail.com" />
+  
+    <meta name="robots" content="noindex" />
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+  
+  <title>Z-II&#39;s Blog</title>
 
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="32x32" href="/uploads/favicon.ico?v=5.1.4">
-
-
-  <link rel="icon" type="image/png" sizes="16x16" href="/uploads/favicon.ico?v=5.1.4">
-
-
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
-
-
-
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-  <link rel="alternate" href="/atom.xml" title="Z-II's Blog" type="application/atom+xml" />
-
-
-
-
-
-
-<meta name="description" content="You are the owner of your career.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Z-II&#39;s Blog">
-<meta property="og:url" content="https://capping.github.io/page/3/index.html">
-<meta property="og:site_name" content="Z-II&#39;s Blog">
-<meta property="og:description" content="You are the owner of your career.">
-<meta property="og:locale" content="zh-CN">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Z-II&#39;s Blog">
-<meta name="twitter:description" content="You are the owner of your career.">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Gemini',
-    version: '5.1.4',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
-    tabs: true,
-    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="https://capping.github.io/page/3/"/>
-
-
-
-
-
-  <title>Z-II's Blog</title>
+  
+    <meta name="keywords" content="Hexo, theme-bmw" />
   
 
+  <script>
+    console.log('\n%c Hexo-theme-bmw v4.0 ' + '%c 🎉 https://github.com/dongyuanxin/theme-bmw 🎉\n' + '\n%c View demo online ' + '%c 🔍 https://godbmw.com/ 🔍  \n' , 'color: #fadfa3; background: #030307; padding:3px 0;', '', 'color: #fadfa3; background: #030307; padding:3px 0;', '');
+  </script>
 
+  
+    <meta name="description" content="You are the owner of your career.">
+  
 
+  
 
+  
+    <link rel="icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/images/touch-icon.png">
+  
 
+  <link href="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/icon/iconfont.css">
+<link rel="stylesheet" href="/css/github-markdown.css">
+<link rel="stylesheet" href="/css/highlight.css">
 
+  <script src="/js/util.js"></script>
+<script src="/js/valine.min.js"></script>
 
+  
+
+  
+    <link href="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/aplayer/1.10.1/APlayer.min.js" async></script>
+  
+
+  
+    <link href="https://cdn.bootcss.com/social-share.js/1.0.16/css/share.min.css" rel="stylesheet">
+  
+  
+  <script src="//cdn.bootcss.com/jquery/3.3.1/jquery.min.js" async></script>
+  
+  
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.11.0/dist/av-min.js"></script>
+  
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <body>
 
-  
-  
-    
-  
-
-  <div class="container sidebar-position-left 
-  page-home">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
     
 
-    <div class="custom-logo-site-title">
-      <a href="/"  class="brand" rel="start">
-        <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Z-II's Blog</span>
-        <span class="logo-line-after"><i></i></span>
-      </a>
+    <div id="app">
+
+      <div class="header-wrap">
+  <header>
+    <div class="site-brand">
+      <div class="site-title">
+        <a href="/">Xuebin Zhang</a>
+      </div>
     </div>
+    <nav class="site-navigation">
+      <ul class="nav-menu">
       
-        <p class="site-subtitle"></p>
+        <li class="nav-item" data-path="/">
+          
+            <a 
+              href="/"
+              target="_self"
+            >
+              主页
+            </a>
+          
+        </li>
       
-  </div>
-
-  <div class="site-nav-toggle">
-    <button>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-      <span class="btn-bar"></span>
-    </button>
-  </div>
+        <li class="nav-item" data-path="/archives/">
+          
+            <a 
+              href="/archives/"
+              target="_self"
+            >
+              归档
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/categories/">
+          
+            <a 
+              href="/categories/"
+              target="_self"
+            >
+              分类
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/tags/">
+          
+            <a 
+              href="/tags/"
+              target="_self"
+            >
+              标签
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="/about/">
+          
+            <a 
+              href="/about/"
+              target="_self"
+            >
+              关于
+            </a>
+          
+        </li>
+      
+        <li class="nav-item" data-path="">
+          
+            <a href="javascript:void(0);" v-else>抓到我</a>
+            <ul class="nav-menu--dropdown">
+              
+                <li>
+                  <a 
+                    href="https://github.com/capping" 
+                    target="_blank"
+                  >
+                    Github
+                  </a>
+                </li>
+              
+            </ul>
+          
+        </li>
+      
+      </ul>
+    </nav>
+    <i class="iconfont icon-menu"></i>
+  </header>
 </div>
 
-<nav class="site-nav">
-  
+<script>
+  let links = document.querySelectorAll('.nav-item');
+  for(let link of links){
+    let childrenLink = link.querySelector('ul');
+    link.addEventListener('mouseenter', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown active";
+      }
+    })
+    link.addEventListener('mouseleave', () => {
+      if(childrenLink) {
+        childrenLink.className = "nav-menu--dropdown";
+      }
+    })
+  }
+  let rootRealPath = getRealPath(window.location.pathname, true);
+  for(let link of links) {
+    let linkPath = link.getAttribute("data-path");
+    if(linkPath && getRealPath(linkPath, true) === rootRealPath) {
+      link.className = "nav-item hover";
+    }
+  }
 
-  
-    <ul id="menu" class="menu">
+  let iconMenu = document.querySelector("i.iconfont.icon-menu"),
+    iconMenuClicked = false;
+  let navDOM = document.querySelector("nav.site-navigation");
+  iconMenu.addEventListener("click", () => {
+    iconMenuClicked 
+      ? navDOM.className = "site-navigation active"
+      : navDOM.className = "site-navigation";
+    iconMenuClicked = !iconMenuClicked;
+  })
+</script>
+
       
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            Home
+<div class="container home-index">
+  
+  <div class="post">
+    <h1 class="article-title">
+      <a href="/2018/08/08/JavaSE/">
+        <span>JavaSE</span>
+      </a>
+    </h1>
+    <!-- PC端文章信息 -->
+    <div class="article-top-meta pc-view">
+      <span>
+        发布时间 : 2018-08-08
+      </span>
+    </div>
+    <!-- 移动端文章信息 -->
+    <div class="article-top-meta mobile-view">
+      <span>
+        发布 : 2018-08-08
+      </span>
+      
+        <span>
+        分类 :
+          <a href="/categories/Java/">
+            Java
           </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            Tags
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            Categories
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            Archives
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            About
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-  <section id="posts" class="posts-expand">
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://capping.github.io/2018/08/08/JavaSE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Xuebin Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Z-II's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/08/08/JavaSE/" itemprop="url">JavaSE</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-08T09:57:06+08:00">
-                2018-08-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/08/08/JavaSE/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/08/08/JavaSE/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+        </span>
       
       
-
-      
-        
-          
-            <h2 id="Getting-Started"><a href="#Getting-Started" class="headerlink" title="Getting Started"></a>Getting Started</h2><p>An introduction to Java technology and lessions on installing Java development software and using it to create a simple program.</p>
-<h3 id="The-Java-Technology-Phenomenon"><a href="#The-Java-Technology-Phenomenon" class="headerlink" title="The Java Technology Phenomenon"></a>The Java Technology Phenomenon</h3><p>Java technology is both a programming language and a platform. (java即是编程语言也是平台)</p>
-<h4 id="The-java-Programming-Language"><a href="#The-java-Programming-Language" class="headerlink" title="The java Programming Language"></a>The java Programming Language</h4><p>The Java programming language is a high-level language that can be characterized by all of the following buzzword.</p>
-<ul>
-<li>Simple  </li>
-<li>Architecture neutral (平台无关的)</li>
-<li>Object oriented</li>
-<li>Portable (可移植的)</li>
-<li>Distributed (分布式的)</li>
-<li>High performance</li>
-<li>Multithreaded</li>
-<li>Roubust (健壮的)</li>
-<li>Dynamic</li>
-<li>Secure</li>
-</ul>
-<blockquote>
-<p>MyProgram.java – javac –&gt; MyProgram.class – java –&gt; MyProgram</p>
-</blockquote>
-<p>Through the Java VM, the same application is capable of running on multiple platforms.</p>
-<h4 id="The-java-platform"><a href="#The-java-platform" class="headerlink" title="The java platform"></a>The java platform</h4><p>A platform is the hardware or software environment in which a program runs.<br>The Java platform has two components:</p>
-<ul>
-<li>The Java Virtual Machine.</li>
-<li>The Java Application Programming Interface(API).<br>JVM 是java平台的基础，并被移植到各种给予硬件的平台上。<br>The API is a large collection of ready-made(现成) software componment that provide many useful capabilities(功能). It is grouped into libraries of related classes and interfaces; these libraries are known as packages.</li>
-</ul>
-<p><img src="https://capping.github.io/images/getStarted-jvm.gif?raw=true" alt=""><br>The API and Java Virtual Machine insulate the program from the underlying hardware.</p>
-<h4 id="What-Can-Java-Technology-Do"><a href="#What-Can-Java-Technology-Do" class="headerlink" title="What Can Java Technology Do?"></a>What Can Java Technology Do?</h4><ul>
-<li>Development Tools: The development tools provide everything you’ll need for compiling, running, monitoring, debugging, and documenting your application. As a new developer, the main tools you’ll be using are the javac compiler, the java launcher and the javadoc documentation tool.</li>
-<li>Application Programming Interface(API): The API provides the core functionlity of the java programming language. </li>
-<li>Deployment Technologies</li>
-<li>User Interface Tookit</li>
-<li>Integration Libraries: Integration libraries such as the Java IDL API, JDBC API, Java Naming and Directory Interface(JNDA) API, and Java Remote Method Invocation over Internet Inter-ORB Protocol Technology (Java RMI-IIOP Technology) enable database access and manipulation of remote objects.</li>
-</ul>
-<h4 id="How-Will-Java-Technology-Change-My-Life"><a href="#How-Will-Java-Technology-Change-My-Life" class="headerlink" title="How Will Java Technology Change My Life?"></a>How Will Java Technology Change My Life?</h4><h2 id="Learning-the-Java-language"><a href="#Learning-the-Java-language" class="headerlink" title="Learning the Java language"></a>Learning the Java language</h2><p>Lessons describing the essential concepts and features of the Java Programming Language.</p>
-<p>This trail provides everything you’ll need to know about getting started with the Java programming language.</p>
-<h3 id="Object-Oriented-Programming-Concepts"><a href="#Object-Oriented-Programming-Concepts" class="headerlink" title="Object-Oriented Programming Concepts"></a>Object-Oriented Programming Concepts</h3><p>teaches you the core concepts behind object-oriented programming: objects, messages, classes and inheritance. The lesson ends by showing you how these concepts translate into code.  </p>
-<h4 id="What-Is-an-Object"><a href="#What-Is-an-Object" class="headerlink" title="What Is an Object?"></a>What Is an Object?</h4><p>Software objects are conceptually similar to real-world object: they too consist of state and related behavior. An object stores it state in fields(variables in some<br>programming languages) and exposes its behavior through methods (functions in some programming languages).Methods operate on an object’s internal state and serve as<br>the primary mechanism for object-to-object communication. Hiding internal state and requiring all interaction to be performed through an object’s methods is know as<br><code>data encapsulation</code>（数据封装） – a fundamental principel of object-oriented programming.</p>
-<p><strong>Bundling code into individual software objects provides a number of benefit, include:</strong></p>
-<ol>
-<li>Modularity: The source code for an object can be written and maintained independently of the source code for other objects. Once created, an object can be easily passed around inside the system.</li>
-<li>Information-hiding: By interacting only with an object’s methods, the datails of its internal implementation remain hidden from the outside world.</li>
-<li>Code re-use: If an object already exists (perhaps written by another software developer), you can use that object in your program. This allows specialists to implement/test/debug complex, task-specific objects, which you can then trust to run in your own code.</li>
-<li>Pluggability and debugging easy: If a particular object turns out to be problematic, you can simple remove it from your application and plug in a different object as its replacement.This is analogous to fixing mechanical problems in ther real world. If a bolt breaks, you replace it, not the entire machine.</li>
-</ol>
-<h4 id="What-Is-a-Class"><a href="#What-Is-a-Class" class="headerlink" title="What Is a Class?"></a>What Is a Class?</h4><p>A class is the blueprint from which individual objects are created.</p>
-<h4 id="What-Is-Inheritance"><a href="#What-Is-Inheritance" class="headerlink" title="What Is Inheritance?"></a>What Is Inheritance?</h4><p>Object-Oriented programming allows classes to inherit commonly used state and behavior from other classes.In the Java programming language, each class is allowed to have one direct superclass, and each superclass has the potential for an unlimited number of subclass.(java 是单继承的)</p>
-<h4 id="What-Is-an-Interface"><a href="#What-Is-an-Interface" class="headerlink" title="What Is an Interface?"></a>What Is an Interface?</h4><p>Interface form a contract between the class and the outside world, and this contract is enforced at build time by the compiler. If your class claims to implement an interface， all methods defined by that interface must appear in its source code before the class will successfully compile.</p>
-<p>Note: To actually compile the ACMEBicycle class, you’ll need to add the <code>public</code> keyword to the beginning of the implemented interface methods.</p>
-<h4 id="What-Is-a-Package"><a href="#What-Is-a-Package" class="headerlink" title="What Is a Package?"></a>What Is a Package?</h4><p>A package is a namespace that organizes a set of related classes and interface.(因为java开发的软件由成千上万的类文件组成，将关联类和接口放在同一特定意义的包中)</p>
-<h3 id="Language-Basics"><a href="#Language-Basics" class="headerlink" title="Language Basics"></a>Language Basics</h3><p>describes the traditional features of the language. include variables, array, data types, operators and control flow.</p>
-<h4 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h4><p>You’ve already learned that objects store their state in fields. However, the Java programming language also uses the term “variales” as well. This section discusses this relationshi, plus variable naming rules and conventions, basic data types (primitive types, character strings, and arrays), default value, and literals(文字).<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Q:</span><br><span class="line">What are the rules and conventions for naming a field?</span><br><span class="line">Besides int, what other data types are there?</span><br><span class="line">Do fields have to be initialized where they are declared?</span><br><span class="line">Are fields assigned a default value if they are not explicitly initialized? # 如果未明确初始化字段，为字段分配默认值吗?</span><br></pre></td></tr></table></figure></p>
-<p>We’ll explore the answers to such questions in this lesson.</p>
-<p>The Java programming language defines the following kinds of variables:</p>
-<ul>
-<li><p>Instance Variables (Non-Static Fields): Technically speaking, object store their individual states in ‘non-static fields’, field declared without the <code>static</code> keyword. Non-static fields are also know as <em>instance variables</em> because their values are unique to each <em>instance of</em> a class (to each object, in other words); the <code>currentSpeed</code> of one bicycle is independent from the <code>currentSpeed</code> of another.</p>
-</li>
-<li><p>Class Variables (Static Field): A <em>class variable</em> is any field declared with the <code>static</code> modifier, this tells the compiler that there is exactly one copy of the variable in existence, regardless of how many times the class has been instantiated. The code <code>static int numGears = 6</code>;would create such a static field. Additionally, the keyword <code>final</code> could be added to indicate that the number of gears will never change.</p>
-</li>
-<li><p>Local Variables: Similar to how an object stores its state in fields, a method will often store its tempoary state in <code>local variable</code>. The syntax for declaring a local variable is similar to declaring a field(for example <code>int count = 0</code>). There is no special keyword designating a variable as local. that determination comes entirely from the location in which the variable is declared – which is between the opening and closing braces of the method. As such, local variables are only visible to the methods in which they are declared; they are not accessiable from the rest of the class.</p>
-</li>
-<li><p>Parameters: You’ve already seen examples of parameters, both in the <code>Bicycle</code> class and in the <code>main</code> method of the “Hello World!” application.Recall that the signature for the main method is <code>public static void main(String[] args)</code>. Here, the args variable is the parameter to this method.This applies to other parameter-accepting constructs as well (such as constructors and exception handlers) that you’ll learn about later in the tutorial.</p>
-</li>
-</ul>
-<p>Naming</p>
-<ul>
-<li>大小写敏感，以<code>字母，$, _</code>开头(通常都是使用字母开头，避免使用<code>$</code>和<code>_</code>)</li>
-<li>后续字符可以是<code>字母，$，_ 和数字</code>，不能使用关键字和保留字</li>
-<li>小驼峰命名；常量的话，使用大写加下划线的形式命名，例：<code>final int NUM_GEARS = 6</code></li>
-</ul>
-<h5 id="Primitive-Data-Types"><a href="#Primitive-Data-Types" class="headerlink" title="Primitive Data Types"></a>Primitive Data Types</h5><p>The Java Programming language is statically-typed, which means that all variables must first declared before they can be used.This involives stating the variable’s type and name, as you’ve already seen:</p>
-
-          
-        
+        <span>
+          浏览 : <span class="article-timer" data-identity="JavaSE"></span>
+        </span>
       
     </div>
     
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://capping.github.io/2018/06/26/special-charcater-in-url/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Xuebin Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Z-II's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
+    <!-- 文章简介 -->
+    <div class="article-content">
+      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/26/special-charcater-in-url/" itemprop="url">url中的特殊字符</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-26T16:05:14+08:00">
-                2018-06-26
-              </time>
-            
-
-            
-
-            
+      </div>
+    </div>
+    <div class="article-footer">
+      <div class="article-meta pull-left">
+        <!-- 分类pc端可见 -->
+        <span class="pc-view">
+          
+            <i class="iconfont icon-tag"></i>分类:
+            <a href="/categories/Java/">
+              Java
+            </a>
           </span>
-
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Network/" itemprop="url" rel="index">
-                    <span itemprop="name">Network</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+        <span>
           
-
-          
+            <i class="iconfont icon-06tags"></i>标签:
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/06/26/special-charcater-in-url/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/06/26/special-charcater-in-url/" itemprop="commentCount"></span>
+              <span class="span--tag">
+                <a href="/tags/Java/">
+                  #Java
                 </a>
               </span>
             
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+                    
+        </span>
+      </div>
+      
+        <div class="article-meta pull-right">
+          <span class="pc-view">
+            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="JavaSE"></span>
+          </span>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
+    </div>
+  </div>
+  
+  <div class="post">
+    <h1 class="article-title">
+      <a href="/2018/06/26/special-charcater-in-url/">
+        <span>url中的特殊字符</span>
+      </a>
+    </h1>
+    <!-- PC端文章信息 -->
+    <div class="article-top-meta pc-view">
+      <span>
+        发布时间 : 2018-06-26
+      </span>
+    </div>
+    <!-- 移动端文章信息 -->
+    <div class="article-top-meta mobile-view">
+      <span>
+        发布 : 2018-06-26
+      </span>
+      
+        <span>
+        分类 :
+          <a href="/categories/Network/">
+            Network
+          </a>
+        </span>
       
       
-
-      
-        
-          
-            <p>uri: uniform resource identifier，统一资源标识符。<br>url: uniform resource locator，统一资源定位符。 </p>
-<p>本文中不讨论<code>url</code>和<code>uri</code>的区别, 暂全文使用url.</p>
-<p>最近调用了一个api, 使用<code>get</code>请求资源. 遇到一个问题, 有的数据可以返回正确的结果, but not all!<br>这就让我很疑惑. 解决思路也很简单, 也没有花多少时间, 在此记录下解决思路, 最后做下总结.</p>
-<p>解决思路:<br>拿到错误数据, 拼接好<code>url</code>, 拿到后台接受的数据.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 问题url例子</span><br><span class="line">https:www.example.com?a=123&amp;b=abc#</span><br></pre></td></tr></table></figure></p>
-<p>其实看到这个url, 问题就明了了, 不过我还是输出下后台拿到的数据<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Array</span><br><span class="line">(</span><br><span class="line">    [a] =&gt; 123</span><br><span class="line">    [b] =&gt; abc</span><br><span class="line">)</span><br></pre></td></tr></table></figure></p>
-<p>问题就出在url中带有特殊字符！</p>
-<p>以下是url中的特殊字符以及对应的编码：</p>
-<table>
-<thead>
-<tr>
-<th>符号</th>
-<th>url中的含义</th>
-<th>编码</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>+</td>
-<td>URL 中+号表示空格</td>
-<td>%2B</td>
-</tr>
-<tr>
-<td>空格</td>
-<td>URL中的空格可以用+号或者编码</td>
-<td>%20</td>
-</tr>
-<tr>
-<td>/</td>
-<td>分隔目录和子目录</td>
-<td>%2F</td>
-</tr>
-<tr>
-<td>?</td>
-<td>分隔实际的URL和参数</td>
-<td>%3F</td>
-</tr>
-<tr>
-<td>%</td>
-<td>指定特殊字符</td>
-<td>%25</td>
-</tr>
-<tr>
-<td>#</td>
-<td>表示书签</td>
-<td>%23</td>
-</tr>
-<tr>
-<td>&amp;</td>
-<td>URL中指定的参数间的分隔符</td>
-<td>%26</td>
-</tr>
-<tr>
-<td>=</td>
-<td>URL中指定参数的值</td>
-<td>%3D</td>
-</tr>
-</tbody>
-</table>
-<p>解决办法:</p>
-<p>替换url中的特殊字符<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">class StringUtil</span><br><span class="line">&#123;</span><br><span class="line">    public static function UrlEncode($str)</span><br><span class="line">    &#123;</span><br><span class="line">        $str = str_replace(&apos;%&apos;, &apos;%25&apos;, $str);</span><br><span class="line">        $str = str_replace(&apos;+&apos;, &apos;%2B&apos;, $str);</span><br><span class="line">        $str = str_replace(&apos; &apos;, &apos;%20&apos;, $str);</span><br><span class="line">        $str = str_replace(&apos;/&apos;, &apos;%2F&apos;, $str);</span><br><span class="line">        $str = str_replace(&apos;?&apos;, &apos;%3F&apos;, $str);</span><br><span class="line">        $str = str_replace(&apos;#&apos;, &apos;%23&apos;, $str);</span><br><span class="line">        $str = str_replace(&apos;&amp;&apos;, &apos;%26&apos;, $str);</span><br><span class="line">        $str = str_replace(&apos;=&apos;, &apos;%3D&apos;, $str);</span><br><span class="line">        return $str;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>很明显, 需要先替换<code>%</code>, 因为编码中都存在%.</p>
-
-          
-        
+        <span>
+          浏览 : <span class="article-timer" data-identity="special-charcater-in-url"></span>
+        </span>
       
     </div>
     
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://capping.github.io/2018/06/02/html5-canvas-image-compress-upload/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Xuebin Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Z-II's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
+    <!-- 文章简介 -->
+    <div class="article-content">
+      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/02/html5-canvas-image-compress-upload/" itemprop="url">前端压缩图片, php实现上传</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-02T10:17:24+08:00">
-                2018-06-02
-              </time>
-            
-
-            
-
-            
+      </div>
+    </div>
+    <div class="article-footer">
+      <div class="article-meta pull-left">
+        <!-- 分类pc端可见 -->
+        <span class="pc-view">
+          
+            <i class="iconfont icon-tag"></i>分类:
+            <a href="/categories/Network/">
+              Network
+            </a>
           </span>
-
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+        <span>
           
-
-          
+            <i class="iconfont icon-06tags"></i>标签:
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/06/02/html5-canvas-image-compress-upload/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/06/02/html5-canvas-image-compress-upload/" itemprop="commentCount"></span>
+              <span class="span--tag">
+                <a href="/tags/url/">
+                  #url
                 </a>
               </span>
             
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+                    
+        </span>
+      </div>
+      
+        <div class="article-meta pull-right">
+          <span class="pc-view">
+            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="special-charcater-in-url"></span>
+          </span>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
+    </div>
+  </div>
+  
+  <div class="post">
+    <h1 class="article-title">
+      <a href="/2018/06/02/html5-canvas-image-compress-upload/">
+        <span>前端压缩图片, php实现上传</span>
+      </a>
+    </h1>
+    <!-- PC端文章信息 -->
+    <div class="article-top-meta pc-view">
+      <span>
+        发布时间 : 2018-06-02
+      </span>
+    </div>
+    <!-- 移动端文章信息 -->
+    <div class="article-top-meta mobile-view">
+      <span>
+        发布 : 2018-06-02
+      </span>
+      
+        <span>
+        分类 :
+          <a href="/categories/PHP/">
+            PHP
+          </a>
+        </span>
       
       
-
-      
-        
-          
-            <p>今天在做一个图片上传的功能。<br>流程如下: 点击添加图片按钮–&gt;拍照(或者选择相册图片)–&gt;然后会调用php的上传接口实现上传。<br>遇到的问题: 图片的尺寸过大, 上传时间过长。<br>解决思路: 前端压缩图片后上传。</p>
-<p>无奈前端小哥, 工作量过大, 想让后端实现压缩后上传。经过调研, 妈呀！这不科学(后端的压缩都是图片上传成功后做的, 对提高上传速度没有卵用)。</p>
-<p>继续探索, 找前端实现压缩的方法, 大都是使用base64做, 这…</p>
-<p>还好我找到了张鑫旭大神的文章(<a href="http://www.zhangxinxu.com/wordpress/2017/07/html5-canvas-image-compress-upload/" target="_blank" rel="noopener">http://www.zhangxinxu.com/wordpress/2017/07/html5-canvas-image-compress-upload/</a>)</p>
-<p>前端的实现文章里讲的很详细, 此处不再赘述。</p>
-<p>随之而来的问题, 由于此处使用的<code>toBlob</code>方法方法实现的, 那做为一个php后端要怎么接收<code>blob</code>(binary large object)对象呢？</p>
-<p>普通的文件上传php使用<code>$_FILES</code>可以接收, 然而我<code>var_dump()</code>打印出来的却是一个空数组。 那试试<code>$_REQUEST</code>?</p>
-<p>然后我借助搜索引擎搜索<code>前端压缩图片后端php怎么接受?</code>, 只能说, 我很绝望！ 继续啃大神的文章, 如下一句话, 点醒梦中人:<br><code>可以把canvas转换成Blob文件，通常用在文件上传中，因为是二进制的，对后端更加友好</code>。</p>
-<p>然后我就找到了查询的关键字<code>php如何接收二进制流？</code><br>豁然开朗:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 方式一</span><br><span class="line">$content = $GLOBALS[&apos;HTTP_RAW_POST_DATA&apos;];  // 需要php.ini设置</span><br><span class="line"># 方式二</span><br><span class="line">$content = file_get_contents(&apos;php://input&apos;);    // 不需要php.ini设置，内存压力小</span><br></pre></td></tr></table></figure></p>
-<p>作为一个技术不那么严谨的公司(连服务器的mb_string扩展都没有正确开启), 果断使用方法二。</p>
-<p>那拿到前端传过来的blob对象,怎么把blob解析成图片呢？<br>接下里就顺畅多了, 直接搜索<code>php如何接收二进制流转换成图片？</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">$file_name = date(&quot;YmdHis&quot;).rand(&quot;1000&quot;,&quot;9999&quot;).&quot;.png&quot;;</span><br><span class="line">//图片路径</span><br><span class="line">$file_dir = UPLOADIMGNEW.$file_name;</span><br><span class="line">$img = file_get_contents(&quot;php://input&quot;);</span><br><span class="line">if (empty($img)) &#123;</span><br><span class="line">    thow new Exception(&apos;二进制流为空&apos;, 400); //二进制流为空</span><br><span class="line">&#125;</span><br><span class="line">if ($fp = fopen($file_dir, &apos;w&apos;)) &#123;</span><br><span class="line">    if (fwrite($fp, $img)) &#123;</span><br><span class="line">        fclose($fp); //成功</span><br><span class="line">        return json_encode[</span><br><span class="line">            &apos;url&apos; =&gt; &quot;http://&quot; . $_SERVER[&quot;SERVER_NAME&quot;] . &quot;:&quot; . $_SERVER[&quot;SERVER_PORT&quot;].dirname($_SERVER[&quot;SCRIPT_NAME&quot;]).&quot;/upload/img/&quot;.$file_name</span><br><span class="line">        ];</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        thow new Exception(&apos;写入文件不成功&apos;, 500); //写入文件不成功</span><br><span class="line">    &#125;</span><br><span class="line">&#125; else &#123;</span><br><span class="line">    thow new Exception(&apos;不能打开或创建文件&apos;, 500); //不能打开或创建文件</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>ok！ 打完收工…</p>
-
-          
-        
+        <span>
+          浏览 : <span class="article-timer" data-identity="html5-canvas-image-compress-upload"></span>
+        </span>
       
     </div>
     
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://capping.github.io/2018/05/16/sourceTree安装时免登录/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Xuebin Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Z-II's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
+    <!-- 文章简介 -->
+    <div class="article-content">
+      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/16/sourceTree安装时免登录/" itemprop="url">sourceTree安装时免登录</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-16T17:01:55+08:00">
-                2018-05-16
-              </time>
-            
-
-            
-
-            
+      </div>
+    </div>
+    <div class="article-footer">
+      <div class="article-meta pull-left">
+        <!-- 分类pc端可见 -->
+        <span class="pc-view">
+          
+            <i class="iconfont icon-tag"></i>分类:
+            <a href="/categories/PHP/">
+              PHP
+            </a>
           </span>
-
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/tools/" itemprop="url" rel="index">
-                    <span itemprop="name">tools</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+        <span>
           
-
-          
+            <i class="iconfont icon-06tags"></i>标签:
             
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/16/sourceTree安装时免登录/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/05/16/sourceTree安装时免登录/" itemprop="commentCount"></span>
+              <span class="span--tag">
+                <a href="/tags/PHP/">
+                  #PHP
                 </a>
               </span>
             
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>sourceTree是一个工具, 我一直用它做git管理(git的图形化界面GUI)<br>最大的一个问题是 : 安装 SourceTree 时, 需要使用atlassian授权, 即使翻墙这个过程也会出现反应慢, 收不到邮件或短信的问题, 现提供跳过 atlassian账号 授权方法。</p>
-<p><img src="https://capping.github.com/images/SourceTree_login.png?raw=true" alt=""></p>
-<p>安装之后, 转到用户本地文件夹下的 SourceTree 目录, 没有则新建：</p>
-<blockquote>
-<p>%LocalAppData%\Atlassian\SourceTree\</p>
-</blockquote>
-<p>请把以上路径直接粘贴到我的电脑路径的位置跳转, 才能跳转到正确位置</p>
-<p>新建 accounts.json 文件</p>
-<blockquote>
-<p>%LocalAppData%\Atlassian\SourceTree\accounts.json</p>
-</blockquote>
-<p>输入以下内容保存即可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;$id&quot;: &quot;1&quot;,</span><br><span class="line">    &quot;$type&quot;: &quot;SourceTree.Api.Host.Identity.Model.IdentityAccount, SourceTree.Api.Host.Identity&quot;,</span><br><span class="line">    &quot;Authenticate&quot;: true,</span><br><span class="line">    &quot;HostInstance&quot;: &#123;</span><br><span class="line">      &quot;$id&quot;: &quot;2&quot;,</span><br><span class="line">      &quot;$type&quot;: &quot;SourceTree.Host.Atlassianaccount.AtlassianAccountInstance, SourceTree.Host.AtlassianAccount&quot;,</span><br><span class="line">      &quot;Host&quot;: &#123;</span><br><span class="line">        &quot;$id&quot;: &quot;3&quot;,</span><br><span class="line">        &quot;$type&quot;: &quot;SourceTree.Host.Atlassianaccount.AtlassianAccountHost, SourceTree.Host.AtlassianAccount&quot;,</span><br><span class="line">        &quot;Id&quot;: &quot;atlassian account&quot;</span><br><span class="line">      &#125;,</span><br><span class="line">      &quot;BaseUrl&quot;: &quot;https://id.atlassian.com/&quot;</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;Credentials&quot;: &#123;</span><br><span class="line">      &quot;$id&quot;: &quot;4&quot;,</span><br><span class="line">      &quot;$type&quot;: &quot;SourceTree.Model.BasicAuthCredentials, SourceTree.Api.Account&quot;,</span><br><span class="line">      &quot;Username&quot;: &quot;&quot;,</span><br><span class="line">      &quot;Email&quot;: null</span><br><span class="line">    &#125;,</span><br><span class="line">    &quot;IsDefault&quot;: false</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure></p>
-<p><img src="https://capping.github.com/images/1526462870.png?raw=true" alt=""></p>
-<p>原博客链接：<a href="https://blog.csdn.net/liby_sunny/article/details/78813001" target="_blank" rel="noopener">https://blog.csdn.net/liby_sunny/article/details/78813001</a><br>若影响到个人利益, 请联系博主删除该文章。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://capping.github.io/2018/05/14/我开始写博客了/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Xuebin Zhang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Z-II's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/14/我开始写博客了/" itemprop="url">我开始写博客了</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-14T13:59:48+08:00">
-                2018-05-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/未分类/" itemprop="url" rel="index">
-                    <span itemprop="name">未分类</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/05/14/我开始写博客了/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/05/14/我开始写博客了/" itemprop="commentCount"></span>
+              <span class="span--tag">
+                <a href="/tags/canvas/">
+                  #canvas
                 </a>
               </span>
             
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+              <span class="span--tag">
+                <a href="/tags/js/">
+                  #js
+                </a>
+              </span>
+            
+                    
+        </span>
+      </div>
+      
+        <div class="article-meta pull-right">
+          <span class="pc-view">
+            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="html5-canvas-image-compress-upload"></span>
+          </span>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
+    </div>
+  </div>
+  
+  <div class="post">
+    <h1 class="article-title">
+      <a href="/2018/05/16/sourceTree安装时免登录/">
+        <span>sourceTree安装时免登录</span>
+      </a>
+    </h1>
+    <!-- PC端文章信息 -->
+    <div class="article-top-meta pc-view">
+      <span>
+        发布时间 : 2018-05-16
+      </span>
+    </div>
+    <!-- 移动端文章信息 -->
+    <div class="article-top-meta mobile-view">
+      <span>
+        发布 : 2018-05-16
+      </span>
+      
+        <span>
+        分类 :
+          <a href="/categories/tools/">
+            tools
+          </a>
+        </span>
       
       
-
-      
-        
-          
-            <p>记录一下吧, 今天是2018年5月14日, 我开始写博客了.<br>之前一直想做一个博客, 当时没什么特别的想法, 只是感觉应该有一个. 但是慢慢的(可能是年龄大了), 想找一个平台记录下自己的生活和学习过程.<br>在纠结了一段时间, 调研了几个常用的博客系统, 从wordpress, segmentfault, hexo等中, 最终决定使用hexo, 选择hexo一样没有理由, 就是感觉想<br>用这个了.<br>从此我也是一个有博客的人了…<br>贴几条命令吧！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 在package.json中配置了这个</span><br><span class="line">&quot;scripts&quot;: &#123;</span><br><span class="line">    &quot;start&quot;: &quot;hexo clean &amp;&amp; hexo g &amp;&amp; hexo d&quot;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">$ hexo new &quot;My New Post&quot;</span><br><span class="line">$ npm start</span><br></pre></td></tr></table></figure></p>
-<p>启动本地服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure></p>
-
-          
-        
+        <span>
+          浏览 : <span class="article-timer" data-identity="sourceTree安装时免登录"></span>
+        </span>
       
     </div>
     
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
+    <!-- 文章简介 -->
+    <div class="article-content">
+      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
+        
+      </div>
+    </div>
+    <div class="article-footer">
+      <div class="article-meta pull-left">
+        <!-- 分类pc端可见 -->
+        <span class="pc-view">
+          
+            <i class="iconfont icon-tag"></i>分类:
+            <a href="/categories/tools/">
+              tools
+            </a>
+          </span>
+          
+        <span>
+          
+            <i class="iconfont icon-06tags"></i>标签:
+            
+              <span class="span--tag">
+                <a href="/tags/tools/">
+                  #tools
+                </a>
+              </span>
+            
+              <span class="span--tag">
+                <a href="/tags/git/">
+                  #git
+                </a>
+              </span>
+            
+                    
+        </span>
+      </div>
       
-
+        <div class="article-meta pull-right">
+          <span class="pc-view">
+            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="sourceTree安装时免登录"></span>
+          </span>
+        </div>
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
+    </div>
   </div>
   
-  
-  
-  </article>
-
-
+  <div class="post">
+    <h1 class="article-title">
+      <a href="/2018/05/14/我开始写博客了/">
+        <span>我开始写博客了</span>
+      </a>
+    </h1>
+    <!-- PC端文章信息 -->
+    <div class="article-top-meta pc-view">
+      <span>
+        发布时间 : 2018-05-14
+      </span>
+    </div>
+    <!-- 移动端文章信息 -->
+    <div class="article-top-meta mobile-view">
+      <span>
+        发布 : 2018-05-14
+      </span>
+      
+        <span>
+        分类 :
+          <a href="/categories/未分类/">
+            未分类
+          </a>
+        </span>
+      
+      
+        <span>
+          浏览 : <span class="article-timer" data-identity="我开始写博客了"></span>
+        </span>
+      
+    </div>
     
-  </section>
-
+    <!-- 文章简介 -->
+    <div class="article-content">
+      <div class="markdown-body article-content--inner" v-html="mdToHtml(psg.summary)">
+        
+      </div>
+    </div>
+    <div class="article-footer">
+      <div class="article-meta pull-left">
+        <!-- 分类pc端可见 -->
+        <span class="pc-view">
+          
+            <i class="iconfont icon-tag"></i>分类:
+            <a href="/categories/未分类/">
+              未分类
+            </a>
+          </span>
+          
+        <span>
+                    
+        </span>
+      </div>
+      
+        <div class="article-meta pull-right">
+          <span class="pc-view">
+            <i class="iconfont icon-view"></i>浏览: <span class="article-timer" data-identity="我开始写博客了"></span>
+          </span>
+        </div>
+      
+    </div>
+  </div>
   
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+
+  <nav class="page-navigation">
+    
+      <a href="/page/2/">上一页</a>
+    
+    
   </nav>
 
-
-
-          </div>
-          
-
-
-          
-
-        </div>
-        
-          
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
+    <script defer>
+const valineAPI = (() => {
+  try {
+    AV.init("Hyq9wkH495DgNHWhDQCOfQSp-gzGzoHsz", "WaR7nrzhliHj9aVwdQzkdlGd");
+  } catch(error) {}
+  const isExist = (identity) => {
+    identity = identity || getRealPath();
+    let query = new AV.Query('Timer');
+    return new Promise((resolve, reject) => {
+      query.equalTo("identity", identity);
+      query.find().then(results => {
+        resolve(results.length > 0);
+      }, error => reject(error));
+    })
+  }
 
-  <aside id="sidebar" class="sidebar">
-    
-    <div class="sidebar-inner">
+  const _get = (identity) => {
+    let query = null;
+    if(identity && identity instanceof Array){
+      let querys = [];
+      for(let i = 0; i < identity.length; ++i) {
+        querys[i] = new AV.Query('Timer');
+        querys[i].equalTo('identity', identity[i]);
+      }
+      query = AV.Query.or.apply(null ,querys);
+    } else {
+      identity = identity || getRealPath();
+      query = new AV.Query("Timer");
+      query.equalTo("identity", identity);
+    }
 
-      
+    return new Promise((resolve, reject) => {
+      query.find()
+      .then(results => resolve(results))
+      .catch(error => reject(error))
+    })
+  }
 
-      
+  const create = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let Todo = AV.Object.extend('Timer');
+      let todo = new Todo();
+      todo.set("times", 1);
+      todo.set("identity", identity);
+      todo.save().then(res => resolve(true), error => reject(error));
+    })
+  }
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
-        <div class="site-overview">
-          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-            
-              <img class="site-author-image" itemprop="image"
-                src="/uploads/avatar.png"
-                alt="Xuebin Zhang" />
-            
-              <p class="site-author-name" itemprop="name">Xuebin Zhang</p>
-              <p class="site-description motion-element" itemprop="description">You are the owner of your career.</p>
-          </div>
+  const update = (identity) => {
+    identity = identity || getRealPath();
+    return new Promise((resolve, reject) => {
+      let query = new AV.Query('Timer');
+      query.equalTo("identity", identity);
+      query.find().then(todos => {
+        todos.forEach(todo => {
+          todo.set("times", todo.attributes.times + 1);
+        });
+        return AV.Object.saveAll(todos);
+      }).then(todos => resolve(true), error => reject(error));
+    })
+  }
 
-          <nav class="site-state motion-element">
+  return {
+    isExist,
+    _get,
+    update,
+    create
+  }
+})()
 
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives/">
-              
-                  <span class="site-state-item-count">25</span>
-                  <span class="site-state-item-name">posts</span>
-                </a>
-              </div>
-            
+const calcAndWriteTimes = () => {
+  let isPost = false;
 
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
-                  <span class="site-state-item-name">categories</span>
-                </a>
-              </div>
-            
+  let timerAllDOM = document.querySelectorAll(".article-timer");
 
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">16</span>
-                  <span class="site-state-item-name">tags</span>
-                </a>
-              </div>
-            
+  if(isPost) {
+    let identity = timerAllDOM[0].getAttribute("data-identity");
+    valineAPI.isExist(identity)
+    .then(exist => {
+      if(exist) {
+        return valineAPI.update(identity);
+      }
+      return new Promise(resolve => resolve(true));
+    })
+    .then( succuess => valineAPI._get(identity))
+    .then( result => timerAllDOM[0].innerText = result[0].attributes.times)
+    .catch(error => console.log(error.message))
+    return ;
+  }
 
-          </nav>
+  let timerDOMCache = {};
 
-          
-            <div class="feed-link motion-element">
-              <a href="/atom.xml" rel="alternate">
-                <i class="fa fa-rss"></i>
-                RSS
-              </a>
-            </div>
-          
+  for(let timerDOM of timerAllDOM) {
+    let identity = timerDOM.getAttribute("data-identity");
+    if(timerDOMCache.hasOwnProperty(identity)){
+      timerDOMCache[identity].dom.push(timerDOM);
+    }else{
+      timerDOMCache[identity] = {
+        dom: [timerDOM],
+        times: undefined
+      };
+    }
+  }
 
-          
-            <div class="links-of-author motion-element">
-                
-                  <span class="links-of-author-item">
-                    <a href="https://github.com/capping" target="_blank" title="GitHub">
-                      
-                        <i class="fa fa-fw fa-github"></i>GitHub</a>
-                  </span>
-                
-                  <span class="links-of-author-item">
-                    <a href="mailto:z.capping@gmail.com" target="_blank" title="E-Mail">
-                      
-                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
-                  </span>
-                
-            </div>
-          
+  let identities = Object.keys(timerDOMCache);
+  valineAPI._get(identities).then(results => {
+    for(let result of results) {
+      let {identity, times} = result.attributes;
+      timerDOMCache[identity].times = times;
+      timerDOMCache[identity].dom.map(item => item.innerText = times);
+    }
+    for(let identity of identities) {
+      if(timerDOMCache[identity].times){
+        continue;
+      }
+      timerDOMCache[identity].dom.map(item => item.innerText = 1);
+      valineAPI.create(identity);
+    }
+  }).catch(error => console.log(error.message))
+}
 
-          
-          
-
-          
-          
-
-          
-
-        </div>
-      </section>
-
-      
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Xuebin Zhang</span>
-
-  
+if(true){
+  calcAndWriteTimes();
+}
+</script>
+   
 </div>
 
 
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
-
-        
-      </div>
-    </footer>
-
+      <footer>
+  <p class="site-info">
+    博客已萌萌哒运行<span id="time-to-now"></span><span class="my-face">(●'◡'●)ﾉ♥</span>
+    <br>
+    Theme - <a href="https://github.com/dongyuanxin/theme-bmw">BMW</a> | Made With 💗 | Powered by <a href="https://godbmw.com/">GodBMW</a>
+    <br>
     
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
+  </p>
+</footer>
 
-    
 
-  </div>
 
-  
+<script>
+const timeToNowDOM = document.querySelector("#time-to-now");
+const startTimestamp = new Date(2018, 1, 10).getTime();
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+const updateTimeStr = () => {
+  let offset = parseInt(
+      (new Date().getTime() - startTimestamp) / 1000,
+      10
+    ),
+    day = Math.floor(offset / 86400),
+    hour = Math.floor((offset % 86400) / 3600),
+    minute = Math.floor(((offset % 86400) % 3600) / 60),
+    second = Math.floor(((offset % 86400) % 3600) % 60);
+  timeToNowDOM.innerHTML =
+    day + "天" + hour + "小时" + minute + "分钟" + second + "秒";
+  setTimeout(updateTimeStr, 500);
+}
+
+setTimeout(updateTimeStr, 500);
 </script>
 
 
-
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
-
-
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-  
-  <script type="text/javascript">
-    var GUEST = ['nick','mail','link'];
-    var guest = 'nick,mail,link';
-    guest = guest.split(',').filter(item=>{
-      return GUEST.indexOf(item)>-1;
+      <div class="back-to-top hidden">
+  <span>
+    <i class="iconfont icon-60"></i><span></span>%
+  </span>
+</div>
+
+<script>
+const updateIconToTop = percent => {
+  let dom = document.querySelector(".back-to-top span span");
+  dom.innerText = percent;
+  if(percent < 1) {
+    document.querySelector(".back-to-top").className = "back-to-top hidden";
+  } else {
+    document.querySelector(".back-to-top").className = "back-to-top";
+  }
+}
+
+const handleScoll = () => {
+  let isRunning = false;
+  return () => {
+    if (isRunning) return;
+    isRunning = true;
+    window.requestAnimationFrame(timestamp => {
+      let scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop,
+        scrollHeight =
+          document.documentElement.scrollHeight ||
+          document.body.scrollHeight,
+        clientHeight =
+          document.documentElement.clientHeight ||
+          document.body.clientHeight;
+      isRunning = false;
+      if (scrollTop <= 1) {
+        updateIconToTop(0);
+        return;
+      }
+      if (scrollTop + clientHeight >= scrollHeight) {
+        updateIconToTop(100);
+      } else {
+        updateIconToTop(parseInt(
+          100 * scrollTop / (scrollHeight - clientHeight),
+          10
+        ));
+      }
     });
-    new Valine({
-        el: '#comments' ,
-        verify: false,
-        notify: false,
-        appId: '2I5JbxPkGVzAO2Uh97NlIQIA-gzGzoHsz',
-        appKey: 'DT9RpoGKR3rf0KAVopfWIdyA',
-        placeholder: 'Just go go',
-        avatar:'mm',
-        guest_info:guest,
-        pageSize:'10' || 10,
+  };
+}
+
+const backToTop = () => {
+  let scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop,
+    delay = 10,
+    time = 200;
+  if (scrollTop <= 20) {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    return;
+  }
+  let step = Math.ceil(scrollTop * delay / time);
+  let timer = setInterval(() => {
+    scrollTop =
+      document.documentElement.scrollTop || document.body.scrollTop;
+    if (scrollTop - step <= 0) {
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      clearInterval(timer);
+    } else {
+      document.documentElement.scrollTop = scrollTop - step;
+      document.body.scrollTop = scrollTop - step;
+    }
+  }, delay);
+}
+
+document.addEventListener("scroll", handleScoll(), false);
+
+document.querySelector(".back-to-top").addEventListener("click", backToTop, false);
+
+</script>
+
+    </div>
+
+    
+      <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+<script>
+  (() => {
+    const mathjaxConfig = {
+      showProcessingMessages: false, //关闭js加载过程信息
+      messageStyle: "none", //不显示信息
+      jax: ["input/TeX", "output/HTML-CSS"],
+      tex2jax: {
+        inlineMath: [["$", "$"], ["\\(", "\\)"]], //行内公式选择符
+        displayMath: [["$$", "$$"], ["\\[", "\\]"]], //段内公式选择符
+        skipTags: ["script", "noscript", "style", "textarea", "pre", "code", "a"] //避开某些标签
+      },
+      "HTML-CSS": {
+        availableFonts: ["STIX", "TeX"], //可选字体
+        showMathMenu: false //关闭右击菜单显示
+      }
+    }
+
+    let mathjaxInterval = setInterval(() => {
+      if(!window.MathJax){
+        return;
+      }
+      window.MathJax.Hub.Config(mathjaxConfig)
+      window.MathJax.Hub.Queue(["Typeset", MathJax.Hub, document.getElementById('app')])
+
+      clearInterval(mathjaxInterval)
+    }, 10)    
+  })()
+</script>
+    
+
+    <script src="https://cdn.bootcss.com/fancybox/3.5.2/jquery.fancybox.min.js" async></script>
+<script async>
+  let fancyTimer = setInterval(function(){
+    if(!window.$){
+      return;
+    }
+    $(document).ready(function() {
+      $(".post img").each(function () {
+        if($(this).parent().get(0).tagName.toLowerCase() === "a") {
+          return;
+        }
+        // $(this).attr("data-fancybox", "gallery"); // if you add 'data-fancybox', img will display after showed
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "gallery");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      });
+      
+      clearInterval(fancyTimer);
     });
-  </script>
+  }, 10);
+</script>
 
+    
+  </body>
 
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-</body>
 </html>
