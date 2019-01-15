@@ -8,7 +8,7 @@
   
   
   
-  <title>标签: Linux | Z-II&#39;s Blog</title>
+  <title>标签: linux | Z-II&#39;s Blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -201,7 +201,7 @@
     <div class="collection-title">
       <h2>
         
-          <span>标签 : Linux</span>
+          <span>标签 : linux</span>
         
       </h2>
     </div>
@@ -211,36 +211,8 @@
   <article class="posts-collapse">
     <header>
       <h2>
-        <a href="/2018/08/30/nohup-and-&/">
-          <span>nohup and &</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        08-30
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2018/08/28/Centos-disk-space-abnormal/">
-          <span>Linux服务器磁盘空间不足异常</span>
-        </a>
-      </h2>
-      <div class="post-meta">
-        08-28
-      </div>
-    </header>
-  </article>
-  
-  
-  <article class="posts-collapse">
-    <header>
-      <h2>
-        <a href="/2018/08/20/Centos-install-phpredis/">
-          <span>Centos安装 phpredis 扩展</span>
+        <a href="/2018/08/20/centos-install-redis/">
+          <span>Centos安装配置redis</span>
         </a>
       </h2>
       <div class="post-meta">
@@ -410,6 +382,27 @@ document.querySelector(".back-to-top").addEventListener("click", backToTop, fals
       return;
     }
     $(document).ready(function() {
+      $(".post img").each(function () {
+        if($(this).parent().get(0).tagName.toLowerCase() === "a") {
+          return;
+        }
+        // $(this).attr("data-fancybox", "gallery"); // if you add 'data-fancybox', img will display after showed
+        var element = document.createElement("a");
+        $(element).attr("data-fancybox", "gallery");
+        $(element).attr("href", $(this).attr("src"));
+        $(this).wrap(element);
+      });
+      
+      clearInterval(fancyTimer);
+    });
+  }, 10);
+</script>
+
+    
+  </body>
+
+</html>
+(function() {
       $(".post img").each(function () {
         if($(this).parent().get(0).tagName.toLowerCase() === "a") {
           return;
