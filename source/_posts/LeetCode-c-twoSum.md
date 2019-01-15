@@ -40,7 +40,7 @@ int* twoSum(int* nums, int numsSize, int target) {
 ```
 解析：
 来源：http://c.biancheng.net/cpp/html/137.html  
-malloc函数用来动态分配内存，其原型为：`void* malloc(size_t size);`  
+- malloc函数用来动态分配内存，其原型为：`void* malloc(size_t size);`  
 【参数说明】size为需要分配的内存空间大小，以字节(Byte)计。  
 【函数说明】malloc()在堆区分配一块指定大小的内存空间，用来存放数据。这块内存空间在函数执行完成后不会被初始化，它们的值是未知的。如果希望在分配内存的同时
 进行初始化，请使用calloc()函数。
@@ -78,11 +78,48 @@ int main ()
 
     printf ("随机生成的字符串为：%s\n",buffer);
     free(buffer);  // 释放内存空间
+    buffer = NULL;
 
-    system("pause");
     return 0;
 }
 ```
 运行结果：
 输入字符串的长度：20
 随机生成的字符串为：lrfkqyuqfjkxyqvnrtys
+
+- free()函数用来释放动态分配的内存空间，其原型为：`void free(void* ptr);`
+free()可以释放由malloc(), calloc(), realloc()分配的内存空间，以便其他程序再次使用。
+【参数说明】ptr为将要释放的内存空间的地址。
+free()只能释放动态分配的内存，并不能释放任意的内存。下面的写法是错误的：
+```
+int a[10];
+...
+free(a);
+```
+如果ptr所指向的内存空间不是由上面的三个函数所分配的，或者已被释放，那么调用free()会有无法预知的情况发生。
+
+如果ptr为NULL，那么free()不会有任何作用。
+
+**注意：free()不会改变ptr变量本身的值，调用free()后它仍然会指向相同的内存空间，但是此时该内存已无效，不能被使用。所以建议将ptr的值设置为NULL，例如**
+```
+free(ptr);
+ptr = NULL;
+```
+代码实例：
+```
+#include <stdlib.h>
+int main ()
+{
+    int * buffer1, * buffer2, * buffer3;
+    buffer1 = (int*) malloc (100*sizeof(int));
+    buffer2 = (int*) calloc (100,sizeof(int));
+    buffer3 = (int*) realloc (buffer2,500*sizeof(int));
+    free (buffer1);
+    buffer1 = NULL;
+    free (buffer3);
+    buffer3 = NULL;
+
+    return 0;
+}
+```
+上面的代码没有输出，仅仅用来演示如何分配和释放内存。
