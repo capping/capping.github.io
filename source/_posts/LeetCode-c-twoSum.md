@@ -39,9 +39,10 @@ int* twoSum(int* nums, int numsSize, int target) {
 
 ```
 解析：
-来源：http://c.biancheng.net/cpp/html/137.html  
 ## 知识点
 #### 1. malloc()函数
+来源：http://c.biancheng.net/cpp/html/137.html  
+
 malloc()函数用来动态分配内存，其原型为：`void* malloc(size_t size);`  
 【参数说明】size为需要分配的内存空间大小，以字节(Byte)计。  
 【函数说明】malloc()在堆区分配一块指定大小的内存空间，用来存放数据。这块内存空间在函数执行完成后不会被初始化，它们的值是未知的。如果希望在分配内存的同时
@@ -90,6 +91,8 @@ int main ()
 随机生成的字符串为：lrfkqyuqfjkxyqvnrtys
 
 #### 2. free()函数
+来源：http://c.biancheng.net/cpp/html/135.html
+
 free()函数用来释放动态分配的内存空间，其原型为：`void free(void* ptr);`
 free()可以释放由malloc(), calloc(), realloc()分配的内存空间，以便其他程序再次使用。
 【参数说明】ptr为将要释放的内存空间的地址。
