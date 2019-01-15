@@ -31,10 +31,11 @@ int* twoSum(int* nums, int numsSize, int target) {
            if (nums[i] + nums[j] == target) {
                a[0] = i;
                a[1] = j;
+               return a;
            }
         }
     }
-    return a;
+    return NULL;
 }
 
 ```
