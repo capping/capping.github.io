@@ -7,7 +7,7 @@ categories: [LeetCode-c]
 
 本文是刷LeetCode学c系列文章。
 
-1. Two Sum
+## Two Sum
 Given an array of integers, return indices of the two numbers such that they add up to a specific target.
 
 You may assume that each input would have exactly one solution, and you may not use the same element twice.
@@ -18,7 +18,7 @@ Given nums = [2, 7, 11, 15], target = 9,
 Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 ```
-Solution1:
+#### Solution1:
 ```
 /**
  * Note: The returned array must be malloced, assume caller calls free().
@@ -40,7 +40,9 @@ int* twoSum(int* nums, int numsSize, int target) {
 ```
 解析：
 来源：http://c.biancheng.net/cpp/html/137.html  
-- malloc函数用来动态分配内存，其原型为：`void* malloc(size_t size);`  
+## 知识点
+#### 1. malloc()函数
+malloc()函数用来动态分配内存，其原型为：`void* malloc(size_t size);`  
 【参数说明】size为需要分配的内存空间大小，以字节(Byte)计。  
 【函数说明】malloc()在堆区分配一块指定大小的内存空间，用来存放数据。这块内存空间在函数执行完成后不会被初始化，它们的值是未知的。如果希望在分配内存的同时
 进行初始化，请使用calloc()函数。
@@ -87,7 +89,8 @@ int main ()
 输入字符串的长度：20
 随机生成的字符串为：lrfkqyuqfjkxyqvnrtys
 
-- free()函数用来释放动态分配的内存空间，其原型为：`void free(void* ptr);`
+#### 2. free()函数
+free()函数用来释放动态分配的内存空间，其原型为：`void free(void* ptr);`
 free()可以释放由malloc(), calloc(), realloc()分配的内存空间，以便其他程序再次使用。
 【参数说明】ptr为将要释放的内存空间的地址。
 free()只能释放动态分配的内存，并不能释放任意的内存。下面的写法是错误的：
