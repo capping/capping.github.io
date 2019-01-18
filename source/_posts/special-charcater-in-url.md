@@ -43,7 +43,7 @@ Array
 
 解决办法:
  
-替换url中的特殊字符
+## 1. 替换url中的特殊字符
 ```
 class StringUtil
 {
@@ -62,3 +62,31 @@ class StringUtil
 }
 ```
 很明显, 需要先替换`%`, 因为编码中都存在%.
+
+**最近(2019-01-18)又遇到一个问题，是由于php默认的url encode编码标准引起的**
+
+## 2. http_build_query或urlencode
+
+随着时间的增长，开始使用http_build_query或urlencode函数解决上面的问题，但是新的问题又出现啦。
+
+先看常用的检验请求合法性的一个方式
+```
+function createToken($params) {
+    $secretKey = 'secretKey';
+    ksort($params);
+    $query = http_build_query($params);
+    $token = md5($query . $secretKey);
+    return $token;
+}
+```
+client 每个请求都携带一个 token ，token 是由请求参数和一个 secret key 一起md5之后计算出来的， 然后 server 端使用同样的算法计算token（一般还会校验time，给 token 一个有效期，我这里简化了），然后对比 token ，保证请求的合法性
+
+但是，被接入方是Java开发的程序，当我的请求中带有`*`号时，验证一直无法通过。
+
+![PHP和Java对`*`号进行urlencode](https://capping.github.io/images/java-php-encode.png)
+
+这样，问题就很清晰了，不是算法问题，而是 url encode 的编码标准的问题。
+
+那么怎么规避这个问题呢？
+
+常见的无非就是这两种方案，第一，两边使用同样的编码标准，第二，生成 token 的算法改一下，不要使用 url encode 之后的字符串加密（建议）。
