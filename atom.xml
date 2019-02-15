@@ -521,13 +521,13 @@
       <category term="PHP" scheme="https://capping.github.io/categories/PHP/"/>
     
     
-      <category term="centos" scheme="https://capping.github.io/tags/centos/"/>
-    
-      <category term="Linux" scheme="https://capping.github.io/tags/Linux/"/>
-    
       <category term="PHP" scheme="https://capping.github.io/tags/PHP/"/>
     
       <category term="redis" scheme="https://capping.github.io/tags/redis/"/>
+    
+      <category term="centos" scheme="https://capping.github.io/tags/centos/"/>
+    
+      <category term="Linux" scheme="https://capping.github.io/tags/Linux/"/>
     
   </entry>
   
@@ -552,9 +552,9 @@
       <category term="redis" scheme="https://capping.github.io/categories/redis/"/>
     
     
-      <category term="centos" scheme="https://capping.github.io/tags/centos/"/>
-    
       <category term="redis" scheme="https://capping.github.io/tags/redis/"/>
+    
+      <category term="centos" scheme="https://capping.github.io/tags/centos/"/>
     
       <category term="linux" scheme="https://capping.github.io/tags/linux/"/>
     
