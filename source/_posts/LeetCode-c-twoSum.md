@@ -1,11 +1,9 @@
 ---
-title: LeetCode c twoSum
+title: LeetCode twoSum
 date: 2019-01-14 16:44:16
 tags: [LeetCode, c]
 categories: [LeetCode-c]
 ---
-
-本文是刷LeetCode学c系列文章。
 
 ## Two Sum
 Given an array of integers, return indices of the two numbers such that they add up to a specific target.
@@ -18,6 +16,70 @@ Given nums = [2, 7, 11, 15], target = 9,
 Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 ```
+
+### Java
+
+```
+import java.util.HashMap;
+import java.util.Map;
+
+class TwoSum 
+{
+    // 1. Brute Force
+    public int[] solution1(int[] nums, int target) {
+        int len = nums.length;
+        for(int i = 0; i < len; i++) {
+            for (int j = i+1; j < len; j++) {
+                if (target == nums[i] + nums[j]) {
+                    int[] result = {i, j};
+                    return result;
+                }
+            }
+        }
+        throw new IllegalArgumentException("No two sum solution");
+    }
+
+    // Two-pass Hash Table
+    public int[] solution2(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            map.put(nums[i], i);
+        }
+        for (int i = 0; i < nums.length; i++) {
+            int complement  = target - nums[i];
+            if (map.containsKey(complement) && map.get(complement) != i) {
+                return new int[] {i, map.get(complement)};
+            }
+        }
+        throw new IllegalArgumentException("No two sum solution");
+    }
+
+    // One-pass Hash Table
+    public int[] solution3(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            int complement = target - nums[i];
+            if (map.containsKey(complement)) {
+                return new int[] {map.get(complement), i};
+            }
+            map.put(nums[i], i);
+        }
+        throw new IllegalArgumentException("No two sum solution");
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {2, 7, 11, 15};
+        int target = 9;
+        TwoSum twoSum = new TwoSum();
+        int[] result = twoSum.solution1(nums, target);
+        for(int i = 0; i < result.length; i++) {
+            System.out.println(result[i]);
+        }
+    }
+}
+```
+### C
+
 #### Solution1:
 ```
 /**
@@ -40,8 +102,8 @@ int* twoSum(int* nums, int numsSize, int target) {
 
 ```
 解析：
-## 知识点
-#### 1. malloc()函数
+##### 知识点
+##### 1. malloc()函数
 来源：http://c.biancheng.net/cpp/html/137.html  
 
 malloc()函数用来动态分配内存，其原型为：`void* malloc(size_t size);`  
@@ -91,7 +153,7 @@ int main ()
 输入字符串的长度：20
 随机生成的字符串为：lrfkqyuqfjkxyqvnrtys
 
-#### 2. free()函数
+##### 2. free()函数
 来源：http://c.biancheng.net/cpp/html/135.html
 
 free()函数用来释放动态分配的内存空间，其原型为：`void free(void* ptr);`
