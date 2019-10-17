@@ -8,12 +8,12 @@
   
   
   
-  <title>Centos安装 phpredis 扩展 | Z-II&#39;s Blog</title>
+  <title>Z-II&#39;s Blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="PHP,PHP,redis,centos,Linux," />
+    <meta name="keywords" content="Hexo, theme-bmw" />
   
 
   <script>
@@ -203,24 +203,17 @@
 
 <div class="post">
   <h1 class="article-title">
-    <span>Centos安装 phpredis 扩展</span>
+    <span></span>
   </h1>
   <div class="article-top-meta">
     <span>
       发布 : 
-      2018-08-20
+      2019-10-17
     </span>
     
-      <span>
-        分类 : 
-          <a href="/categories/PHP/">
-            PHP
-          </a>
-      </span>
-    
     
       <span>
-        浏览 : <span class="article-timer" data-identity="Centos-install-phpredis"></span>
+        浏览 : <span class="article-timer" data-identity="knapsack"></span>
       </span>
     
   </div>
@@ -229,13 +222,30 @@
 
   <div class="article-content">
     <div class="markdown-body">
-      <h2 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"># 1. 下载phpredis</span><br><span class="line">wget https://github.com/phpredis/phpredis/archive/4.1.1.tar.gz</span><br><span class="line"></span><br><span class="line"># 2. 解压 </span><br><span class="line"># z-tar包被gzip压缩,用gunzip解压 x-从tar包中提取文件 v-显示详细信息 f-指定被处理的文件</span><br><span class="line">tar -zxvf 4.1.1.tar.gz</span><br><span class="line"></span><br><span class="line"># 3. 进入解压后目录</span><br><span class="line">cd phpredis-4.1.1/</span><br><span class="line"></span><br><span class="line"># 4. 生成configure配置文件</span><br><span class="line">/usr/local/php/bin/phpize</span><br><span class="line"></span><br><span class="line"># 5. 配置</span><br><span class="line">./configure --with-php-config=/usr/local/php/bin/php-config</span><br><span class="line"></span><br><span class="line"># 6. 编译</span><br><span class="line">make</span><br><span class="line"></span><br><span class="line"># 7. 运行测试</span><br><span class="line">make test</span><br><span class="line"></span><br><span class="line"># 8. 安装</span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line"># 9. 配置ini文件</span><br><span class="line">vi /usr/local/php/lib/php.ini</span><br><span class="line">&gt; extension=&quot;redis.so&quot;</span><br><span class="line"></span><br><span class="line"># 10. 重启php-fpm</span><br><span class="line">kill PID</span><br><span class="line">/usr/local/php/sbin/php-fpm</span><br><span class="line"></span><br><span class="line"># 11. 重启nginx</span><br><span class="line">nginx -s reload # 重启nginx</span><br></pre></td></tr></table></figure>
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>重启php-fpm时使用</p>
-<blockquote>
-<p>/usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php-fpm.conf</p>
-</blockquote>
-<p>导致 <code>phpinfo()</code> 中参数 <code>Loaded Configuration File</code> 是 <code>/usr/local/php/etc/php-fpm.conf</code> ,所以打印 <code>phpinfo</code> 时一直无法显示<code>redis</code>扩展。</p>
-<p>正确的做法是上面显示的，不指定配置文件 <del>-c /usr/local/php/etc/php-fpm.conf</del> 的做法</p>
+      <h2 id="0-1背包问题！-回溯？？-动态规划？？"><a href="#0-1背包问题！-回溯？？-动态规划？？" class="headerlink" title="0-1背包问题！ 回溯？？ 动态规划？？"></a>0-1背包问题！ 回溯？？ 动态规划？？</h2><p>注意：如果未特殊说明：w表示背包的容量，n表示物品的数量。</p>
+<h3 id="1-什么是0-1背包问题？"><a href="#1-什么是0-1背包问题？" class="headerlink" title="1. 什么是0-1背包问题？"></a>1. 什么是0-1背包问题？</h3><p>对于一组不同重量、不可分割的物品，我们选择一些装入背包，在满足背包最大容量限制的前提下，背包中物品总重量的最大值是多少？</p>
+<p>假如有n个物品，对于每个物品来说，都有两种选择，装进背包或者不装进背包。对于n个物品来说，总的装法就有2^n中装法。所以，我们只需要穷举所有的装法，去掉大于背包容量的装法，选择一个最接近背包容量的装法。</p>
+<p>举个例子：假设背包的最大承载重量是9。我们有5个不同的物品，每个物品的重量分别是2，2，4，6，3。那我们能怎么装呢？</p>
+<h3 id="2-回溯算法"><a href="#2-回溯算法" class="headerlink" title="2. 回溯算法"></a>2. 回溯算法</h3><p>我们假设函数f(x, y)，其中x为第几个物品，y为当前背包重量。可以画出如下图形。</p>
+<p><img src="https://capping.github.io/images/WX20191017-124834@2x.png" alt=""></p>
+<p>就是枚举所有的情况，得出最优解。</p>
+<p>翻译成代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">private int maxW = Integer.MIN_VALUE;   // 存放结果</span><br><span class="line">private int n = 5;  // 物品数量</span><br><span class="line">private int w = 9;  // 背包容量</span><br><span class="line">private int[] weight = &#123;2, 2, 4, 6, 3&#125;;</span><br><span class="line"></span><br><span class="line">public function(int i, int cw) &#123;</span><br><span class="line">    if (i == n || cw == w) &#123;    // 物品放完了，背包容量满了</span><br><span class="line">        if (cw &gt; maxW) maxw = cw;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    f(i+1, cw);     // 第i+1个物品不放入背包</span><br><span class="line">    if ((cw + weight[i+1]) &lt; w) &#123;</span><br><span class="line">        f(i+1, cw + weigth[i+1]);   // 第i+1个物品放入背包</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这就是回溯算法实现的0-1背包问题。</p>
+<p>可以再优化吗？！！！</p>
+<p><img src="https://capping.github.io/images/WX20191017-124749@2x.png" alt=""></p>
+<p>我们再看这张图，图中颜色相同的部分，求解其实是重复的，就像两个f(2,2)，下面一定都是f(3,2)和f(3,6)，所以没必要计算两次。我们只需要记录一下，我们解过哪些情况，然后记录一下，下次再进来的时候直接返回就可以啦。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">private int maxW = Integer.MIN_VALUE;   // 存放结果</span><br><span class="line">private int n = 5;  // 物品数量</span><br><span class="line">private int w = 9;  // 背包容量</span><br><span class="line">private int[] weight = &#123;2, 2, 4, 6, 3&#125;;</span><br><span class="line">private boolean[] mem = new Boolean[n][w+1];    // 加了这行</span><br><span class="line"></span><br><span class="line">public function(int i, int cw) &#123;</span><br><span class="line">    if (i == n || cw == w) &#123;    // 物品放完了，背包容量满了</span><br><span class="line">        if (cw &gt; maxW) maxw = cw;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    if (mem[i][cw]) return;      // 加了这行</span><br><span class="line">    mem[i][cw] = true;           // 加了这行</span><br><span class="line">    f(i+1, cw);     // 第i+1个物品不放入背包</span><br><span class="line">    if ((cw + weight[i+1]) &lt; w) &#123;</span><br><span class="line">        f(i+1, cw + weigth[i+1]);   // 第i+1个物品放入背包</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种解决办法非常好。实际上，它已经跟动态规划的执行效率基本上没有差别。但是，多一种方法就多一种解决思路，我们还是要看一下动态规划是怎么解决的。</p>
+<h3 id="3-动态规划"><a href="#3-动态规划" class="headerlink" title="3. 动态规划"></a>3. 动态规划</h3><p>我们把整个求解过程分为n个阶段，每个阶段会决策一个物品是否放到背包中。每个物品决策（放入或者不放入背包）完之后，背包中的重量会有多种情况。例如树中第一次决策完后，背包的重量只有两种情况【0，2】，第二次决策完后，背包中只会有三种情况【0，2，4】等等。这样我们就把每一层重复的状态合并了，这样我们就能保证每一层不同状态的个数都不会超过w个（w表示背包的容量）。于是就成功避免了每层状态个数的指数级增长。</p>
+<p>我们用二维数组states[n][w+1]，来记录每层可以达到的不同状态。<br>第0个（下标从0开始编号）物品的重量是2，要么装入背包，要么不装入背包，决策完之后会对应背包的两种状态，背包中的总重量是0或者2。我们用states[0][0]=true和states[0][2]=true来表示这两种状态。</p>
+<p>依次类推，考察完所有的物品后，整个states状态数组就都计算好了。我们把整个计算过程画出来。</p>
+<p><code>①初始状态</code><br> \    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9<br>——|—|—|—|—|—|—|—|—|—|—<br>w=2 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=2 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=4 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=6 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=3 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br><code>②第0个物品决策完后</code><br> \    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9<br>——|—|—|—|—|—|—|—|—|—|—<br>w=2 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=2 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=4 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=6 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=3 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br><code>②第1个物品决策完后</code><br> \    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9<br>——|—|—|—|—|—|—|—|—|—|—<br>w=2 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=2 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 |<br>w=4 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=6 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=3 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br><code>②第2个物品决策完后</code><br> \    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9<br>——|—|—|—|—|—|—|—|—|—|—<br>w=2 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=2 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 |<br>w=4 2 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 |<br>w=6 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=3 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br><code>②第3个物品决策完后</code><br> \    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9<br>——|—|—|—|—|—|—|—|—|—|—<br>w=2 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=2 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 |<br>w=4 2 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 |<br>w=6 3 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 |<br>w=3 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br><code>②第4个物品决策完后</code><br> \    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9<br>——|—|—|—|—|—|—|—|—|—|—<br>w=2 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=2 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 |<br>w=4 2 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 |<br>w=6 3 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 |<br>w=3 4 | 1 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | </p>
+<p>因为states[4][9] == true，所以最优解就是true。</p>
+<p>将上面的过程翻译成代码就是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// weight:物品重量，n:物品数量，w:背包容量</span><br><span class="line">public int knapsack(int[] weight, int n, int w) &#123;</span><br><span class="line">    boolean[][] states[][] = new boolean[n][w+1];</span><br><span class="line">    states[0][0] = true;    // 第一行数据要特殊处理，可以利用哨兵优化</span><br><span class="line">    if (weight[0] &lt; w) &#123;</span><br><span class="line">        states[0][weight[0]] = true;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i = 1; i &lt; n; ++i) &#123;    // 动态规划状态转移</span><br><span class="line">        for (int j = 0; j &lt;= 2; ++j) &#123;  // 不把第i个物品放入背包</span><br><span class="line">            if (states[i-1][j] == true)</span><br><span class="line">                states[i][j] = states[i-1][j];</span><br><span class="line">        &#125;</span><br><span class="line">        for (int j = 0; j &lt; w-weight[i]; ++j) &#123; // 把第i个物品放入背包</span><br><span class="line">            if (states[i-1][j] == true) </span><br><span class="line">                states[i][j+weight[i]] = true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for (int i = w; i &gt;= 0; ++i) &#123;</span><br><span class="line">        if (states[n-1][i] == true) </span><br><span class="line">            return i;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>实际上，这是一种用动态规划解决问题的思路。我们把问题分解成多个阶段，每个阶段对应一个决策。我们记录每一个阶段可达的状态集合（去掉重复的），然后通过当前阶段的状态集合，来推导下一个阶段的状态集合，动态的向前推进。</p>
+<p>这个代码还可以再优化吗？！！！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public int knapsack(int[] weight, int n, int w) &#123;</span><br><span class="line">    boolean[] states[] = new boolean[w+1];</span><br><span class="line">    states[0] = true;    // 第一行数据要特殊处理，可以利用哨兵优化</span><br><span class="line">    if (weight[0] &lt; w) &#123;</span><br><span class="line">        states[weight[0]] = true;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i = 1; i &lt; n; ++i) &#123;    // 动态规划状态转移</span><br><span class="line">        for (int j = w-weight[i]; j &gt;= 0; ++j) &#123; // 把第i个物品放入背包</span><br><span class="line">            if (states[j] == true) </span><br><span class="line">                states[j+weight[i]] = true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for (int i = w; i &gt;= 0; ++i) &#123;</span><br><span class="line">        if (states[i] == true) </span><br><span class="line">            return i;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这个代码相对之前的代码，将states数组从二维数组降为一维数组。空间复杂度由O(n*w)变为O(w)。</p>
+<p>需要强调的是：代码的第8行 <code>for (int j = w-weight[i]; j &gt;= 0; ++j)</code>，j需要从大到小来处理。如果不按j从小到大处理的话，会出现for循环重复计算的问题。你自己画一下试试。有问题我们拿出来讨论。</p>
 
     </div>
   </div>
@@ -247,7 +257,7 @@
         
           本文作者 : Xuebin Zhang <br/>
         
-        原文链接 : <a href="">https://capping.github.io/2018/08/20/Centos-install-phpredis/</a><br>
+        原文链接 : <a href="">https://capping.github.io/2019/10/17/knapsack/</a><br>
         版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </blockquote>
       </div>
@@ -310,33 +320,6 @@
     <div class="article-meta pull-left">
       <span>
         
-          <i class="iconfont icon-06tags"></i>标签: 
-          
-          <span class="span--tag">
-            <a href="/tags/PHP/">
-              #PHP
-            </a>
-          </span>
-          
-          <span class="span--tag">
-            <a href="/tags/redis/">
-              #redis
-            </a>
-          </span>
-          
-          <span class="span--tag">
-            <a href="/tags/centos/">
-              #centos
-            </a>
-          </span>
-          
-          <span class="span--tag">
-            <a href="/tags/Linux/">
-              #Linux
-            </a>
-          </span>
-          
-        
       </span>
     </div>
     <div class="article-meta pull-right">
@@ -357,15 +340,9 @@
       <div class="nav-pre">
         <i class="iconfont icon-prev"></i>
         上一篇:
-        <a href="/2018/08/20/centos-install-redis/" target="_self">Centos安装配置redis</a>
+        <a href="/2019/09/08/java-learnning-path-map/" target="_self">Java学习路径</a>
       </div>
     
-    
-      <div class="nav-next">
-        下一篇:
-        <a href="/2018/08/28/Centos-disk-space-abnormal/" target="_self">Linux服务器磁盘空间不足异常</a>
-        <i class="iconfont icon-next"></i>
-      </div>
     
   </nav>
 

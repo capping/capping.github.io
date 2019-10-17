@@ -8,12 +8,12 @@
   
   
   
-  <title>Centos安装 phpredis 扩展 | Z-II&#39;s Blog</title>
+  <title>translate | Z-II&#39;s Blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="PHP,PHP,redis,centos,Linux," />
+    <meta name="keywords" content="Hexo, theme-bmw" />
   
 
   <script>
@@ -203,24 +203,17 @@
 
 <div class="post">
   <h1 class="article-title">
-    <span>Centos安装 phpredis 扩展</span>
+    <span>translate</span>
   </h1>
   <div class="article-top-meta">
     <span>
       发布 : 
-      2018-08-20
+      2019-03-15
     </span>
     
-      <span>
-        分类 : 
-          <a href="/categories/PHP/">
-            PHP
-          </a>
-      </span>
-    
     
       <span>
-        浏览 : <span class="article-timer" data-identity="Centos-install-phpredis"></span>
+        浏览 : <span class="article-timer" data-identity="translate"></span>
       </span>
     
   </div>
@@ -229,13 +222,20 @@
 
   <div class="article-content">
     <div class="markdown-body">
-      <h2 id="安装配置"><a href="#安装配置" class="headerlink" title="安装配置"></a>安装配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"># 1. 下载phpredis</span><br><span class="line">wget https://github.com/phpredis/phpredis/archive/4.1.1.tar.gz</span><br><span class="line"></span><br><span class="line"># 2. 解压 </span><br><span class="line"># z-tar包被gzip压缩,用gunzip解压 x-从tar包中提取文件 v-显示详细信息 f-指定被处理的文件</span><br><span class="line">tar -zxvf 4.1.1.tar.gz</span><br><span class="line"></span><br><span class="line"># 3. 进入解压后目录</span><br><span class="line">cd phpredis-4.1.1/</span><br><span class="line"></span><br><span class="line"># 4. 生成configure配置文件</span><br><span class="line">/usr/local/php/bin/phpize</span><br><span class="line"></span><br><span class="line"># 5. 配置</span><br><span class="line">./configure --with-php-config=/usr/local/php/bin/php-config</span><br><span class="line"></span><br><span class="line"># 6. 编译</span><br><span class="line">make</span><br><span class="line"></span><br><span class="line"># 7. 运行测试</span><br><span class="line">make test</span><br><span class="line"></span><br><span class="line"># 8. 安装</span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line"># 9. 配置ini文件</span><br><span class="line">vi /usr/local/php/lib/php.ini</span><br><span class="line">&gt; extension=&quot;redis.so&quot;</span><br><span class="line"></span><br><span class="line"># 10. 重启php-fpm</span><br><span class="line">kill PID</span><br><span class="line">/usr/local/php/sbin/php-fpm</span><br><span class="line"></span><br><span class="line"># 11. 重启nginx</span><br><span class="line">nginx -s reload # 重启nginx</span><br></pre></td></tr></table></figure>
-<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>重启php-fpm时使用</p>
-<blockquote>
-<p>/usr/local/php/sbin/php-fpm -c /usr/local/php/etc/php-fpm.conf</p>
-</blockquote>
-<p>导致 <code>phpinfo()</code> 中参数 <code>Loaded Configuration File</code> 是 <code>/usr/local/php/etc/php-fpm.conf</code> ,所以打印 <code>phpinfo</code> 时一直无法显示<code>redis</code>扩展。</p>
-<p>正确的做法是上面显示的，不指定配置文件 <del>-c /usr/local/php/etc/php-fpm.conf</del> 的做法</p>
+      <h1 id="Extension-Writing-Part-I-Introduction-to-PHP-and-Zend"><a href="#Extension-Writing-Part-I-Introduction-to-PHP-and-Zend" class="headerlink" title="Extension Writing Part I: Introduction to PHP and Zend"></a>Extension Writing Part I: Introduction to PHP and Zend</h1><h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>如果你正在读这个教程，你可能对写一个PHP扩展有一些兴趣。如果没有兴趣…当你读完这个教程的时候，你或许会发现一个你不知道存在的兴趣！</p>
+<p>本教程假设您基本熟悉PHP语句和PHP解释器使用的语言：C。</p>
+<p>让我们首先确定为什么要编写PHP扩展。</p>
+<ol>
+<li>有一些特定于库或操作系统的调用不能直接从PHP中进行，这是因为该语言固有的抽象程度。</li>
+<li>您想让PHP本身以某种不寻常的方式运行。</li>
+<li>您已经编写了一些PHP代码，但是您知道它可以更快、更小，并且在运行时消耗更少的内存。</li>
+<li>您有一个特别聪明的代码想要出售，重要的是，您出售它的一方能够执行它，但不能查看源代码。</li>
+</ol>
+<p>这些都是完全合理的理由，但是为了创建扩展，您需要首先理解什么是扩展。</p>
+<h2 id="What’s-an-Extension"><a href="#What’s-an-Extension" class="headerlink" title="What’s an Extension?"></a>What’s an Extension?</h2><p>如果你使用过PHP，那么你已经使用过扩展。除了少数例外，PHP语言的中的每个用户空间函数被分组到一个或另一个扩展中。其中许多函数都是标准扩展的一部分–总共超过400个。PHP源代码包附带了大概86个扩展，平均每个扩展有大约30个函<br>数。算一下，大概有2500个函数。好像这还不够，PECL存储库提供了超过100个额外的扩展，甚至更多的扩展可以在Internet的其他地方找到。</p>
+<p>“所有这些函数都存在于扩展中，还剩下什么?“我听见你问。“它们是什么东西的延伸?”PHP的‘核心’是什么?”</p>
+<p>PHP的核心由两个单独的部分组成。在最低层，您可以找到Zend引擎(ZE)。ZE处理将人可读的脚本解析为机器可读的令牌，然后在进程空间中执行这些令牌。ZE还负责内存管理，变量的范围，以及调度函数调用。另外一部分是PHP核心。PHP处理<br>与SAPI层的通信和绑定（服务器应用程序编程接口，也通常用于指主机环境–Apache，IIS，CLI，CGI等）。它还为<code>safe_mode</code>和<code>open_basedir</code>检查提供了统一的控制层，以及流层，流层将文件和网络I/O与<code>fopen()</code>、<code>fread()</code><br>和<code>fwrite()</code>等用户空间函数关联起来。</p>
+<h2 id="Lifecycles"><a href="#Lifecycles" class="headerlink" title="Lifecycles"></a>Lifecycles</h2><p>当给定的SAPI启动时，例如，响应<code>/usr/local/apache/bin/apachectl start</code>，PHP首先初始化它的核心子系统。在这个启动例程的末尾，它加载每个扩展的代码并调用它们的模块初始化例程(MINIT)。这使每个扩展都有机会初始化内部<br>变量、分配资源、注册资源处理程序并将其函数注册到ZE中，这样，如果脚本调用其中一个函数，ZE就知道要执行哪些代码。接下来，PHP等待SAPI层请求要处理的页面。在CGI或CLI SAPIs的情况下，这是立即发生的，而且只有一次。对于<br>Apache、IIS或其他功能齐全的web服务器SAPIs，它是在远程用户请求页面时发生的，并且重复任意次数，可能是并发的。无论请求是如何传入的，PHP都首先要求ZE为运行脚本设置一个环境，然后调用每个扩展的请求初始化(RINIT)函数。<br>RINIT为扩展提供了设置特定环境变量、分配特定资源或执行其他任务(如审计)的机会。运行中的RINIT函数的一个主要例子是在会话扩展中，如果会话。启用auto_start选项后，RINIT将自动触发userspace session_start()函数，并预先填充$_SESSION变量。</p>
 
     </div>
   </div>
@@ -247,7 +247,7 @@
         
           本文作者 : Xuebin Zhang <br/>
         
-        原文链接 : <a href="">https://capping.github.io/2018/08/20/Centos-install-phpredis/</a><br>
+        原文链接 : <a href="">https://capping.github.io/2019/03/15/translate/</a><br>
         版权声明 : 本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！
         </blockquote>
       </div>
@@ -310,33 +310,6 @@
     <div class="article-meta pull-left">
       <span>
         
-          <i class="iconfont icon-06tags"></i>标签: 
-          
-          <span class="span--tag">
-            <a href="/tags/PHP/">
-              #PHP
-            </a>
-          </span>
-          
-          <span class="span--tag">
-            <a href="/tags/redis/">
-              #redis
-            </a>
-          </span>
-          
-          <span class="span--tag">
-            <a href="/tags/centos/">
-              #centos
-            </a>
-          </span>
-          
-          <span class="span--tag">
-            <a href="/tags/Linux/">
-              #Linux
-            </a>
-          </span>
-          
-        
       </span>
     </div>
     <div class="article-meta pull-right">
@@ -357,13 +330,13 @@
       <div class="nav-pre">
         <i class="iconfont icon-prev"></i>
         上一篇:
-        <a href="/2018/08/20/centos-install-redis/" target="_self">Centos安装配置redis</a>
+        <a href="/2019/02/15/algo-array/" target="_self">05 | 数组：为什么很多编程语言中数组都是从0开始编号？</a>
       </div>
     
     
       <div class="nav-next">
         下一篇:
-        <a href="/2018/08/28/Centos-disk-space-abnormal/" target="_self">Linux服务器磁盘空间不足异常</a>
+        <a href="/2019/09/08/java-learnning-path-map/" target="_self">Java学习路径</a>
         <i class="iconfont icon-next"></i>
       </div>
     
