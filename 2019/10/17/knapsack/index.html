@@ -8,12 +8,12 @@
   
   
   
-  <title>Z-II&#39;s Blog</title>
+  <title>0-1背包问题！ 回溯？？ 动态规划？？ | Z-II&#39;s Blog</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   
-    <meta name="keywords" content="Hexo, theme-bmw" />
+    <meta name="keywords" content="algo,algo,0-1背包," />
   
 
   <script>
@@ -203,13 +203,20 @@
 
 <div class="post">
   <h1 class="article-title">
-    <span></span>
+    <span>0-1背包问题！ 回溯？？ 动态规划？？</span>
   </h1>
   <div class="article-top-meta">
     <span>
       发布 : 
       2019-10-17
     </span>
+    
+      <span>
+        分类 : 
+          <a href="/categories/algo/">
+            algo
+          </a>
+      </span>
     
     
       <span>
@@ -222,7 +229,7 @@
 
   <div class="article-content">
     <div class="markdown-body">
-      <h2 id="0-1背包问题！-回溯？？-动态规划？？"><a href="#0-1背包问题！-回溯？？-动态规划？？" class="headerlink" title="0-1背包问题！ 回溯？？ 动态规划？？"></a>0-1背包问题！ 回溯？？ 动态规划？？</h2><p>注意：如果未特殊说明：w表示背包的容量，n表示物品的数量。</p>
+      <p>注意：如果未特殊说明：w表示背包的容量，n表示物品的数量。</p>
 <h3 id="1-什么是0-1背包问题？"><a href="#1-什么是0-1背包问题？" class="headerlink" title="1. 什么是0-1背包问题？"></a>1. 什么是0-1背包问题？</h3><p>对于一组不同重量、不可分割的物品，我们选择一些装入背包，在满足背包最大容量限制的前提下，背包中物品总重量的最大值是多少？</p>
 <p>假如有n个物品，对于每个物品来说，都有两种选择，装进背包或者不装进背包。对于n个物品来说，总的装法就有2^n中装法。所以，我们只需要穷举所有的装法，去掉大于背包容量的装法，选择一个最接近背包容量的装法。</p>
 <p>举个例子：假设背包的最大承载重量是9。我们有5个不同的物品，每个物品的重量分别是2，2，4，6，3。那我们能怎么装呢？</p>
@@ -239,7 +246,516 @@
 <h3 id="3-动态规划"><a href="#3-动态规划" class="headerlink" title="3. 动态规划"></a>3. 动态规划</h3><p>我们把整个求解过程分为n个阶段，每个阶段会决策一个物品是否放到背包中。每个物品决策（放入或者不放入背包）完之后，背包中的重量会有多种情况。例如树中第一次决策完后，背包的重量只有两种情况【0，2】，第二次决策完后，背包中只会有三种情况【0，2，4】等等。这样我们就把每一层重复的状态合并了，这样我们就能保证每一层不同状态的个数都不会超过w个（w表示背包的容量）。于是就成功避免了每层状态个数的指数级增长。</p>
 <p>我们用二维数组states[n][w+1]，来记录每层可以达到的不同状态。<br>第0个（下标从0开始编号）物品的重量是2，要么装入背包，要么不装入背包，决策完之后会对应背包的两种状态，背包中的总重量是0或者2。我们用states[0][0]=true和states[0][2]=true来表示这两种状态。</p>
 <p>依次类推，考察完所有的物品后，整个states状态数组就都计算好了。我们把整个计算过程画出来。</p>
-<p><code>①初始状态</code><br> \    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9<br>——|—|—|—|—|—|—|—|—|—|—<br>w=2 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=2 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=4 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=6 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=3 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br><code>②第0个物品决策完后</code><br> \    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9<br>——|—|—|—|—|—|—|—|—|—|—<br>w=2 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=2 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=4 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=6 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=3 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br><code>②第1个物品决策完后</code><br> \    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9<br>——|—|—|—|—|—|—|—|—|—|—<br>w=2 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=2 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 |<br>w=4 2 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=6 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=3 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br><code>②第2个物品决策完后</code><br> \    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9<br>——|—|—|—|—|—|—|—|—|—|—<br>w=2 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=2 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 |<br>w=4 2 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 |<br>w=6 3 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=3 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br><code>②第3个物品决策完后</code><br> \    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9<br>——|—|—|—|—|—|—|—|—|—|—<br>w=2 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=2 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 |<br>w=4 2 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 |<br>w=6 3 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 |<br>w=3 4 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br><code>②第4个物品决策完后</code><br> \    | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9<br>——|—|—|—|—|—|—|—|—|—|—<br>w=2 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |<br>w=2 1 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 0 |<br>w=4 2 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 |<br>w=6 3 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | 1 | 0 |<br>w=3 4 | 1 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | </p>
+<p><code>①初始状态</code></p>
+<table>
+<thead>
+<tr>
+<th>\</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>w=2 0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=2 1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=4 2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=6 3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=3 4</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+</tbody>
+</table>
+<p><code>②第0个物品决策完后</code></p>
+<table>
+<thead>
+<tr>
+<th>\</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>w=2 0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=2 1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=4 2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=6 3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=3 4</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+</tbody>
+</table>
+<p><code>③第1个物品决策完后</code></p>
+<table>
+<thead>
+<tr>
+<th>\</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>w=2 0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=2 1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=4 2</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=6 3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=3 4</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+</tbody>
+</table>
+<p><code>④第2个物品决策完后</code></p>
+<table>
+<thead>
+<tr>
+<th>\</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>w=2 0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=2 1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=4 2</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=6 3</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=3 4</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+</tbody>
+</table>
+<p><code>⑤第3个物品决策完后</code></p>
+<table>
+<thead>
+<tr>
+<th>\</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>w=2 0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=2 1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=4 2</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=6 3</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=3 4</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+</tbody>
+</table>
+<p><code>⑥第4个物品决策完后</code></p>
+<table>
+<thead>
+<tr>
+<th>\</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>3</th>
+<th>4</th>
+<th>5</th>
+<th>6</th>
+<th>7</th>
+<th>8</th>
+<th>9 </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>w=2 0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=2 1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=4 2</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=6 3</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0 </td>
+</tr>
+<tr>
+<td>w=3 4</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1 </td>
+</tr>
+</tbody>
+</table>
 <p>因为states[4][9] == true，所以最优解就是true。</p>
 <p>将上面的过程翻译成代码就是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">// weight:物品重量，n:物品数量，w:背包容量</span><br><span class="line">public int knapsack(int[] weight, int n, int w) &#123;</span><br><span class="line">    boolean[][] states[][] = new boolean[n][w+1];</span><br><span class="line">    states[0][0] = true;    // 第一行数据要特殊处理，可以利用哨兵优化</span><br><span class="line">    if (weight[0] &lt; w) &#123;</span><br><span class="line">        states[0][weight[0]] = true;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i = 1; i &lt; n; ++i) &#123;    // 动态规划状态转移</span><br><span class="line">        for (int j = 0; j &lt;= 2; ++j) &#123;  // 不把第i个物品放入背包</span><br><span class="line">            if (states[i-1][j] == true)</span><br><span class="line">                states[i][j] = states[i-1][j];</span><br><span class="line">        &#125;</span><br><span class="line">        for (int j = 0; j &lt; w-weight[i]; ++j) &#123; // 把第i个物品放入背包</span><br><span class="line">            if (states[i-1][j] == true) </span><br><span class="line">                states[i][j+weight[i]] = true;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    for (int i = w; i &gt;= 0; ++i) &#123;</span><br><span class="line">        if (states[n-1][i] == true) </span><br><span class="line">            return i;</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>实际上，这是一种用动态规划解决问题的思路。我们把问题分解成多个阶段，每个阶段对应一个决策。我们记录每一个阶段可达的状态集合（去掉重复的），然后通过当前阶段的状态集合，来推导下一个阶段的状态集合，动态的向前推进。</p>
@@ -319,6 +835,21 @@
   <div class="article-footer">
     <div class="article-meta pull-left">
       <span>
+        
+          <i class="iconfont icon-06tags"></i>标签: 
+          
+          <span class="span--tag">
+            <a href="/tags/algo/">
+              #algo
+            </a>
+          </span>
+          
+          <span class="span--tag">
+            <a href="/tags/0-1背包/">
+              #0-1背包
+            </a>
+          </span>
+          
         
       </span>
     </div>
