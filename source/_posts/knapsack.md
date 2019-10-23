@@ -35,8 +35,8 @@ public function(int i, int cw) {
         return;
     }
     f(i+1, cw);     // 第i+1个物品不放入背包
-    if ((cw + weight[i+1]) < w) {
-        f(i+1, cw + weigth[i+1]);   // 第i+1个物品放入背包
+    if ((cw + weight[i]) <= w) {
+        f(i+1, cw + weigth[i]);   // 第i+1个物品放入背包
     }
 }
 ```
@@ -57,15 +57,15 @@ private boolean[] mem = new Boolean[n][w+1];    // 加了这行
 
 public function(int i, int cw) {
     if (i == n || cw == w) {    // 物品放完了，背包容量满了
-        if (cw > maxW) maxw = cw;
+        if (cw > maxW) maxW = cw;
         return;
     }
 
     if (mem[i][cw]) return;      // 加了这行
     mem[i][cw] = true;           // 加了这行
     f(i+1, cw);     // 第i+1个物品不放入背包
-    if ((cw + weight[i+1]) < w) {
-        f(i+1, cw + weigth[i+1]);   // 第i+1个物品放入背包
+    if ((cw + weight[i]) <= w) {
+        f(i+1, cw + weigth[i]);   // 第i+1个物品放入背包
     }
 }
 ```
@@ -142,21 +142,21 @@ w=3 4 | 1 | 0 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 1
 public int knapsack(int[] weight, int n, int w) {
     boolean[][] states[][] = new boolean[n][w+1];
     states[0][0] = true;    // 第一行数据要特殊处理，可以利用哨兵优化
-    if (weight[0] < w) {
+    if (weight[0] <= w) {
         states[0][weight[0]] = true;
     }
     for(int i = 1; i < n; ++i) {    // 动态规划状态转移
-        for (int j = 0; j <= 2; ++j) {  // 不把第i个物品放入背包
+        for (int j = 0; j <= w; ++j) {  // 不把第i个物品放入背包
             if (states[i-1][j] == true)
                 states[i][j] = states[i-1][j];
         }
-        for (int j = 0; j < w-weight[i]; ++j) { // 把第i个物品放入背包
+        for (int j = 0; j <= w-weight[i]; ++j) { // 把第i个物品放入背包
             if (states[i-1][j] == true) 
                 states[i][j+weight[i]] = true;
         }
     }
 
-    for (int i = w; i >= 0; ++i) {
+    for (int i = w; i >= 0; --i) {
         if (states[n-1][i] == true) 
             return i;
     }
@@ -171,17 +171,17 @@ public int knapsack(int[] weight, int n, int w) {
 public int knapsack(int[] weight, int n, int w) {
     boolean[] states[] = new boolean[w+1];
     states[0] = true;    // 第一行数据要特殊处理，可以利用哨兵优化
-    if (weight[0] < w) {
+    if (weight[0] <= w) {
         states[weight[0]] = true;
     }
     for(int i = 1; i < n; ++i) {    // 动态规划状态转移
-        for (int j = w-weight[i]; j >= 0; ++j) { // 把第i个物品放入背包
+        for (int j = w-weight[i]; j >= 0; --j) { // 把第i个物品放入背包
             if (states[j] == true) 
                 states[j+weight[i]] = true;
         }
     }
 
-    for (int i = w; i >= 0; ++i) {
+    for (int i = w; i >= 0; --i) {
         if (states[i] == true) 
             return i;
     }
@@ -191,4 +191,4 @@ public int knapsack(int[] weight, int n, int w) {
 
 这个代码相对之前的代码，将states数组从二维数组降为一维数组。空间复杂度由O(n\*w)变为O(w)。
 
-需要强调的是：代码的第8行 `for (int j = w-weight[i]; j >= 0; ++j)`，j需要从大到小来处理。如果不按j从小到大处理的话，会出现for循环重复计算的问题。你自己画一下试试。有问题我们拿出来讨论。
+需要强调的是：代码的第8行 `for (int j = w-weight[i]; j >= 0; --j)`，j需要从大到小来处理。如果不按j从小到大处理的话，会出现for循环重复计算的问题。你自己画一下试试。有问题我们拿出来讨论。
